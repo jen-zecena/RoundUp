@@ -1,6 +1,6 @@
 const events = [
     {
-        id = 1,
+        id: 1,
         ownerID: "id",
         name: "Alex",
         date: "1/5/2021", 
@@ -9,7 +9,7 @@ const events = [
         tags: ["CMC", "EconDepartment"]
     },
     {
-        id = 2,
+        id : 2,
         ownerID: "id",
         name: "Ben",
         date: "10/5/2021", 
@@ -18,7 +18,7 @@ const events = [
         tags: ["HMC", "CSDepartment"]
     },
     {
-        id = 3,
+        id : 3,
         ownerID: "id",
         name: "Claudia",
         date: "9/23/2021", 
@@ -27,7 +27,7 @@ const events = [
         tags: ["Scripts", "Orchestra"]
     },
     {
-        id = 4,
+        id : 4,
         ownerID: "id",
         name: "Diana",
         date: "8/32/2021", 
