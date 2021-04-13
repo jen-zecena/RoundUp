@@ -1,24 +1,74 @@
-import React from 'react';
+import React from "react";
 import ReactDOM from "react-dom";
-import UserSearch from "./UserSearch"
-import DisplayPosters from "./DisplayPosters.txt"
+import UserSearch from "./UserSearch";
+import DisplayPosters from "./DisplayPosters.jsx";
+import { Form } from "react-bootstrap";
 
 /**
 This component displays an event poster to the user and also provides the ability to RSVP for an event**/
 
-
-async function getRequest(props){
-	/**
+async function getRequest(props) {
+  /**
 	@param props: the props that are passed from parent (displayPosters) to child (DisplayEventPoster) includes the event id of the event that the user clicked
 	Turns requestBody object into JSON with stringify() and then sends the 			JSON as GET request to the backend with fetch()
 
 	Puts result into state data object (response will be the required poster)
 	**/
+
+  axios.get(`https://jsonplaceholder.typicode.com/users`)
+      .then(res => {
+        const persons = res.data;
+        this.setState({ persons });
+      })
 }
 
+/** Declare a userInfo state object that will be filled in when the user types in their information.
+ *  This object will be used in the JSON sent with the PUT request after a user clicks submit on the RSVP form*/
+const [userInfo, setUserInfo] = useState({
+  fName: "",
+  lName: "",
+  email: "",
+  userID: "",
+  eventID: "",
+});
 
-function RSVPForm (){
-    /**
+//This is a new function that was not in the component specification 
+function handleChange(event) {
+  /**
+	@param event: information about the event that has occured in the RSVP form is passed to this function. The event will be a user filling in
+    their information in the input fields
+
+    This function will update the userInfo object as a user types in their information. (the function that saves the user's info in a javascript object )
+	
+	**/
+
+  const { name, value } = event.target;
+
+  setUserInfo((prevValue) => {
+    if (name === "fName") {
+      return {
+        fName: value,
+        lName: prevValue.lName,
+        email: prevValue.email,
+      };
+    } else if (name === "lName") {
+      return {
+        fName: prevValue.fName,
+        lName: value,
+        email: prevValue.email,
+      };
+    } else if (name === "email") {
+      return {
+        fName: prevValue.fName,
+        lName: prevValue.lName,
+        email: value,
+      };
+    }
+  });
+}
+
+function RSVPForm() {
+  /**
     @param : none
     @return: html code with embeded javascript that represents an HTML form with multiple inputs and a submission button
     It will include the structure and content of a RSVPForm
@@ -27,12 +77,15 @@ function RSVPForm (){
     userRSVP(props) function will be called 
 
     This component will be defined in its own file in the actual implementation and then imported into the main component file 
-    /** 
-    
+    **/
+  // HTML code outline:
+  // h1: RSVP Form
+  // form: 3 inputs first name, last name, email
+  // button: submit  (will route to a different page)
 }
 
-function EventPosterCardWithRSVP (props){
-    /**
+function EventPosterCardWithRSVP(props) {
+  /**
     @param props: properties of the event that will be displayed
     @return: html code with embeded javascript that references properties in the props passed into this function
     It will include the structure and content of a EventPosterCardWithRSVP
@@ -47,17 +100,22 @@ function EventPosterCardWithRSVP (props){
     **/
 }
 
-async function userRSVP(props){
-	/**
+async function userRSVP(props) {
+  /**
 	@param props: the props that are passed contain information about the user that is RSVPing to the event
 	Turns requestBody object into JSON with stringify() and then sends the 			JSON as PUT request to the backend with fetch()
 
 	This function will put the userid and the eventid into the database
 	**/
+  axios.put(`https://jsonplaceholder.typicode.com/users`, { userInfo })
+  .then(res => {
+    console.log(res);
+    console.log(res.data);
+  })
 }
 
-function App(){
-/**
+function App() {
+  /**
     @param: no parameters
     @return: html code with embeded JavaScript that will describe the structure and data of all of the components
     displayed in the Event Poster with RSVP Form Display page
@@ -65,15 +123,7 @@ function App(){
     This will be our main react component and in the actual implementation will be in its own file. When it is in its
     own file it will import all necessary components and modules
     **/
-
 }
 
 //used to render everything in the App component onto the screen, usually in the index.js file of a react app
 ReactDOM.render(<App />, document.getElementById("root"));
-
-
-
-
-
-
-	

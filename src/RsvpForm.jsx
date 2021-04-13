@@ -13,6 +13,7 @@ function App() {
 
   console.log(userInfo);
   console.log(user);
+  
   function handleChange(event) {
     const { name, value } = event.target;
 

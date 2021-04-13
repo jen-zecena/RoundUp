@@ -7,7 +7,6 @@ import UserSearch from "./UserSearch"
 This component displays event posters that match a user's search tags in chronological order**/
 
 
-
 async function getRequest(props){
 	/**
 	@param props: the props that are passed from parent (UserSearch) to child (DisplayPosters) are the tags that a user chose when filtering/searching for events
@@ -16,6 +15,12 @@ async function getRequest(props){
 
 	Puts result into state data object (response will be list of posters)
 	**/
+
+    axios.get(`https://jsonplaceholder.typicode.com/users`)
+      .then(res => {
+        const persons = res.data;
+        this.setState({ persons });
+      })
 }
 
 function RemovePastEvents(eventsList){
@@ -35,6 +40,9 @@ function sortEvents(updatedEventsList){
     this function will use the date property of the events to sort events in the events list in chronological order.
     events that are happening soon will be first
     **/
+
+    // Will use an event's date property and a sorting algorithim to sort events in chronological order
+    // Merge sort is likely the algorithm that will be used 
 }
 
 function EventPosterCard (finalEventsList){
@@ -48,6 +56,9 @@ function EventPosterCard (finalEventsList){
     
     This component will be defined in its own file in the actual implementation and then imported into the main component file 
     **/
+
+    // use Bootstrap to create a card that can hold all necessary event info
+    // If Bootstrap integration is not successful use plain HTML and CSS styling 
 }
 
 function mapEvents(finalEventsList){
@@ -58,6 +69,8 @@ function mapEvents(finalEventsList){
     we will use this function to map the data of each event in the final events list object onto an EventCard. 
     All of the EventCards will be stored in a description list 
     **/
+
+    // populate event card data fields with correct info as you iterate through the map 
 }
 
 
