@@ -1,24 +1,24 @@
 import React from "react";
-import Entry from "./Entry";
-import events from "../events";
+
+import HomePage from "./HomePage";
+import MappedEvents from "./MappedEvents";
+import Login from "./Login";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 
 function App() {
   return (
     <div>
-      <h1>
-        <span>Events Layout</span>
-      </h1>
-      <dl className="dictionary">
-        {events.map(event => (
-          <Entry
-            key={event.id}
-            date={event.date}
-            name={event.name}
-            location={event.location}
-          />
-        ))}
-      </dl>
+    <MappedEvents />
+    <HomePage />
+    <Login/>
     </div>
+
   );
 }
 

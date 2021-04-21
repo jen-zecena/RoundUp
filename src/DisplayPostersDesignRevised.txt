@@ -55,7 +55,7 @@ function DisplayPosters(eventsListProps){
 	    // If Bootstrap integration is not successful use plain HTML and CSS styling
 	}
 
-	function retreivePoster(imgUrl){
+	function retrievePoster(imgUrl){
 		/**
 		@param imgUrl: url of the poster image that is stored in the S3 bucket. This url will be passed to this component in the
 		eventsListProps prop.

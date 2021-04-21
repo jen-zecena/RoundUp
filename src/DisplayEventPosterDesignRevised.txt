@@ -112,6 +112,7 @@ function DisplayEventPoster(eventInfoProps) {
 }
 
 
+
 function App() {
   /**
     @param: no parameters

@@ -1,8 +1,23 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./components/App";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App3 from './App3';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Header from './components/header'
+import Service from './components/service'
+import About from './components/about'
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+ReactDOM.render(
+  <React.StrictMode>
+       <Router>
+      <Header/>
+      <Switch>
+        <Route exact path="/" component={App3} />
+        <Route path="/service" component={Service} />
+        <Route path="/about" component={About} />
 
-
-ReactDOM.render(<App />, document.getElementById("root"));
+      </Switch>
+    </Router>
+  </React.StrictMode>,
+  document.getElementById('root')
+);
