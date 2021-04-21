@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
@@ -7,14 +7,17 @@ function EventCard(props){
 
   return (
     <Card style = {{ width: '18rem'}} >
-    <Card.Img variant = "top" src = "holder.js/100px180" / >
+    <Card.Img variant = "top" src = "https://picsum.photos/200" / >
     < Card.Body >
-      <Card.Title > Card Title < /Card.Title>
+      <Card.Title > {props.name} < /Card.Title>
+      <Card.Subtitle className="mb-2 text-muted">
+        {props.date}{' '}{props.time}{' '}{props.location}
+      </Card.Subtitle>
       <Card.Text >
-        Some quick example text to build on the card title and make up the bulk of
-        the card 's content.
+        {props.description}
+
       </Card.Text>
-      <Button variant = "primary" > Go somewhere < /Button>
+      <Button variant = "primary" > More Information < /Button>
     </Card.Body>
   </Card>
   );

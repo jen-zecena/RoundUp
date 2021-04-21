@@ -1,7 +1,7 @@
 import React from "react";
-import Entry from "./Entry";
+//import Entry from "./Entry";
+import EventCard from "./EventCard";
 import events from "../events";
-
 
 
 function MappedEvents(){
@@ -11,16 +11,29 @@ function MappedEvents(){
       <span>Events Layout</span>
     </h1>
     <dl className="dictionary">
-      {events.map(event => (
-        <Entry
-          key={event.id}
-          date={event.date}
-          name={event.name}
-          location={event.location}
-        />
-      ))}
+    {events.map(event => (
+      <EventCard
+        key={event.id}
+        date={event.date}
+        name={event.name}
+        location={event.location}
+        description={event.description}
+        time={event.time}
+      />
+    ))}
     </dl>
-  </div>);
-}
+    </div>);
+    }
+      // {events.map(event => (
+      //   <Entry
+      //     key={event.id}
+      //     date={event.date}
+      //     name={event.name}
+      //     location={event.location}
+      //   />
+      // ))}
+
+
+
 
 export default MappedEvents;

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const service = () => {
+function UploadEvent(){
     return (
         <div>
             <h1>This is Service Page</h1>
@@ -8,4 +8,4 @@ const service = () => {
     )
 }
 
-export default service
+export default UploadEvent;
