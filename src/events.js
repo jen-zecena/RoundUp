@@ -41,12 +41,4 @@ const events = [
     }
 ];
 
-function useEvents(event) {
-    return [
-        event.name,
-        function(){
-            console.log(event.location);
-        }
-    ];
-}
 export default events;
