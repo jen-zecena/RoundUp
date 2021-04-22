@@ -7,7 +7,7 @@ import events from "../events";
 function MappedEvents(){
 
   return(<div>
-    <h1>
+    <h1 style={{textAlign:"center"}}>
       Events Page
     </h1>
     <dl className="dictionary">

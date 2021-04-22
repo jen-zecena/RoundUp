@@ -27,7 +27,7 @@ const header = () => {
       </LinkContainer>
 
       <LinkContainer to="/login">
-        <Nav.Link>Login</Nav.Link>
+        <Nav.Link >Login</Nav.Link>
       </LinkContainer>
     </Nav>
   </Navbar.Collapse>
