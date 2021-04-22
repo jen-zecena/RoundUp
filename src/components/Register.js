@@ -6,18 +6,28 @@ import Col from 'react-bootstrap/Col';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 
 
-function Login() {
+function Register() {
   return (
   <div>
     <Container>
       <Col class="col-sm-6 mx-auto">
         <Jumbotron>
-          <h2>Login Page </h2>
+          <h2>Register </h2>
           <div class="login-form">
             <form>
               <div class="form-group">
-                <label>User Name</label>
-                <input type="text" class="form-control" placeholder="User Name"/>
+                <label>First Name</label>
+                <input type="text" class="form-control" placeholder="First Name"/>
+              </div>
+
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" class="form-control" placeholder="Last Name"/>
+              </div>
+
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" placeholder="Email"/>
               </div>
 
               <div class="form-group">
@@ -25,8 +35,7 @@ function Login() {
                   <input type="password" class="form-control" placeholder="Password"/>
               </div>
 
-              <button type="submit" class="btn btn-dark">Login</button>
-              <button type="submit" class="btn btn-secondary">Register</button>
+              <button type="submit" class="btn btn-dark">Register</button>
             </form>
           </div>
         </Jumbotron>
@@ -37,4 +46,4 @@ function Login() {
 }
 
 
-export default Login;
+export default Register;

@@ -3,7 +3,7 @@ import React from 'react'
 function UploadEvent(){
     return (
         <div>
-            <h1>This is Service Page</h1>
+            <h1>This is the Upload Events Page!</h1>
         </div>
     )
 }

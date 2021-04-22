@@ -6,14 +6,6 @@ body {
     color: #555;
   }
 
-  h1 {
-    font-weight: 900;
-    font-size: 500%;
-    text-align: center;
-    margin-top: 4rem;
-    color: #00004d;
-    line-height: 1.2;
-  }
 
   h1 span {
     padding: 5px 15px;

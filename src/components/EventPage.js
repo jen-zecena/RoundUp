@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import EventCard from './EventCard';
+import EventInfo from './EventInfo';
 import RsvpForm from './RsvpForm';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Jumbotron from 'react-bootstrap/Jumbotron';
 
 function EventPage(props) {
 
@@ -19,13 +20,15 @@ function EventPage(props) {
   return (
     <div>
     <Container>
-      <Row>
-        <Col> <EventCard/> </Col>
-        <Col> <RsvpForm/>  </Col>
-      </Row>
+    <Jumbotron>
+
+        <Row>
+          <Col> <EventInfo/> </Col>
+          <Col> <RsvpForm/>  </Col>
+        </Row>
+
+    </Jumbotron>
     </Container>
-
-
     </div>
   );
 

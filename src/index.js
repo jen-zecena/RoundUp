@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from './components/header';
 import UploadEvent from './components/UploadEvent';
 import AboutPage from './components/AboutPage';
+import Login from './components/Login';
+import EventPage from './components/EventPage';
 import MappedEvents from './components/MappedEvents';
 
 ReactDOM.render(
@@ -17,6 +19,8 @@ ReactDOM.render(
         <Route path="/uploadEvent" component={UploadEvent} />
         <Route path="/about" component={AboutPage} />
         <Route path="/events" component={MappedEvents}/>
+        <Route path="/eventPage" component={EventPage}/>
+        <Route path="/login" component={Login}/>
       </Switch>
     </Router>
   </React.StrictMode>,

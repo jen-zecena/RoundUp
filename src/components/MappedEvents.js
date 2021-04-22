@@ -8,7 +8,7 @@ function MappedEvents(){
 
   return(<div>
     <h1>
-      <span>Events Layout</span>
+      Events Page
     </h1>
     <dl className="dictionary">
     {events.map(event => (

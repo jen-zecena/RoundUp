@@ -89,7 +89,7 @@ function App() {
               placeholder="Enter email" />
           </Form.Group>
 
-          <Button variant="primary" type="submit" onClick = {sendUserRSVP} >
+          <Button variant="danger" type="submit" onClick = {sendUserRSVP} >
             Submit
           </Button>
         </Form>
