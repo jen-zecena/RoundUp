@@ -35,7 +35,7 @@ function Register() {
                   <input type="password" class="form-control" placeholder="Password"/>
               </div>
 
-              <button type="submit" class="btn btn-dark">Register</button>
+              <button type="submit" class="btn btn-dark">Submit</button>
             </form>
           </div>
         </Jumbotron>

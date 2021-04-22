@@ -7,6 +7,7 @@ import Header from './components/header';
 import UploadEvent from './components/UploadEvent';
 import AboutPage from './components/AboutPage';
 import Login from './components/Login';
+import Register from './components/Register';
 import EventPage from './components/EventPage';
 import MappedEvents from './components/MappedEvents';
 
@@ -21,6 +22,7 @@ ReactDOM.render(
         <Route path="/events" component={MappedEvents}/>
         <Route path="/eventPage" component={EventPage}/>
         <Route path="/login" component={Login}/>
+        <Route path="/register" component={Register}/>
       </Switch>
     </Router>
   </React.StrictMode>,
