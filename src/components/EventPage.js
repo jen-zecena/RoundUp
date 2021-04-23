@@ -1,6 +1,4 @@
 import React, {useState} from "react";
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import EventInfo from './EventInfo';
 import RsvpForm from './RsvpForm';
 import Container from 'react-bootstrap/Container';

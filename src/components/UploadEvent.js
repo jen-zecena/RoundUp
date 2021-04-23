@@ -12,9 +12,13 @@ function UploadEvent(){
         <Container >
 
         <Jumbotron>
+        <div>
         <h1 style={{textAlign:"center"}}>
           Event Upload Form
         </h1>
+        </div>
+        <br/>
+        <br/>
           <Container class ="justify-content-center">
           <Row>
           <Col>

@@ -13,6 +13,7 @@ function Register() {
       <Col class="col-sm-6 mx-auto">
         <Jumbotron>
           <h2>Register </h2>
+          <br/>
           <div class="login-form">
             <form>
               <div class="form-group">
