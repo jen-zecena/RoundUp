@@ -1,3 +1,15 @@
+import {
+  LOADING_USER,
+  LOADED_USER,
+  SUCCESSFUL_REGISTRATION,
+  SUCCESSFUL_LOGIN,
+  SUCCESSFUL_LOGOUT,
+  AUTHENTICATION_ERROR,
+  FAILED_REGISTRATION,
+  FAILED_LOGIN,
+  FAILED_LOGOUT
+} from '../actions/types/auth';
+
 // the default state of the user
 const defaultAuthState = {
   /*
