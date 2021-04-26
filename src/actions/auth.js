@@ -15,7 +15,6 @@ import {
 
 import store from '../store';
 
-
 export const loadUser = () => async (dispatch, getState) => {
   /*
     1. tell the web application that the user information is being loaded.
