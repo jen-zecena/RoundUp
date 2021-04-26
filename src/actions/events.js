@@ -44,7 +44,7 @@ export default addEvent = ({ userId, description, eventTime, poster, name, locat
 }
 
 /**
-  @param eventId: the id of the specific event
+  @param eventID: the id of the specific event
 
   This method retrieves event information from the database by making
   a request to the backend.
@@ -52,7 +52,7 @@ export default addEvent = ({ userId, description, eventTime, poster, name, locat
   The method dispatches the result of the action to the reducer, which
   informs the web app of the retrieved event.
 */
-export default getEvent = (eventId) => async (dispatch, getState) => {
+export default getEvent = (eventID) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to retrieve the event information.
@@ -60,20 +60,15 @@ export default getEvent = (eventId) => async (dispatch, getState) => {
     success and pass along user information
     4. otherwise, tell the authentication reducer about the failed attempt.
   */
-  try {
-    dispatch({
-      type: ,
-      payload: response.data
-    });
-  } catch (error) {
-    dispatch({
-      type:
-    })
-  }
+  const response = await axios.get(`/events/${eventID}`, tokenConfig(getState));
+  dispatch({
+    type: GET_EVENT,
+    payload: response.data
+  });
 }
 
 /**
-  @param eventId:  the id of the event to be updated
+  @param eventID:  the id of the event to be updated
   @param userId: the user id of the user trying to update the event
   @param description: the new description for the event
   @param eventTime: the new time for the event
@@ -87,7 +82,7 @@ export default getEvent = (eventId) => async (dispatch, getState) => {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the updated event.
 */
-export default updateEvent = (eventId, userId, description, eventTime, poster, name, location, tags) => async (dispatch, getState) => {
+export default updateEvent = ({ eventID, userId, description, eventTime, poster, name, location, tags }) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to modify the specified event.
@@ -95,20 +90,15 @@ export default updateEvent = (eventId, userId, description, eventTime, poster, n
     success and pass along user information
     4. otherwise, tell the authentication reducer about the failed attempt.
   */
-  try {
-    dispatch({
-      type: ,
-      payload: response.data
-    });
-  } catch (error) {
-    dispatch({
-      type:
-    })
-  }
+  const response = await axios.put(`/events/${eventID}`, { eventID, userId, description, eventTime, poster, name, location, tags }, tokenConfig(getState));
+  dispatch({
+    type: UPDATE_EVENT,
+    payload: response.data
+  });
 }
 
 /**
-  @param eventId: the id of the specific event
+  @param eventID: the id of the specific event
 
   This method deletes an event by making a request to the backend to delete the
   specified event from the database.
@@ -116,7 +106,7 @@ export default updateEvent = (eventId, userId, description, eventTime, poster, n
   The method dispatches the result of the action to the reducer, which
   informs the web app of the deleted event.
 */
-export default deleteEvent = (eventId) => async (dispatch, getState) => {
+export default deleteEvent = (eventID) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to delete the event.
@@ -124,16 +114,11 @@ export default deleteEvent = (eventId) => async (dispatch, getState) => {
     success and pass along user information
     4. otherwise, tell the authentication reducer about the failed attempt.
   */
-  try {
-    dispatch({
-      type: ,
-      payload: response.data
-    });
-  } catch (error) {
-    dispatch({
-      type:
-    })
-  }
+  const response = await axios.delete(`/events/${eventID}`, tokenConfig(getState));
+  dispatch({
+    type: DELETE_EVENT,
+    payload: response.data
+  });
 }
 
 /**
@@ -146,7 +131,7 @@ export default deleteEvent = (eventId) => async (dispatch, getState) => {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the retrieved events.
 */
-export default getEvents = (tags, status) => async (dispatch, getState) => {
+export default getEvents = (owner, tags, status) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to retrieve specified events.
@@ -154,14 +139,9 @@ export default getEvents = (tags, status) => async (dispatch, getState) => {
     success and pass along user information
     4. otherwise, tell the authentication reducer about the failed attempt.
   */
-  try {
-    dispatch({
-      type: ,
-      payload: response.data
-    });
-  } catch (error) {
-    dispatch({
-      type:
-    })
-  }
+  const response = await axios.get(`/events/`, {owner, tags, status}, tokenConfig(getState));
+  dispatch({
+    type: GET_EVENTS,
+    payload: response.data
+  });
 }
