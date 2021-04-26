@@ -28,7 +28,7 @@ import { tokenConfig } from './auth';
   The method dispatches the result of the action to the reducer, which
   informs the web app of the added event.
 */
-export default addEvent = (userId, description, eventTime, poster, name, location, tags) => async (dispatch, getState) => {
+export default addEvent = ({ userId, description, eventTime, poster, name, location, tags }) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to add the new event.
@@ -36,16 +36,11 @@ export default addEvent = (userId, description, eventTime, poster, name, locatio
     success and pass along user information
     4. otherwise, tell the authentication reducer about the failed attempt.
   */
-  try {
-    dispatch({
-      type: ,
-      payload: response.data
-    });
-  } catch (error) {
-    dispatch({
-      type:
-    })
-  }
+  const response = await axios.post('/events', { userId, description, eventTime, poster, name, location, tags }, tokenConfig(getState));
+  dispatch({
+    type: ADD_EVENT,
+    payload: response.data
+  });
 }
 
 /**
