@@ -28,7 +28,7 @@ export default addRsvp = ({ userID, eventID }) => {
     success and pass along user information
     4. otherwise, tell the authentication reducer about the failed attempt.
   */
-  const response = await axios.post(`/rsvps`, {  userID, eventID}, tokenConfig(getState));
+  const response = await axios.post(`/rsvps`, { userID, eventID }, tokenConfig(getState));
   dispatch({
     type: ADD_RSVP,
     payload: response.data
