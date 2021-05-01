@@ -10,6 +10,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import EventPage from './components/EventPage';
 import MappedEvents from './components/MappedEvents';
+import UserSearch from './components/UserSearch';
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,6 +25,7 @@ ReactDOM.render(
         <Route path="/eventPage" component={EventPage}/>
         <Route path="/login" component={Login}/>
         <Route path="/register" component={Register}/>
+        <Route path="/userSearch" component={UserSearch}/>
       </Switch>
     </Router>
   </React.StrictMode>,

@@ -29,6 +29,10 @@ const Header = () => {
       <LinkContainer to="/login">
         <Nav.Link>Login</Nav.Link>
       </LinkContainer>
+
+      <LinkContainer to="/userSearch">
+        <Nav.Link>Search</Nav.Link>
+      </LinkContainer>
     </Nav>
   </Navbar.Collapse>
 </Navbar>
