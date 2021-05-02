@@ -1,39 +1,27 @@
 import React from "react";
-//import Entry from "./Entry";
-import EventCard from "./EventCard";
 import events from "../events";
+import EventCard from "./EventCard";
 
-
-function MappedEvents(){
-
-  return(<div>
+const EventsPage = () => {
+  return (<div>
     <h1 style={{textAlign:"center"}}>
       Events Page
     </h1>
-    <dl className="dictionary">
-    {events.map(event => (
-      <EventCard
-        key={event.id}
-        date={event.date}
-        name={event.name}
-        location={event.location}
-        description={event.description}
-        time={event.time}
-      />
-    ))}
-    </dl>
-    </div>);
-    }
-      // {events.map(event => (
-      //   <Entry
-      //     key={event.id}
-      //     date={event.date}
-      //     name={event.name}
-      //     location={event.location}
-      //   />
-      // ))}
+      <dl className="dictionary">
+      {events.map((event, index) => (
+        <EventCard
+          key={index}
+          date={event.date}
+          name={event.name}
+          location={event.location}
+          description={event.description}
+          time={event.time}
+          eventLink={`/event/${index + 1}`}
+        />
+      ))}
+      </dl>
+    </div>
+  );
+};
 
-
-
-
-export default MappedEvents;
+export default EventsPage;

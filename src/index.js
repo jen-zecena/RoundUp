@@ -22,7 +22,7 @@ ReactDOM.render(
         <Route path="/uploadEvent" component={UploadEvent} />
         <Route path="/about" component={AboutPage} />
         <Route path="/events" component={MappedEvents}/>
-        <Route path="/eventPage" component={EventPage}/>
+        <Route path="/event/:eventId" component={EventPage}/>
         <Route path="/login" component={Login}/>
         <Route path="/register" component={Register}/>
         <Route path="/userSearch" component={UserSearch}/>
