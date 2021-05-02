@@ -1,103 +1,93 @@
 const events = [
     {
-        id: 1,
-        ownerID: "id",
+        userId: 1,
+        eventTime: "2020-04-04 14:55:10.888",
+        posterUrl: "",
         name: "Event 1",
-        date: "1/5/21",
-        time: "10:25am",
-        location: "CMC",
         description: "event 1 description is going to go here.",
+        location: "CMC",
         tags: ["CMC", "EconDepartment"]
     },
     {
-        id : 2,
-        ownerID: "id",
-        name: "Event 2",
-        date: "10/5/21",
-        time: "8:25pm",
-        location: "HMC",
-        description: "event 2 description is going to go here",
-        tags: ["HMC", "CSDepartment"]
+      userId: 2,
+      eventTime: "2020-08-03 14:55:10.888",
+      posterUrl: "",
+      name: "Event 2",
+      description: "event 2 description is going to go here.",
+      location: "CMC",
+      tags: ["CMC", "EconDepartment"]
     },
     {
-        id : 3,
-        ownerID: "id",
-        name: "Event 3",
-        date: "9/23/21",
-        time: "10:25am",
-        location: "Scrips",
-        description: "event 3 description is going to go here",
-        tags: ["Scripts", "Orchestra"]
+      userId: 3,
+      eventTime: "2022-05-15 14:55:10.888",
+      posterUrl: "",
+      name: "Event 3",
+      description: "event 3 description is going to go here.",
+      location: "CMC",
+      tags: ["CMC", "EconDepartment"]
     },
     {
-        id : 4,
-        ownerID: "id",
-        name: "Event 4",
-        date: "8/32/21",
-        time: "10:25pm",
-        location: "Pomona",
-        description: "event 4 description is going to go here",
-        tags: ["Pomona", "EconDepartment"]
+      userId: 4,
+      eventTime: "2022-01-03 14:55:10.888",
+      posterUrl: "",
+      name: "Event 4",
+      description: "event 4 description is going to go here.",
+      location: "CMC",
+      tags: ["CMC", "EconDepartment"]
     },
     {
-        id: 5,
-        ownerID: "id",
-        name: "Event 5",
-        date: "1/5/21",
-        time: "10:25am",
-        location: "CMC",
-        description: "event 1 description is going to go here.",
-        tags: ["CMC", "EconDepartment"]
+      userId: 6,
+      eventTime: "2024-06-04 14:55:10.888",
+      posterUrl: "",
+      name: "Event 5",
+      description: "event 5 description is going to go here.",
+      location: "CMC",
+      tags: ["CMC", "EconDepartment"]
     },
     {
-        id : 6,
-        ownerID: "id",
-        name: "Event 6",
-        date: "10/5/21",
-        time: "8:25pm",
-        location: "HMC",
-        description: "event 2 description is going to go here",
-        tags: ["HMC", "CSDepartment"]
+      userId: 5,
+      eventTime: "2023-03-02 14:55:10.888",
+      posterUrl: "",
+      name: "Event 6",
+      description: "event 6 description is going to go here.",
+      location: "CMC",
+      tags: ["CMC", "EconDepartment"]
     },
     {
-        id : 7,
-        ownerID: "id",
-        name: "Event 7",
-        date: "9/23/21",
-        time: "10:25am",
-        location: "Scrips",
-        description: "event 3 description is going to go here",
-        tags: ["Scripts", "Orchestra"]
+      userId: 7,
+      eventTime: "2022-08-09 14:55:10.888",
+      posterUrl: "",
+      name: "Event 7",
+      description: "event 7 description is going to go here.",
+      location: "CMC",
+      tags: ["CMC", "EconDepartment"]
     },
     {
-        id : 8,
-        ownerID: "id",
-        name: "Event 8",
-        date: "8/32/21",
-        time: "10:25pm",
-        location: "Pomona",
-        description: "event 4 description is going to go here",
-        tags: ["Pomona", "EconDepartment"]
+      userId: 8,
+      eventTime: "2021-04-09 14:55:10.888",
+      posterUrl: "",
+      name: "Event 8",
+      description: "event 8 description is going to go here.",
+      location: "CMC",
+      tags: ["CMC", "EconDepartment"]
     },
     {
-        id : 9,
-        ownerID: "id",
-        name: "Event 9",
-        date: "9/23/21",
-        time: "10:25am",
-        location: "Scrips",
-        description: "event 3 description is going to go here",
-        tags: ["Scripts", "Orchestra"]
+      userId: 10,
+      eventTime: "2022-07-04 14:55:10.888",
+      posterUrl: "",
+      name: "Event 9",
+      description: "event 9 description is going to go here.",
+      location: "CMC",
+      tags: ["CMC", "EconDepartment"]
     },
     {
-        id : 10,
-        ownerID: "id",
-        name: "Event 10",
-        date: "8/32/21",
-        time: "10:25pm",
-        location: "Pomona",
-        description: "event 4 description is going to go here",
-        tags: ["Pomona", "EconDepartment"]
+      userId: 9,
+      eventTime: "2021-04-04 14:55:10.888",
+      posterUrl: "",
+      name: "Event 10",
+      description: "event 10 description is going to go here.",
+      location: "CMC",
+      tags: ["CMC", "EconDepartment"]
     }
 ];
 

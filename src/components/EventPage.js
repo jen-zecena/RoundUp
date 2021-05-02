@@ -23,7 +23,7 @@ const EventPage = ({ match, location }) => {
             < Card.Body >
               <Card.Title > {events[eventId - 1].name} < /Card.Title>
               <Card.Subtitle className="mb-2 text-muted">
-              {events[eventId - 1].date}{' '}{events[eventId - 1].time}{' '}{events[eventId - 1].location}
+              {events[eventId - 1].eventTime}{' '}{events[eventId - 1].location}
               </Card.Subtitle>
               <Card.Text >{events[eventId - 1].description}</Card.Text>
             </Card.Body>

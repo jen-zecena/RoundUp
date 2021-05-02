@@ -9,7 +9,7 @@ import AboutPage from './components/AboutPage';
 import Login from './components/Login';
 import Register from './components/Register';
 import EventPage from './components/EventPage';
-import MappedEvents from './components/MappedEvents';
+import DisplayEventsPage from './components/DisplayEventsPage';
 import UserSearch from './components/UserSearch';
 
 
@@ -21,7 +21,7 @@ ReactDOM.render(
         <Route exact path="/" component={App} />
         <Route path="/uploadEvent" component={UploadEvent} />
         <Route path="/about" component={AboutPage} />
-        <Route path="/events" component={MappedEvents}/>
+        <Route path="/events" component={DisplayEventsPage}/>
         <Route path="/event/:eventId" component={EventPage}/>
         <Route path="/login" component={Login}/>
         <Route path="/register" component={Register}/>
