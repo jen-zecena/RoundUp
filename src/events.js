@@ -80,7 +80,7 @@ const events = [
         tags: ["Pomona", "EconDepartment"]
     },
     {
-        id : 7,
+        id : 9,
         ownerID: "id",
         name: "Event 9",
         date: "9/23/21",
@@ -90,7 +90,7 @@ const events = [
         tags: ["Scripts", "Orchestra"]
     },
     {
-        id : 8,
+        id : 10,
         ownerID: "id",
         name: "Event 10",
         date: "8/32/21",

@@ -1,7 +1,7 @@
 import React from "react";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-
+import { Link} from "react-router-dom";
 
 function EventCard(props){
 
@@ -17,12 +17,13 @@ function EventCard(props){
         {props.description}
 
       </Card.Text>
-      <Button variant="danger" > More Information < /Button>
+      <Link to={props.eventLink}>
+        <Button variant="danger" > More Information < /Button>
+      </Link>
     </Card.Body>
   </Card>
   );
 
 }
-
 
 export default EventCard;
