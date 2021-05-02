@@ -9,6 +9,7 @@
     "bootstrap": "^4.6.0",
     "history": "^4.10.1",
     "jquery": "^3.6.0",
+    "multiselect-react-dropdown": "^1.6.11",
     "popper.js": "^1.16.1",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
@@ -50,6 +51,7 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.2",
+    "jest-mock-axios": "^4.4.0",
     "lodash": "^4.17.21",
     "redux": "^4.1.0",
     "redux-form": "^8.3.7"
