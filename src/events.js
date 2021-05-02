@@ -46,7 +46,7 @@ const events = [
         date: "1/5/21",
         time: "10:25am",
         location: "CMC",
-        description: "event 1 description is going to go here.",
+        description: "event 5 description is going to go here.",
         tags: ["CMC", "EconDepartment"]
     },
     {
@@ -56,7 +56,7 @@ const events = [
         date: "10/5/21",
         time: "8:25pm",
         location: "HMC",
-        description: "event 2 description is going to go here",
+        description: "event 6 description is going to go here",
         tags: ["HMC", "CSDepartment"]
     },
     {
@@ -66,7 +66,7 @@ const events = [
         date: "9/23/21",
         time: "10:25am",
         location: "Scrips",
-        description: "event 3 description is going to go here",
+        description: "event 7 description is going to go here",
         tags: ["Scripts", "Orchestra"]
     },
     {
@@ -76,7 +76,7 @@ const events = [
         date: "8/32/21",
         time: "10:25pm",
         location: "Pomona",
-        description: "event 4 description is going to go here",
+        description: "event 8 description is going to go here",
         tags: ["Pomona", "EconDepartment"]
     },
     {
@@ -86,7 +86,7 @@ const events = [
         date: "9/23/21",
         time: "10:25am",
         location: "Scrips",
-        description: "event 3 description is going to go here",
+        description: "event 9 description is going to go here",
         tags: ["Scripts", "Orchestra"]
     },
     {
@@ -96,7 +96,7 @@ const events = [
         date: "8/32/21",
         time: "10:25pm",
         location: "Pomona",
-        description: "event 4 description is going to go here",
+        description: "event 10 description is going to go here",
         tags: ["Pomona", "EconDepartment"]
     }
 ];
