@@ -1,7 +1,7 @@
 import {Navbar, Nav} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 
-const Header = () => {
+const NavBar = () => {
     return (
         <Navbar bg="light" expand="lg">
             <LinkContainer to="/">
@@ -22,6 +22,10 @@ const Header = () => {
         <Nav.Link>About</Nav.Link>
       </LinkContainer>
 
+      <LinkContainer to="/parent">
+        <Nav.Link>Parent</Nav.Link>
+      </LinkContainer>
+
       <LinkContainer to="/login">
         <Nav.Link>Login</Nav.Link>
       </LinkContainer>
@@ -35,4 +39,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default NavBar;

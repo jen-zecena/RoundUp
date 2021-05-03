@@ -91,4 +91,6 @@ const events = [
     }
 ];
 
+console.log("events List");
+console.log(events);
 export default events;
