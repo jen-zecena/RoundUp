@@ -12,38 +12,82 @@ import UserSearch from './components/UserSearch';
 import Parent from './components/Parent';
 
 function App() {
-  const [eventsList, setEventList] = useState([{
-    userId: 10,
-    eventTime: "2022-07-04 14:55:10.888",
-    posterUrl: "",
-    name: "Event 9",
-    description: "event 9 description is going to go here.",
-    location: "CMC",
-    tags: ["CMC", "EconDepartment"]
-  },
-  {
-    userId: 9,
-    eventTime: "2025-04-04 14:55:10.888",
-    posterUrl: "",
-    name: "Event 10",
-    description: "event 10 description is going to go here.",
-    location: "CMC",
-    tags: ["CMC", "EconDepartment"]
-  },
-  {
-    userId: 11,
-    eventTime: "2021-04-04 14:55:10.888",
-    posterUrl: "",
-    name: "Event 11",
-    description: "event 10 description is going to go here.",
-    location: "CMC",
-    tags: ["CMC", "EconDepartment"]
-  }]);
+
+  /**
+  @param eventsList: eventsList is a name for the events list object prop that will be passed into this function
+  @return: and updated eventsList
+  this function will use the filter function to remove any events that have already occured by
+  checking to see if the date listed as one of the event's properties is greater than the current date
+  if it is bigger the event will be kept, if not it will be removed
+  **/
+  function removePastEvents(events){
+    var currentDate = new Date();
+    var dateTime = currentDate.getFullYear() + "-" + currentDate.getMonth() + "-" + currentDate.getDate() +
+                   " " + currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds()
+
+    return events.filter(function(e){
+      return e.eventTime > dateTime;
+    });
+  }
+
+
+  /**
+  @param updatedEventsList: updatedEventsList is a name for the props that will be passed into this function
+  @return the final events list
+  this function will use the date property of the events to sort events in the events list in chronological order.
+  events that are happening soon will be first
+  **/
+  function sortEvents(updatedEventsList){
+    const sortedEvents =  updatedEventsList.slice().sort((a,b) => (a.eventTime > b.eventTime) ? 1: -1);
+    return sortedEvents;
+  }
+
+  const events =
+    [
+        {
+        userId: 10,
+        eventTime: "2021-07-04 14:55:10.888",
+        posterUrl: "",
+        name: "Event 9",
+        description: "event 9 description is going to go here.",
+        location: "CMC",
+        tags: ["CMC", "EconDepartment"]
+      },
+      {
+        userId: 9,
+        eventTime: "2025-04-04 14:55:10.888",
+        posterUrl: "",
+        name: "Event 10",
+        description: "event 10 description is going to go here.",
+        location: "CMC",
+        tags: ["CMC", "EconDepartment"]
+      },
+      {
+        userId: 11,
+        eventTime: "2024-04-04 14:55:10.888",
+        posterUrl: "",
+        name: "Event 11",
+        description: "event 10 description is going to go here.",
+        location: "CMC",
+        tags: ["CMC", "EconDepartment"]
+      }
+    ];
+
+
+  var filteredEvents = removePastEvents(events);
+  const finalEventsList = sortEvents(filteredEvents);
+
+
+  const [eventsList, setEventsList] = useState(finalEventsList);
+
+  function handleChangeToEventList(newEventsList){
+    setEventsList(newEventsList);
+  }
 
 
   return (
   <React.StrictMode>
-       <Router>
+      <Router>
       <NavBar/>
       <Switch>
         <Route exact path="/" component={App} />
@@ -52,9 +96,13 @@ function App() {
         <Route
             exact
             path="/events"
-            render={(props) => <DisplayEventsPage {...props} eventsList={eventsList} />}
+            render={(props) => <DisplayEventsPage {...props} eventsList={eventsList} onChange={handleChangeToEventList}/>}
           />
-        <Route path="/event/:eventId" component={EventPage}/>
+        <Route
+            exact
+            path="/event/:eventId"
+            render={(props) => <EventPage {...props} eventsList={eventsList} />}
+          />
         <Route path="/login" component={Login}/>
         <Route path="/register" component={Register}/>
         <Route path="/userSearch" component={UserSearch}/>
