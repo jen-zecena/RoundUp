@@ -15,9 +15,6 @@ function App() {
 
   const [user,setUser] = useState([]);
 
-  console.log(userInfo);
-  console.log(user);
-
   function handleChange(event) {
     const { name, value } = event.target;
 

@@ -68,6 +68,9 @@ export const login = (email, password)  => async dispatch => {
     }
   };
 
+  // get token with this method
+  // btoa("email:password")
+
   // request body
   const body = JSON.stringify({ email, password });
 

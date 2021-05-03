@@ -27,7 +27,7 @@ export default function rsvpReducer(state={}, action) {
       */
       return {
         ...state,
-        action.payload
+        [action.payload.eventID]: action.payload
       };
     case DELETE_RSVP:
       /*

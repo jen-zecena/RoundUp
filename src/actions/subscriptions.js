@@ -19,7 +19,7 @@ import {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the added subscription.
 */
-export default addSubscription = ({ followerID, followedID }) => {
+export const addSubscription = ({ followerID, followedID }) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to add the new subscription.
@@ -43,7 +43,7 @@ export default addSubscription = ({ followerID, followedID }) => {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the retrieved subscriptions.
 */
-export default getSubscriptions = (followerID) => {
+export const getSubscriptions = (followerID) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to retrieve the user's subscriptions.
@@ -67,7 +67,7 @@ export default getSubscriptions = (followerID) => {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the retrieved subscribers.
 */
-export default getSubscribers = (followedID) => {
+export const getSubscribers = (followedID) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to retrieve the user's subscribers.
@@ -93,7 +93,7 @@ export default getSubscribers = (followedID) => {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the deleted subscription.
 */
-export default deleteSubscription = ({ followerID, followedID }) => {
+export const deleteSubscription = ({ followerID, followedID }) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to delete the specified subscription.

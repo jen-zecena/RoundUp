@@ -28,7 +28,7 @@ import { tokenConfig } from './auth';
   The method dispatches the result of the action to the reducer, which
   informs the web app of the added event.
 */
-export default addEvent = ({ userId, description, eventTime, poster, name, location, tags }) => async (dispatch, getState) => {
+export const addEvent = ({ userId, description, eventTime, poster, name, location, tags }) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to add the new event.
@@ -52,7 +52,7 @@ export default addEvent = ({ userId, description, eventTime, poster, name, locat
   The method dispatches the result of the action to the reducer, which
   informs the web app of the retrieved event.
 */
-export default getEvent = (eventID) => async (dispatch, getState) => {
+export const getEvent = (eventID) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to retrieve the event information.
@@ -82,7 +82,7 @@ export default getEvent = (eventID) => async (dispatch, getState) => {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the updated event.
 */
-export default updateEvent = ({ eventID, userId, description, eventTime, poster, name, location, tags }) => async (dispatch, getState) => {
+export const updateEvent = ({ eventID, userId, description, eventTime, poster, name, location, tags }) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to modify the specified event.
@@ -106,7 +106,7 @@ export default updateEvent = ({ eventID, userId, description, eventTime, poster,
   The method dispatches the result of the action to the reducer, which
   informs the web app of the deleted event.
 */
-export default deleteEvent = (eventID) => async (dispatch, getState) => {
+export const deleteEvent = (eventID) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to delete the event.
@@ -131,7 +131,7 @@ export default deleteEvent = (eventID) => async (dispatch, getState) => {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the retrieved events.
 */
-export default getEvents = (owner, tags, status) => async (dispatch, getState) => {
+export const getEvents = (owner=null, tags=null, status=null) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to retrieve specified events.

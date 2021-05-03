@@ -4,8 +4,8 @@ import { reducer as formReducer } from 'redux-form';
 import authReducer from './auth';
 import eventReducer from './events';
 import rsvpReducer from './rsvps';
-import subscriptionReducer from '/subscriptions';
-import { SUCCESSFUL_LOGOUT } from '../actions/types';
+import subscriptionReducer from './subscriptions';
+import { SUCCESSFUL_LOGOUT } from '../actions/types/auth';
 
 const appReducer = combineReducers({
   form: formReducer,

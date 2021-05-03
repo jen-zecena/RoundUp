@@ -11,9 +11,13 @@ import Register from './components/Register';
 import EventPage from './components/EventPage';
 import MappedEvents from './components/MappedEvents';
 
+import { Provider } from 'react-redux';
+import store from './store';
+
 ReactDOM.render(
   <React.StrictMode>
-       <Router>
+    <Provider store={store}>
+      <Router>
       <Header/>
       <Switch>
         <Route exact path="/" component={App} />
@@ -25,6 +29,7 @@ ReactDOM.render(
         <Route path="/register" component={Register}/>
       </Switch>
     </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -31,7 +31,7 @@ const defaultAuthState = {
   This function processes responses from authentication requests made by the client
   api, and updates the user's authentication state accordingly.
 */
-export default function authReducer(state=defaultState, action) {
+export default function authReducer(state=defaultAuthState, action) {
   switch (action.type) {
     case LOADING_USER:
       /*

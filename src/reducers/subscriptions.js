@@ -25,7 +25,7 @@ export default function subscriptionReducer(state={}, action) {
       */
       return {
         ...state,
-        action.payload
+        [action.payload.followerID]: action.payload
       };
     case DELETE_SUBSCRIPTION:
       /*

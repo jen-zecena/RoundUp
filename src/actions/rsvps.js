@@ -20,7 +20,7 @@ import {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the added rsvp.
 */
-export default addRsvp = ({ userID, eventID }) => {
+export const addRsvp = ({ userID, eventID }) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to add the new rsvp.
@@ -44,7 +44,7 @@ export default addRsvp = ({ userID, eventID }) => {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the retrieved attendees.
 */
-export default getAttendees = (eventID) => {
+export const getAttendees = (eventID) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to retrieve the list of attendees.
@@ -67,7 +67,7 @@ export default getAttendees = (eventID) => {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the retrieved rsvps.
 */
-export default getUserRsvps = (userID) => {
+export const getUserRsvps = (email, status) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to retrieve rsvp history.
@@ -75,7 +75,7 @@ export default getUserRsvps = (userID) => {
     success and pass along user information
     4. otherwise, tell the authentication reducer about the failed attempt.
   */
-  const response = await axios.get(`/users/${userID}/rsvps/`, tokenConfig(getState));
+  const response = await axios.get(`/users/${email}/rsvps/${status}`, tokenConfig(getState));
   dispatch({
     type: GET_USER_RSVPS,
     payload: response.data
@@ -90,7 +90,7 @@ export default getUserRsvps = (userID) => {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the retrieved rsvps.
 */
-export default getEventRsvps = (eventID) => {
+export const getEventRsvps = (eventID) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to retrieve an event's rsvps.
@@ -115,7 +115,7 @@ export default getEventRsvps = (eventID) => {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the deleted rsvp.
 */
-export default deleteRsvp = ({ userID, eventID }) => {
+export const deleteRsvp = ({ userID, eventID }) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to delete the specified rsvp object.
