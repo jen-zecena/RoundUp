@@ -28,7 +28,7 @@ const DisplayEventsPage = ({eventsList, onChange}) => {
       <Card style = {{ width: '18rem'}} >
       <Card.Img variant = "top" src = "https://picsum.photos/200" / >
       < Card.Body >
-        <Card.Title > {props.name} < /Card.Title>
+        <Card.Title > {props.name} </ Card.Title>
         <Card.Subtitle className="mb-2 text-muted">
             {props.eventTime}{' '}{props.location}
         </Card.Subtitle>
@@ -37,10 +37,10 @@ const DisplayEventsPage = ({eventsList, onChange}) => {
 
         </Card.Text>
         <Link to={props.eventLink}>
-          <Button variant="danger" > More Information < /Button>
-        </Link>
-      </Card.Body>
-    </Card>
+          <Button variant="danger" > More Information </ Button>
+        </ Link>
+      </ Card.Body>
+    </ Card>
     );
 
   }
