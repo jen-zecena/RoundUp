@@ -1,5 +1,6 @@
 {
   "name": "roundup",
+  "proxy": "https://localhost:9000/api",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -24,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "mock-api": "node ./mock-api/app.js",
+    "dev": "run-p start mock-api"
   },
   "eslintConfig": {
     "extends": [
@@ -47,9 +50,11 @@
   "devDependencies": {
     "@babel/plugin-syntax-jsx": "^7.12.13",
     "axios": "^0.21.1",
+    "connect-api-mocker": "^1.9.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.2",
+    "express": "^4.17.1",
     "lodash": "^4.17.21",
     "redux": "^4.1.0",
     "redux-form": "^8.3.7"
