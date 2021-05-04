@@ -5,6 +5,8 @@ import Container from 'react-bootstrap/Container';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import mockAxios from 'jest-mock-axios'; //testing
+
 
 function App(){
   const [eventInfo, setEventInfo] = useState({
@@ -146,6 +148,7 @@ function App(){
 		if( checkRequiredFields(this.state)){
       alert('A name was submitted: ' + this.state.value);
       console.log(this.state.value);
+      
     }
 	} 
 
