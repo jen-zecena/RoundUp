@@ -22,8 +22,8 @@ const NavBar = () => {
         <Nav.Link>About</Nav.Link>
       </LinkContainer>
 
-      <LinkContainer to="/parent">
-        <Nav.Link>Parent</Nav.Link>
+      <LinkContainer to="/uploadPoster">
+        <Nav.Link>Upload Poster</Nav.Link>
       </LinkContainer>
 
       <LinkContainer to="/login">

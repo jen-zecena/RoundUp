@@ -9,7 +9,7 @@ import Register from './components/Register';
 import EventPage from './components/EventPage';
 import DisplayEventsPage from './components/DisplayEventsPage';
 import UserSearch from './components/UserSearch';
-import Parent from './components/Parent';
+import UploadPoster from "./components/UploadPosterTestFile";
 
 function App() {
 
@@ -106,7 +106,7 @@ function App() {
         <Route path="/login" component={Login}/>
         <Route path="/register" component={Register}/>
         <Route path="/userSearch" component={UserSearch}/>
-        <Route path="/parent" component={Parent}/>
+        <Route path="/uploadPoster" component={UploadPoster}/>
       </Switch>
     </Router>
   </React.StrictMode>
