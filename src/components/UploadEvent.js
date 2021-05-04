@@ -6,7 +6,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-function App(){
+function UploadEvent(){
   const [eventInfo, setEventInfo] = useState({
     userID: "",
     description: "",
@@ -137,7 +137,6 @@ function App(){
 
   /**
 		@param event: submit button is hit
-
 		Make sure all information is there and send PUT request
 		**/
   function handleSubmit(event){
@@ -260,4 +259,4 @@ function App(){
     );
 }
 
-export default App;
+export default UploadEvent;
