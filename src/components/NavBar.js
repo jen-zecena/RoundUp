@@ -1,7 +1,7 @@
 import {Navbar, Nav} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 
-const Header = () => {
+const NavBar = () => {
     return (
         <Navbar bg="light" expand="lg">
             <LinkContainer to="/">
@@ -9,7 +9,7 @@ const Header = () => {
   </LinkContainer>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="mr-auto">
+    <Nav className="ml-auto">
       <LinkContainer to="/events">
         <Nav.Link>Events</Nav.Link>
       </LinkContainer>
@@ -18,12 +18,12 @@ const Header = () => {
         <Nav.Link>Upload Event</Nav.Link>
       </LinkContainer>
 
-      <LinkContainer to="/eventPage">
-        <Nav.Link>Event Page</Nav.Link>
-      </LinkContainer>
-
       <LinkContainer to="/about">
         <Nav.Link>About</Nav.Link>
+      </LinkContainer>
+
+      <LinkContainer to="/parent">
+        <Nav.Link>Parent</Nav.Link>
       </LinkContainer>
 
       <LinkContainer to="/login">
@@ -39,4 +39,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default NavBar;
