@@ -1,70 +1,78 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import functions from "./PosterApi.js"
+import uploadPoster from "./PosterApi.js"
+import S3 from 'react-aws-s3';
 
 
 
-class UploadPoster extends React.Component{
-  constructor(props) {
-    super(props);
-      this.state = {
-        selectedFile: null
-      }
+function UploadPoster(){
 
-  };
-
-  onChangeHandler=event=>{
-    var file = event.target.files[0];
-    console.log(file);
-    console.log(this.validateSize(event));
-    if(this.validateSize(event)){
-      console.log(file);
-  // if return true allow to setState
-     this.setState({
-      selectedFile: file
-      });
-
-    }
+  const config = {
+    bucketName: 'roundupposters',
+    //dirName: 'media', /* optional */
+    region: 'us-east-1',
+    accessKeyId: 'AKIA6CRJN2MSKJZOJQBH',
+    secretAccessKey: 'Ipr/pa7YTZGvB94ofLdOjT4rX00CQUp4dpMEW1hD',
+  //  s3Url: 'https:/your-custom-s3-url.com/', /* optional */
   }
 
-  fileUploadHandler = () => {
-    const data = new FormData()
-    console.log(this.state.selectedFile);
-    data.append('file', this.state.selectedFile)
-    console.log(data);
-    functions.uploadPoster(this.selectedFile, 55, "testEvent1");
-
-  };
- //  validateSize=(event)=>{
- //  let file = event.target.files[0];
- //  let size = 30000;
- //  let err = '';
- //  console.log(file.size);
- //  if (file.size > size) {
- //   err = file.type+'is too large, please pick a smaller file\n';
- //   toast.error(err);
- // }
+  const ReactS3Client = new S3(config);
 
 
-  render() {
+  function uploadPoster (file, userID, eventName){
+                var string = userID + eventName;
+                 var hash = 0;
+
+                 if (string.length === 0) return hash;
+
+                 for (var i = 0; i < string.length; i++) {
+                     var char = string.charCodeAt(i);
+                     hash = ((hash << 5) - hash) + char;
+                     hash = hash & hash;
+                 }
+
+                 ReactS3Client
+                     .uploadFile(file, hash)
+                     .then(data => console.log(data))
+                     .catch(err => console.error(err))
+  }
+
+  const[posterFile,setPosterFile] = useState({
+    poster: ""
+  });
+
+
+  function handleChange(event){
+    const {name,value} = event.target
+    setPosterFile(prevValue => {
+      if (name === "poster"){
+        return {
+          poster: value
+        };
+      };
+    })
+  }
+
+  function sendPosterToBucket(){
+    uploadPoster(posterFile.poster, 5, "testEvent");
+  }
     return(
       <div>
       <Form>
-        <Form.Group controlId="uploadPoster">
+        <Form.Group controlId="poster">
           <Form.File
-            onChange = {this.onChangeHandler}
-            value={this.selectedFile}
+            onChange = {handleChange}
+            value={posterFile.poster}
             id="custom-file"
             label="Upload Poster Image"
             custom/>
         </Form.Group>
       </Form>
       <h1>{this.selectedFile} </h1>
-    <Button variant="danger" type="submit" onClick = {this.fileUploadHandler}>Submit</Button>
+    <Button variant="danger" type="submit" onClick = {sendPosterToBucket}>Submit</Button>
       </div>
     );
-  }
 
 }
 
