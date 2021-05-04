@@ -22,9 +22,7 @@ const NavBar = () => {
         <Nav.Link>About</Nav.Link>
       </LinkContainer>
 
-      <LinkContainer to="/parent">
-        <Nav.Link>Parent</Nav.Link>
-      </LinkContainer>
+      
 
       <LinkContainer to="/login">
         <Nav.Link>Login</Nav.Link>
