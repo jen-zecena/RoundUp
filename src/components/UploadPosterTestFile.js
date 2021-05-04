@@ -11,6 +11,7 @@ function UploadPoster(){
   const config = {
     bucketName: 'roundupposters',
     //dirName: 'media', /* optional */
+    
     region: 'us-east-1',
     accessKeyId: 'AKIA6CRJN2MSKJZOJQBH',
     secretAccessKey: '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',
