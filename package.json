@@ -10,6 +10,8 @@
     "multiselect-react-dropdown": "^1.6.11",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
+    "react-datepicker": "^3.8.0",
+    "react-datetime-picker": "^3.2.1",
     "react-dom": "^17.0.2",
     "react-router": "^5.2.0",
     "react-router-bootstrap": "^0.25.0",
