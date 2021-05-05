@@ -2,7 +2,7 @@ import React from "react";
 // import events from "../events";
 import EventCard from "./EventCard";
 
-import { getEventsAction } from '../actions/eventActions';
+import { getEventsByTimeAction } from '../actions/eventActions';
 import { connect } from 'react-redux';
 
 class EventsPage extends React.Component {
@@ -12,7 +12,7 @@ class EventsPage extends React.Component {
       fromTime.setMonth(fromTime.getMonth() - 1);
       fromTime = fromTime.getTime();
 
-      this.props.getEventsAction({ fromTime: fromTime, toTime: toTime})
+      this.props.getEventsByTimeAction({ fromTime: fromTime, toTime: toTime})
     }
 
     render() {
@@ -45,5 +45,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getEventsAction }
+  { getEventsByTimeAction }
 )(EventsPage);

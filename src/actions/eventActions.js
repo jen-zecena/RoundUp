@@ -12,16 +12,16 @@ import {
   UPDATE_EVENT_FAIL,
   DELETE_EVENT_SUCCESS,
   DELETE_EVENT_FAIL,
-  GET_EVENTS_SUCCESS,
-  GET_EVENTS_FAIL,
-  // GET_EVENTS_BY_TAGS_SUCCESS,
-  // GET_EVENTS_BY_TAGS_FAIL,
-  // GET_EVENTS_BY_NAME_SUCCESS,
-  // GET_EVENTS_BY_NAME_FAIL,
-  // GET_EVENTS_BY_OWNER_SUCCESS,
-  // GET_EVENTS_BY_OWNER_FAIL,
-  // GET_EVENTS_BY_TIME_SUCCESS,
-  // GET_EVENTS_BY_TIME_FAIL,
+  // GET_EVENTS_SUCCESS,
+  // GET_EVENTS_FAIL,
+  GET_EVENTS_BY_TAGS_SUCCESS,
+  GET_EVENTS_BY_TAGS_FAIL,
+  GET_EVENTS_BY_NAME_SUCCESS,
+  GET_EVENTS_BY_NAME_FAIL,
+  GET_EVENTS_BY_OWNER_SUCCESS,
+  GET_EVENTS_BY_OWNER_FAIL,
+  GET_EVENTS_BY_TIME_SUCCESS,
+  GET_EVENTS_BY_TIME_FAIL,
   GET_EVENT_ATTENDEES_SUCCESS,
   GET_EVENT_ATTENDEES_FAIL
 } from './types/eventActionTypes';
@@ -182,40 +182,13 @@ export const deleteEventAction = (eventID, uID) => async (dispatch, getState) =>
   }
 }
 
-/**
-  @param tags: a list of tags associated with the event
-  @param search: the key word to search events by
-  @param uID: the owner's user id
-  @param status: the status of events user is interested in
-  @param fromTime: the beginning of the events time window
-  @param toTime: the end of the events time window
-
-  This method retrieves eventsthat have particular tags by making a request ot the backend to extract events with
-  specified parameters.
-
-  The method dispatches the result of the action to the reducer, which
-  informs the web app of the retrieved events.
-*/
-export const getEventsAction = ({ tags, search, uID, status, fromTime, toTime }) => async (dispatch, getState) => {
-  dispatch(apiRequest());
-  try {
-    const response = await axios.get(EVENTS_URL, {params: { tags: tags, search: search, status: status, fromTime: fromTime, toTime: toTime }});
-    dispatch({
-      type: GET_EVENTS_SUCCESS,
-      payload: response.data.events
-    });
-    return response;
-  } catch (error) {
-    dispatch({
-      type: GET_EVENTS_FAIL,
-      error: error.message
-    });
-    return error;
-  }
-}
-
 // /**
-//
+//   @param tags: a list of tags associated with the event
+//   @param search: the key word to search events by
+//   @param uID: the owner's user id
+//   @param status: the status of events user is interested in
+//   @param fromTime: the beginning of the events time window
+//   @param toTime: the end of the events time window
 //
 //   This method retrieves eventsthat have particular tags by making a request ot the backend to extract events with
 //   specified parameters.
@@ -223,138 +196,165 @@ export const getEventsAction = ({ tags, search, uID, status, fromTime, toTime })
 //   The method dispatches the result of the action to the reducer, which
 //   informs the web app of the retrieved events.
 // */
-// export const getEventsByTagsAction = (tags, status) => async (dispatch, getState) => {
-//   /*
-//     1. Create the request configuration and stringify the parameters
-//     2. Make a request to the backend to retrieve specified events.
-//     3. If the attempt was successful, tell authentication reducer about
-//     success and pass along user information
-//     4. otherwise, tell the authentication reducer about the failed attempt.
-//   */
+// export const getEventsAction = ({ tags, search, uID, status, fromTime, toTime }) => async (dispatch, getState) => {
 //   dispatch(apiRequest());
 //   try {
-//     const response = await axios.get(`/events/`, {tags, status}, tokenConfig(getState));
+//     const response = await axios.get(EVENTS_URL, {params: { tags: tags, search: search, status: status, fromTime: fromTime, toTime: toTime }});
 //     dispatch({
-//       type: GET_EVENTS_BY_TAGS_SUCCESS,
-//       payload: response.data
+//       type: GET_EVENTS_SUCCESS,
+//       payload: response.data.events
 //     });
 //     return response;
 //   } catch (error) {
 //     dispatch({
-//       type: GET_EVENTS_BY_TAGS_FAIL,
+//       type: GET_EVENTS_FAIL,
 //       error: error.message
 //     });
 //     return error;
 //   }
 // }
-//
-//
-// /**
-//   @param uID: the owner's user id
-//   @param status: the status of events user is interested in
-//
-//   This method retrieves events belonging to a particular owner by making a request ot the backend to extract events with
-//   specified parameters.
-//
-//   The method dispatches the result of the action to the reducer, which
-//   informs the web app of the retrieved events.
-// */
-// export const getEventsByOwnerAction = (uID, status) => async (dispatch, getState) => {
-//   /*
-//     1. Create the request configuration and stringify the parameters
-//     2. Make a request to the backend to retrieve specified events.
-//     3. If the attempt was successful, tell authentication reducer about
-//     success and pass along user information
-//     4. otherwise, tell the authentication reducer about the failed attempt.
-//   */
-//   dispatch(apiRequest());
-//   try {
-//     const response = await axios.get(`/events/`, {uID, status}, tokenConfig(getState));
-//     dispatch({
-//       type: GET_EVENTS_BY_OWNER_SUCCESS,
-//       payload: response.data
-//     });
-//     return response;
-//   } catch (error) {
-//     dispatch({
-//       type: GET_EVENTS_BY_OWNER_FAIL,
-//       error: error.message
-//     });
-//     return error;
-//   }
-// }
-//
-//
-// /**
-//   @param search: the key word to search events by
-//   @param status: the status of events user is interested in
-//
-//   This method retrieves events that that a key word by making a request ot the backend to extract events with
-//   specified parameters.
-//
-//   The method dispatches the result of the action to the reducer, which
-//   informs the web app of the retrieved events.
-// */
-// export const getEventsByNameAction = (search, status) => async (dispatch, getState) => {
-//   /*
-//     1. Create the request configuration and stringify the parameters
-//     2. Make a request to the backend to retrieve specified events.
-//     3. If the attempt was successful, tell authentication reducer about
-//     success and pass along user information
-//     4. otherwise, tell the authentication reducer about the failed attempt.
-//   */
-//   dispatch(apiRequest());
-//   try {
-//     const response = await axios.get(`/events/`, {search, status}, tokenConfig(getState));
-//     dispatch({
-//       type: GET_EVENTS_BY_NAME_SUCCESS,
-//       payload: response.data
-//     });
-//     return response;
-//   } catch (error) {
-//     dispatch({
-//       type: GET_EVENTS_BY_NAME_FAIL,
-//       error: error.message
-//     });
-//     return error;
-//   }
-// }
-//
-//
-// /**
-//   @param fromTime: the beginning of the events time window
-//   @param toTime: the end of the events time window
-//
-//   This method retrieves events within a time window by making a request ot the backend to extract events with
-//   specified parameters.
-//
-//   The method dispatches the result of the action to the reducer, which
-//   informs the web app of the retrieved events.
-// */
-// export const getEventsByTimeAction = (fromTime, toTime) => async (dispatch, getState) => {
-//   /*
-//     1. Create the request configuration and stringify the parameters
-//     2. Make a request to the backend to retrieve specified events.
-//     3. If the attempt was successful, tell authentication reducer about
-//     success and pass along user information
-//     4. otherwise, tell the authentication reducer about the failed attempt.
-//   */
-//   dispatch(apiRequest());
-//   try {
-//     const response = await axios.get(`/events/`, {fromTime, toTime}, tokenConfig(getState));
-//     dispatch({
-//       type: GET_EVENTS_BY_TIME_SUCCESS,
-//       payload: response.data
-//     });
-//     return response;
-//   } catch (error) {
-//     dispatch({
-//       type: GET_EVENTS_BY_TIME_FAIL,
-//       error: error.message
-//     });
-//     return error;
-//   }
-// }
+
+/**
+
+
+  This method retrieves eventsthat have particular tags by making a request ot the backend to extract events with
+  specified parameters.
+
+  The method dispatches the result of the action to the reducer, which
+  informs the web app of the retrieved events.
+*/
+export const getEventsByTagsAction = (tags, status) => async (dispatch, getState) => {
+  /*
+    1. Create the request configuration and stringify the parameters
+    2. Make a request to the backend to retrieve specified events.
+    3. If the attempt was successful, tell authentication reducer about
+    success and pass along user information
+    4. otherwise, tell the authentication reducer about the failed attempt.
+  */
+  dispatch(apiRequest());
+  try {
+    const response = await axios.get(EVENTS_URL + "/tags/", {tags, status}, tokenConfig(getState));
+    dispatch({
+      type: GET_EVENTS_BY_TAGS_SUCCESS,
+      payload: response.data
+    });
+    return response;
+  } catch (error) {
+    dispatch({
+      type: GET_EVENTS_BY_TAGS_FAIL,
+      error: error.message
+    });
+    return error;
+  }
+}
+
+
+/**
+  @param uID: the owner's user id
+  @param status: the status of events user is interested in
+
+  This method retrieves events belonging to a particular owner by making a request ot the backend to extract events with
+  specified parameters.
+
+  The method dispatches the result of the action to the reducer, which
+  informs the web app of the retrieved events.
+*/
+export const getEventsByOwnerAction = (uID, status) => async (dispatch, getState) => {
+  /*
+    1. Create the request configuration and stringify the parameters
+    2. Make a request to the backend to retrieve specified events.
+    3. If the attempt was successful, tell authentication reducer about
+    success and pass along user information
+    4. otherwise, tell the authentication reducer about the failed attempt.
+  */
+  dispatch(apiRequest());
+  try {
+    const response = await axios.get(EVENTS_URL + `/${uID}/`, {status}, tokenConfig(getState));
+    dispatch({
+      type: GET_EVENTS_BY_OWNER_SUCCESS,
+      payload: response.data
+    });
+    return response;
+  } catch (error) {
+    dispatch({
+      type: GET_EVENTS_BY_OWNER_FAIL,
+      error: error.message
+    });
+    return error;
+  }
+}
+
+
+/**
+  @param search: the key word to search events by
+  @param status: the status of events user is interested in
+
+  This method retrieves events that that a key word by making a request ot the backend to extract events with
+  specified parameters.
+
+  The method dispatches the result of the action to the reducer, which
+  informs the web app of the retrieved events.
+*/
+export const getEventsByNameAction = (search, status) => async (dispatch, getState) => {
+  /*
+    1. Create the request configuration and stringify the parameters
+    2. Make a request to the backend to retrieve specified events.
+    3. If the attempt was successful, tell authentication reducer about
+    success and pass along user information
+    4. otherwise, tell the authentication reducer about the failed attempt.
+  */
+  dispatch(apiRequest());
+  try {
+    const response = await axios.get(EVENTS_URL + "/search/", {search, status}, tokenConfig(getState));
+    dispatch({
+      type: GET_EVENTS_BY_NAME_SUCCESS,
+      payload: response.data
+    });
+    return response;
+  } catch (error) {
+    dispatch({
+      type: GET_EVENTS_BY_NAME_FAIL,
+      error: error.message
+    });
+    return error;
+  }
+}
+
+
+/**
+  @param fromTime: the beginning of the events time window
+  @param toTime: the end of the events time window
+
+  This method retrieves events within a time window by making a request ot the backend to extract events with
+  specified parameters.
+
+  The method dispatches the result of the action to the reducer, which
+  informs the web app of the retrieved events.
+*/
+export const getEventsByTimeAction = (fromTime, toTime) => async (dispatch, getState) => {
+  /*
+    1. Create the request configuration and stringify the parameters
+    2. Make a request to the backend to retrieve specified events.
+    3. If the attempt was successful, tell authentication reducer about
+    success and pass along user information
+    4. otherwise, tell the authentication reducer about the failed attempt.
+  */
+  dispatch(apiRequest());
+  try {
+    const response = await axios.get(EVENTS_URL + "/timeframe/", {fromTime, toTime}, tokenConfig(getState));
+    dispatch({
+      type: GET_EVENTS_BY_TIME_SUCCESS,
+      payload: response.data
+    });
+    return response;
+  } catch (error) {
+    dispatch({
+      type: GET_EVENTS_BY_TIME_FAIL,
+      error: error.message
+    });
+    return error;
+  }
+}
 
 
 /**

@@ -9,16 +9,16 @@ import {
   UPDATE_EVENT_FAIL,
   DELETE_EVENT_SUCCESS,
   DELETE_EVENT_FAIL,
-  GET_EVENTS_SUCCESS,
-  GET_EVENTS_FAIL,
-  // GET_EVENTS_BY_TAGS_SUCCESS,
-  // GET_EVENTS_BY_TAGS_FAIL,
-  // GET_EVENTS_BY_NAME_SUCCESS,
-  // GET_EVENTS_BY_NAME_FAIL,
-  // GET_EVENTS_BY_OWNER_SUCCESS,
-  // GET_EVENTS_BY_OWNER_FAIL,
-  // GET_EVENTS_BY_TIME_SUCCESS,
-  // GET_EVENTS_BY_TIME_FAIL,
+  // GET_EVENTS_SUCCESS,
+  // GET_EVENTS_FAIL,
+  GET_EVENTS_BY_TAGS_SUCCESS,
+  GET_EVENTS_BY_TAGS_FAIL,
+  GET_EVENTS_BY_NAME_SUCCESS,
+  GET_EVENTS_BY_NAME_FAIL,
+  GET_EVENTS_BY_OWNER_SUCCESS,
+  GET_EVENTS_BY_OWNER_FAIL,
+  GET_EVENTS_BY_TIME_SUCCESS,
+  GET_EVENTS_BY_TIME_FAIL,
   GET_EVENT_ATTENDEES_SUCCESS,
   GET_EVENT_ATTENDEES_FAIL
 } from '../actions/types/eventActionTypes';
@@ -127,7 +127,30 @@ export default function eventReducer(state=defaultEventState, action) {
         ...state,
         error: action.error
       };
-    case GET_EVENTS_SUCCESS:
+    // case GET_EVENTS_SUCCESS:
+    //   /*
+    //     return an updated state object where the list of events is updated with
+    //     the retrieved events;
+    //   */
+    //   return {
+    //     ...state,
+    //     events: _.uniqBy([
+    //       ...state.events,
+    //       ...action.payload
+    //     ], function(event) {
+    //       return event.eID
+    //     })
+    //   };
+    // case GET_EVENTS_FAIL:
+    //   /*
+    //     return an updated state object where the list of events is updated with
+    //     the retrieved events;
+    //   */
+    //   return {
+    //     ...state,
+    //     error: action.error
+    //   };
+    case GET_EVENTS_BY_TAGS_SUCCESS:
       /*
         return an updated state object where the list of events is updated with
         the retrieved events;
@@ -141,7 +164,7 @@ export default function eventReducer(state=defaultEventState, action) {
           return event.eID
         })
       };
-    case GET_EVENTS_FAIL:
+    case GET_EVENTS_BY_TAGS_FAIL:
       /*
         return an updated state object where the list of events is updated with
         the retrieved events;
@@ -150,98 +173,75 @@ export default function eventReducer(state=defaultEventState, action) {
         ...state,
         error: action.error
       };
-    // case GET_EVENTS_BY_TAGS_SUCCESS:
-    //   /*
-    //     return an updated state object where the list of events is updated with
-    //     the retrieved events;
-    //   */
-    //   return {
-    //     ...state,
-    //     events: _.uniqBy([
-    //       ...state.events,
-    //       ...action.payload
-    //     ], function(event) {
-    //       return event.eID
-    //     })
-    //   };
-    // case GET_EVENTS_BY_TAGS_FAIL:
-    //   /*
-    //     return an updated state object where the list of events is updated with
-    //     the retrieved events;
-    //   */
-    //   return {
-    //     ...state,
-    //     error: action.error
-    //   };
-    // case GET_EVENTS_BY_NAME_SUCCESS:
-    //   /*
-    //     return an updated state object where the list of events is updated with
-    //     the retrieved events;
-    //   */
-    //   return {
-    //     ...state,
-    //     events: _.uniqBy([
-    //       ...state.events,
-    //       ...action.payload
-    //     ], function(event) {
-    //       return event.eID
-    //     })
-    //   };
-    // case GET_EVENTS_BY_NAME_FAIL:
-    //   /*
-    //     return an updated state object where the list of events is updated with
-    //     the retrieved events;
-    //   */
-    //   return {
-    //     ...state,
-    //     error: action.error
-    //   };
-    // case GET_EVENTS_BY_OWNER_SUCCESS:
-    //   /*
-    //     return an updated state object where the list of events is updated with
-    //     the retrieved events;
-    //   */
-    //   return {
-    //     ...state,
-    //     events: _.uniqBy([
-    //       ...state.events,
-    //       ...action.payload
-    //     ], function(event) {
-    //       return event.eID
-    //     })
-    //   };
-    // case GET_EVENTS_BY_OWNER_FAIL:
-    //   /*
-    //     return an updated state object where the list of events is updated with
-    //     the retrieved events;
-    //   */
-    //   return {
-    //     ...state,
-    //     error: action.error
-    //   };
-    // case GET_EVENTS_BY_TIME_SUCCESS:
-    //   /*
-    //     return an updated state object where the list of events is updated with
-    //     the retrieved events;
-    //   */
-    //   return {
-    //     ...state,
-    //     events: _.uniqBy([
-    //       ...state.events,
-    //       ...action.payload
-    //     ], function(event) {
-    //       return event.eID
-    //     })
-    //   };
-    // case GET_EVENTS_BY_TIME_FAIL:
-    //   /*
-    //     return an updated state object where the list of events is updated with
-    //     the retrieved events;
-    //   */
-    //   return {
-    //     ...state,
-    //     error: action.error
-    //     };
+    case GET_EVENTS_BY_NAME_SUCCESS:
+      /*
+        return an updated state object where the list of events is updated with
+        the retrieved events;
+      */
+      return {
+        ...state,
+        events: _.uniqBy([
+          ...state.events,
+          ...action.payload
+        ], function(event) {
+          return event.eID
+        })
+      };
+    case GET_EVENTS_BY_NAME_FAIL:
+      /*
+        return an updated state object where the list of events is updated with
+        the retrieved events;
+      */
+      return {
+        ...state,
+        error: action.error
+      };
+    case GET_EVENTS_BY_OWNER_SUCCESS:
+      /*
+        return an updated state object where the list of events is updated with
+        the retrieved events;
+      */
+      return {
+        ...state,
+        events: _.uniqBy([
+          ...state.events,
+          ...action.payload
+        ], function(event) {
+          return event.eID
+        })
+      };
+    case GET_EVENTS_BY_OWNER_FAIL:
+      /*
+        return an updated state object where the list of events is updated with
+        the retrieved events;
+      */
+      return {
+        ...state,
+        error: action.error
+      };
+    case GET_EVENTS_BY_TIME_SUCCESS:
+      /*
+        return an updated state object where the list of events is updated with
+        the retrieved events;
+      */
+      return {
+        ...state,
+        events: _.uniqBy([
+          ...state.events,
+          ...action.payload
+        ], function(event) {
+          return event.eID
+        })
+      };
+    case GET_EVENTS_BY_TIME_FAIL:
+      /*
+        return an updated state object where the list of events is updated with
+        the retrieved events;
+      */
+      return {
+        ...state,
+        error: action.error
+        };
     case GET_EVENT_ATTENDEES_SUCCESS:
       /*
         return an updated state the list of attendees for a specified event is updated.
