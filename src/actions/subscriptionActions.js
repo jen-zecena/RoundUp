@@ -1,12 +1,20 @@
 import axios from 'axios';
 import { stopSubmit } from 'redux-form';
+import { apiRequest } from './commonActions';
+
+import { tokenConfig } from './authActions';
 
 import {
-  ADD_SUBSCRIPTION,
-  DELETE_SUBSCRIPTION,
-  GET_SUBSCRIPTIONS,
-  GET_SUBSCRIBERS
-} from './types/subscriptions';
+  ADD_SUBSCRIPTION_SUCCESS,
+  ADD_SUBSCRIPTION_FAIL,
+  DELETE_SUBSCRIPTION_SUCCESS,
+  DELETE_SUBSCRIPTION_FAIL,
+  GET_SUBSCRIPTIONS_SUCCESS,
+  GET_SUBSCRIPTIONS_FAIL,
+  GET_SUBSCRIBERS_SUCCESS,
+  GET_SUBSCRIBERS_FAIL
+} from './types/subscriptionActionTypes';
+
 
 // action related to subscriptions **
 /**
@@ -19,7 +27,7 @@ import {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the added subscription.
 */
-export const addSubscription = ({ followerID, followedID }) => async (dispatch, getState) => {
+export const addSubscriptionAction = (followerID, followedID) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to add the new subscription.
@@ -27,11 +35,21 @@ export const addSubscription = ({ followerID, followedID }) => async (dispatch, 
     success and pass along user information
     4. otherwise, tell the authentication reducer about the failed attempt.
   */
-  const response = await axios.post(`/subscriptions`, { followerID, followedID }, tokenConfig(getState));
-  dispatch({
-    type: ADD_SUBSCRIPTION,
-    payload: response.data
-  });
+  dispatch(apiRequest());
+  try {
+    const response = await axios.post(`/subscriptions`, { followerID, followedID }, tokenConfig(getState));
+    dispatch({
+      type: ADD_SUBSCRIPTION_SUCCESS,
+      payload: response.data
+    });
+    return response;
+  } catch (error) {
+      dispatch({
+        type: ADD_SUBSCRIPTION_FAIL,
+        error: error.message
+      });
+      return error;
+  }
 }
 
 /**
@@ -43,7 +61,7 @@ export const addSubscription = ({ followerID, followedID }) => async (dispatch, 
   The method dispatches the result of the action to the reducer, which
   informs the web app of the retrieved subscriptions.
 */
-export const getSubscriptions = (followerID) => async (dispatch, getState) => {
+export const getSubscriptionsAction = (followerID) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to retrieve the user's subscriptions.
@@ -51,11 +69,21 @@ export const getSubscriptions = (followerID) => async (dispatch, getState) => {
     success and pass along user information
     4. otherwise, tell the authentication reducer about the failed attempt.
   */
-  const response = await axios.post(`/users/${followerID}/subscriptions`, tokenConfig(getState));
-  dispatch({
-    type: GET_SUBSCRIPTIONS,
-    payload: response.data
-  });
+  dispatch(apiRequest());
+  try {
+    const response = await axios.get(`/users/${followerID}/subscriptions`, tokenConfig(getState));
+    dispatch({
+      type: GET_SUBSCRIPTIONS_SUCCESS,
+      payload: response.data
+    });
+    return response;
+  } catch (error) {
+      dispatch({
+        type: GET_SUBSCRIPTIONS_FAIL,
+        error: error.message
+      });
+      return error;
+  }
 }
 
 /**
@@ -67,7 +95,7 @@ export const getSubscriptions = (followerID) => async (dispatch, getState) => {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the retrieved subscribers.
 */
-export const getSubscribers = (followedID) => async (dispatch, getState) => {
+export const getSubscribersAction = (followedID) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to retrieve the user's subscribers.
@@ -75,11 +103,21 @@ export const getSubscribers = (followedID) => async (dispatch, getState) => {
     success and pass along user information
     4. otherwise, tell the authentication reducer about the failed attempt.
   */
-  const response = await axios.get(`/users/${followedID}/subscribers/`, tokenConfig(getState));
-  dispatch({
-    type: GET_SUBSCRIBERS,
-    payload: response.data
-  });
+  dispatch(apiRequest());
+  try {
+    const response = await axios.get(`/users/${followedID}/subscribers/`, tokenConfig(getState))
+    dispatch({
+      type: GET_SUBSCRIBERS_SUCCESS,
+      payload: response.data
+    });
+    return response;
+  } catch (error) {
+      dispatch({
+        type: GET_SUBSCRIBERS_FAIL,
+        error: error.message
+      });
+      return error;
+  }
 }
 
 
@@ -93,7 +131,7 @@ export const getSubscribers = (followedID) => async (dispatch, getState) => {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the deleted subscription.
 */
-export const deleteSubscription = ({ followerID, followedID }) => async (dispatch, getState) => {
+export const deleteSubscriptionAction = ({ followerID, followedID }) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to delete the specified subscription.
@@ -101,9 +139,19 @@ export const deleteSubscription = ({ followerID, followedID }) => async (dispatc
     success and pass along user information
     4. otherwise, tell the authentication reducer about the failed attempt.
   */
-  const response = await axios.delete(`/subscriptions`, { followerID, followedID }, tokenConfig(getState));
-  dispatch({
-    type: DELETE_SUBSCRIPTION,
-    payload: response.data
-  });
+  dispatch(apiRequest());
+  try {
+    const response = await axios.delete(`/subscriptions`, { followerID, followedID }, tokenConfig(getState));
+    dispatch({
+      type: DELETE_SUBSCRIPTION_SUCCESS,
+      payload: response.data
+    });
+    return response;
+  } catch (error) {
+      dispatch({
+        type: DELETE_SUBSCRIPTION_FAIL,
+        error: error.message
+      });
+      return error;
+  }
 }

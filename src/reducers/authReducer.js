@@ -1,17 +1,17 @@
 import {
   LOADING_USER,
-  LOADED_USER,
-  SUCCESSFUL_REGISTRATION,
-  SUCCESSFUL_LOGIN,
-  SUCCESSFUL_LOGOUT,
-  AUTHENTICATION_ERROR,
-  FAILED_REGISTRATION,
-  FAILED_LOGIN,
-  FAILED_LOGOUT
-} from '../actions/types/auth';
+  LOADING_USER_SUCCESS,
+  LOADING_USER_FAIL,
+  REGISTRATION_SUCCESS,
+  REGISTRATION_FAIL,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAIL
+} from '../actions/types/authActionTypes';
 
 // the default state of the user
-const defaultAuthState = {
+export const defaultAuthState = {
   /*
     Initialize state variables that will control web app
     behavior.
@@ -44,7 +44,7 @@ export default function authReducer(state=defaultAuthState, action) {
         ...state,
         isLoading: true
       };
-    case LOADED_USER:
+    case LOADING_USER_SUCCESS:
      /*
        return a state object that tells the
        web app that the user is no longer being
@@ -60,7 +60,7 @@ export default function authReducer(state=defaultAuthState, action) {
        user: action.payload,
        token: action.payload.token
      };
-    case SUCCESSFUL_REGISTRATION:
+    case REGISTRATION_SUCCESS:
       /*
         currently do nothing because the user information
         can be retrieved from the database if registration
@@ -71,9 +71,10 @@ export default function authReducer(state=defaultAuthState, action) {
         ...state,
         isLoading: false,
         isAuthenticated: true,
-        ...action.payload
+        user: action.payload,
+        token: action.payload.token
       };
-    case SUCCESSFUL_LOGIN:
+    case LOGIN_SUCCESS:
       /*
         1. store the authentication token in local storage
         object.
@@ -87,9 +88,10 @@ export default function authReducer(state=defaultAuthState, action) {
         ...state,
         isLoading: false,
         isAuthenticated: true,
-        ...action.payload
+        user: action.payload,
+        token: action.payload.token
       };
-    case SUCCESSFUL_LOGOUT:
+    case LOGOUT_SUCCESS:
       /*
         1. delete the authentication token from local storage.
         2. return an updated state object that has default values for
@@ -103,14 +105,32 @@ export default function authReducer(state=defaultAuthState, action) {
         user: null,
         token: null
       };
-    case AUTHENTICATION_ERROR:
-      // do nothing
-    case FAILED_REGISTRATION:
-      // do nothing
-    case FAILED_LOGIN:
-      // do nothing
-    case FAILED_LOGOUT:
-      // do nothing
+    case LOADING_USER_FAIL:
+      return {
+        ...state,
+        isAuthenticated: false,
+        isLoading: false,
+        user: null,
+        error: action.error
+    }
+    case REGISTRATION_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error
+      }
+    case LOGIN_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error
+      }
+    case LOGOUT_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error
+      }
     default:
       /*
         return state as is
