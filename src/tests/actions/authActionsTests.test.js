@@ -110,7 +110,7 @@ describe('creatingRegisterUserAction', () => {
     ];
 
     const store = mockStore({ auth: {user: {}} })
-    return store.dispatch(authActions.registerUserAction('John', 'Doe', 'john@doe.edu', 'xxxxxxxx', 'POM')).then(() => {
+    return store.dispatch(authActions.registerUserAction({ firstName: 'John', lastName: 'Doe', email: 'john@doe.edu', password: 'xxxxxxxx', campus: 'POM' })).then(() => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });
@@ -133,7 +133,7 @@ describe('creatingRegisterUserAction', () => {
     ];
 
     const store = mockStore({ auth: { user: {}} })
-    return store.dispatch(authActions.registerUserAction('John', 'Doe', 'john@doe.edu', 'xxxxxxxx', 'POM')).then(() => {
+    return store.dispatch(authActions.registerUserAction({ firstName: 'John', lastName: 'Doe', email: 'john@doe.edu', password: 'xxxxxxxx', campus: 'POM' })).then(() => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });
@@ -166,7 +166,7 @@ describe('creatingLoginUserAction', () => {
     ];
 
     const store = mockStore({ auth: { user: {}} })
-    return store.dispatch(authActions.loginUserAction('joe@doe.edu', 'xxxxxxxx')).then(() => {
+    return store.dispatch(authActions.loginUserAction({ email: 'joe@doe.edu', password: 'xxxxxxxx'})).then(() => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });
@@ -189,7 +189,7 @@ describe('creatingLoginUserAction', () => {
     ];
 
     const store = mockStore({ auth: { user: {}} })
-    return store.dispatch(authActions.loginUserAction('joe@doe.edu', 'xxxxxxxx')).then(() => {
+    return store.dispatch(authActions.loginUserAction( {email: 'joe@doe.edu', password: 'xxxxxxxx'})).then(() => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });

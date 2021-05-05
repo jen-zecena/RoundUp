@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 
 function UploadEvent(){
   const [eventInfo, setEventInfo] = useState({
-    userID: "",
+    uID: "",
     description: "",
     eventTime: "",
     poster: "",
@@ -22,7 +22,7 @@ function UploadEvent(){
 
   const [setEvent] = useState([]);
 
-  const requiredProps = ["userID" , "eventTime" , "name" , "location", "email"];
+  const requiredProps = ["uID" , "eventTime" , "name" , "location", "email"];
   
   console.log(eventInfo);
 
@@ -30,9 +30,9 @@ function UploadEvent(){
     const { name, value } = event.target;
 
     setEventInfo(prevValue => {
-      if (name === "userID") {
+      if (name === "uID") {
         return {
-          userID: value,
+          uID: value,
           description: prevValue.description,
           eventTime: prevValue.eventTime,
           poster: prevValue.poster,
@@ -42,7 +42,7 @@ function UploadEvent(){
         };
       } else if (name === "description") {
         return {
-          userID: prevValue.userID,
+          uID: prevValue.uID,
           description: value,
           eventTime: prevValue.eventTime,
           poster: prevValue.poster,
@@ -53,7 +53,7 @@ function UploadEvent(){
       } else if (name === "eventDate") {
         dateFormat = value;
         return {
-          userID: prevValue.userID,
+          uID: prevValue.uID,
           description: prevValue.description,
           eventTime: dateFormat + timeFormat,
           poster: prevValue.poster,
@@ -64,7 +64,7 @@ function UploadEvent(){
       } else if (name === "eventTime") {
         timeFormat = value;
         return {
-          userID: prevValue.userID,
+          uID: prevValue.uID,
           description: prevValue.description,
           eventTime: dateFormat + timeFormat,
           poster: prevValue.poster,
@@ -74,7 +74,7 @@ function UploadEvent(){
         };
       }else if (name === "poster") {
         return {
-          userID: prevValue.userID,
+          uID: prevValue.uID,
           description: prevValue.description,
           eventTime: prevValue.eventTime,
           poster: value,
@@ -84,7 +84,7 @@ function UploadEvent(){
         };
       }else if (name === "name") {
         return {
-          userID: prevValue.userID,
+          uID: prevValue.uID,
           description: prevValue.description,
           eventTime: prevValue.eventTime,
           poster: prevValue.poster,
@@ -94,7 +94,7 @@ function UploadEvent(){
         };
       }else if (name === "location") {
         return {
-          userID: prevValue.userID,
+          uID: prevValue.uID,
           description: prevValue.description,
           eventTime: prevValue.eventTime,
           poster: prevValue.poster,
@@ -104,7 +104,7 @@ function UploadEvent(){
         };
       }else if (name === "email") {
         return {
-          userID: prevValue.userID,
+          uID: prevValue.uID,
           description: prevValue.description,
           eventTime: prevValue.eventTime,
           poster: prevValue.poster,

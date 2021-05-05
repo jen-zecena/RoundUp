@@ -17,7 +17,7 @@ import {
 
 // ** rsvp **
 /**
-  @param userID: the id of the user who is rsvp'ing to the event
+  @param uID: the id of the user who is rsvp'ing to the event
   @param eventID: the id of the event to be rsvp'ing to
 
   This method adds a new rsvp by passing new rsvp information to be
@@ -51,7 +51,7 @@ export const addRsvpAction = (email, name, eventID, time) => async (dispatch, ge
 }
 
 /**
-  @param userID: the id of the user in question
+  @param uID: the id of the user in question
 
   This method retrieves a user's rsvp history.
 
@@ -83,7 +83,7 @@ export const getUserRsvpsAction = (email, status) => async (dispatch, getState) 
 }
 
 /**
-  @param userID: the id of the user who is rsvp'ing to the event
+  @param uID: the id of the user who is rsvp'ing to the event
   @param eventID: the id of the event to be rsvp'ing to
 
   This method deletes an rsvp by making a request to the backend to delete it

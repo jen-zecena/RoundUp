@@ -14,7 +14,10 @@ import {
   LOGOUT_FAIL
 } from './types/authActionTypes';
 
-import store from '../store';
+import  {
+  USERS_URL,
+  USERS_LOGIN_URL
+} from './backendAccessPoints';
 
 export const loadUserAction = () => async (dispatch, getState) => {
   /*
@@ -32,7 +35,7 @@ export const loadUserAction = () => async (dispatch, getState) => {
 
   dispatch(apiRequest());
   try {
-    const response = await axios.get('/users/', tokenConfig(getState));
+    const response = await axios.get(USERS_URL, tokenConfig(getState));
     dispatch({
       type: LOADING_USER_SUCCESS,
       payload: response.data
@@ -57,7 +60,7 @@ export const loadUserAction = () => async (dispatch, getState) => {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the user's state.
 */
-export const loginUserAction = (email, password)  => async dispatch => {
+export const loginUserAction = ({ email, password })  => async dispatch => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to login the user.
@@ -65,7 +68,6 @@ export const loginUserAction = (email, password)  => async dispatch => {
     success and pass along user information
     4. otherwise, tell the authentication reducer about the failed attempt.
   */
-
   // creating request headers and body
   const config = getHeaders();
   const body = JSON.stringify({ email, password });
@@ -76,7 +78,7 @@ export const loginUserAction = (email, password)  => async dispatch => {
 
   dispatch(apiRequest());
   try {
-    const response = await axios.post('/users/login', body, config);
+    const response = await axios.post(USERS_LOGIN_URL, body, config);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: response.data
@@ -87,8 +89,9 @@ export const loginUserAction = (email, password)  => async dispatch => {
       type: LOGIN_FAIL,
       error: error.message
     });
-    // dispatch(stopSubmit('loginForm', error.response.data));
+    dispatch(stopSubmit('loginForm', error.message))
     return error;
+
   }
 }
 
@@ -107,7 +110,7 @@ export const loginUserAction = (email, password)  => async dispatch => {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the user's state.
   */
-export const registerUserAction = (firstName, lastName, email, password, campus) =>  async dispatch => {
+export const registerUserAction = ({ firstName, lastName, email, password, campus }) =>  async dispatch => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to register the user.
@@ -121,7 +124,7 @@ export const registerUserAction = (firstName, lastName, email, password, campus)
 
   dispatch(apiRequest());
   try {
-    const response = await axios.post('/users/register', body,  config)
+    const response = await axios.post(USERS_URL, body,  config)
     dispatch({
       type: REGISTRATION_SUCCESS,
       payload: response.data
@@ -132,7 +135,7 @@ export const registerUserAction = (firstName, lastName, email, password, campus)
       type: REGISTRATION_FAIL,
       error: error.message
     });
-    // dispatch(stopSubmit('registrationForm', error.response.data));
+    dispatch(stopSubmit('registerForm', error.message))
     return error;
   }
 }
@@ -157,6 +160,7 @@ export const logoutUserAction = () =>  async (dispatch, getState) => {
     dispatch({
       type: LOGOUT_SUCCESS
     })
+
   } else {
     dispatch({
       type: LOGOUT_FAIL

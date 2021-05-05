@@ -9,7 +9,7 @@ function App() {
     fName: "",
     lName: "",
     email: "",
-    userID: "",
+    uID: "",
     eventID: ""
   });
 

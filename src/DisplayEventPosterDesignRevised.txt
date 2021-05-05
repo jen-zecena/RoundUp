@@ -24,7 +24,7 @@ function DisplayEventPoster(eventInfoProps) {
 	  fName: "",
 	  lName: "",
 	  email: "",
-	  userID: "",
+	  uID: "",
 	  eventID: "",
 	});
 
@@ -101,7 +101,7 @@ function DisplayEventPoster(eventInfoProps) {
 		@param props: the props that are passed contain information about the user that is RSVPing to the event
 		Turns requestBody object into JSON with stringify() and then sends the 			JSON as PUT request to the backend with fetch()
 
-		This function will put the userid and the eventid into the database
+		This function will put the uID and the eventid into the database
 		**/
 	  axios.put(`https://jsonplaceholder.typicode.com/users`, { userInfo })
 	  .then(res => {

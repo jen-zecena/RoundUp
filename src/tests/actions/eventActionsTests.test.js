@@ -15,14 +15,16 @@ import {
   UPDATE_EVENT_FAIL,
   DELETE_EVENT_SUCCESS,
   DELETE_EVENT_FAIL,
-  GET_EVENTS_BY_TAGS_SUCCESS,
-  GET_EVENTS_BY_TAGS_FAIL,
-  GET_EVENTS_BY_NAME_SUCCESS,
-  GET_EVENTS_BY_NAME_FAIL,
-  GET_EVENTS_BY_OWNER_SUCCESS,
-  GET_EVENTS_BY_OWNER_FAIL,
-  GET_EVENTS_BY_TIME_SUCCESS,
-  GET_EVENTS_BY_TIME_FAIL,
+  GET_EVENTS_SUCCESS,
+  GET_EVENTS_FAIL,
+  // GET_EVENTS_BY_TAGS_SUCCESS,
+  // GET_EVENTS_BY_TAGS_FAIL,
+  // GET_EVENTS_BY_NAME_SUCCESS,
+  // GET_EVENTS_BY_NAME_FAIL,
+  // GET_EVENTS_BY_OWNER_SUCCESS,
+  // GET_EVENTS_BY_OWNER_FAIL,
+  // GET_EVENTS_BY_TIME_SUCCESS,
+  // GET_EVENTS_BY_TIME_FAIL,
   GET_EVENT_ATTENDEES_SUCCESS,
   GET_EVENT_ATTENDEES_FAIL
 } from '../../actions/types/eventActionTypes';
@@ -378,6 +380,7 @@ describe('creatingDeleteEventActionAsNonOwner', () => {
   });
 });
 
+
 describe('creatingGetEventsByTagsAction', () => {
   beforeEach(function () {
     moxios.install();
@@ -387,7 +390,7 @@ describe('creatingGetEventsByTagsAction', () => {
     moxios.uninstall();
   });
 
-  it('creates GET_EVENTS_BY_TAGS_SUCCESS after successfully retrieving events', async  () => {
+  it('creates GET_EVENTS_SUCCESS after successfully retrieving events', async  () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
@@ -398,19 +401,19 @@ describe('creatingGetEventsByTagsAction', () => {
 
     const expectedActions = [
       { type: API_REQUEST },
-      { type: GET_EVENTS_BY_TAGS_SUCCESS,
+      { type: GET_EVENTS_SUCCESS,
         payload: testEvents
       },
     ];
 
     const store = mockStore({ events: {}})
-    return store.dispatch(eventActions.getEventsByTagsAction(['tag1', 'tag2'], 'active')).then(() => {
+    return store.dispatch(eventActions.getEvents({ tags: ['tag1', 'tag2'], status: 'active'})).then(() => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
 
-  it('creates GET_EVENTS_BY_TAGS_FAIL after failing to add event', async  () => {
+  it('creates GET_EVENTS_FAIL after failing to add event', async  () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.reject({
@@ -421,186 +424,244 @@ describe('creatingGetEventsByTagsAction', () => {
 
     const expectedActions = [
       { type: API_REQUEST },
-      { type: GET_EVENTS_BY_TAGS_FAIL,
+      { type: GET_EVENTS_FAIL,
         error: 'Error message'
       },
     ];
 
     const store = mockStore({ events: {}})
-    return store.dispatch(eventActions.getEventsByTagsAction(['tag1', 'tag2'], 'active')).then(() => {
+    return store.dispatch(eventActions.getEvents({tags: ['tag1', 'tag2'], status: 'active'})).then(() => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
 });
 
-describe('creatingGetEventsByNameAction', () => {
-  beforeEach(function () {
-    moxios.install();
-  });
 
-  afterEach(function () {
-    moxios.uninstall();
-  });
-
-  it('creates GET_EVENTS_BY_NAME_SUCCESS after successfully retrieving events', async  () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      request.respondWith({
-        status: 200,
-        response: testEvents
-      });
-    });
-
-    const expectedActions = [
-      { type: API_REQUEST },
-      { type: GET_EVENTS_BY_NAME_SUCCESS,
-        payload: testEvents
-      },
-    ];
-
-    const store = mockStore({ events: {}})
-    return store.dispatch(eventActions.getEventsByNameAction('Event', 'active')).then(() => {
-      // return of async actions
-      expect(store.getActions()).toEqual(expectedActions);
-    });
-  });
-
-  it('creates GET_EVENTS_BY_NAME_FAIL after failing to retrieve events', async  () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      request.reject({
-        status: 400,
-        message: 'Error message',
-      });
-    });
-
-    const expectedActions = [
-      { type: API_REQUEST },
-      { type: GET_EVENTS_BY_NAME_FAIL,
-        error: 'Error message'
-      },
-    ];
-
-    const store = mockStore({ events: {}})
-    return store.dispatch(eventActions.getEventsByNameAction('Event', 'active')).then(() => {
-      // return of async actions
-      expect(store.getActions()).toEqual(expectedActions);
-    });
-  });
-});
-
-describe('creatingGetEventsByOwnerAction', () => {
-  beforeEach(function () {
-    moxios.install();
-  });
-
-  afterEach(function () {
-    moxios.uninstall();
-  });
-
-  it('creates GET_EVENTS_BY_OWNER_SUCCESS after successfully retrieving events', async  () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      request.respondWith({
-        status: 200,
-        response: testEvents
-      });
-    });
-
-    const expectedActions = [
-      { type: API_REQUEST },
-      { type: GET_EVENTS_BY_OWNER_SUCCESS,
-        payload: testEvents
-      },
-    ];
-
-    const store = mockStore({ events: {}})
-    return store.dispatch(eventActions.getEventsByOwnerAction(1, 'active')).then(() => {
-      // return of async actions
-      expect(store.getActions()).toEqual(expectedActions);
-    });
-  });
-
-  it('creates GET_EVENTS_BY_OWNER_FAIL after failing to retrieve events', async  () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      request.reject({
-        status: 400,
-        message: 'Error message',
-      });
-    });
-
-    const expectedActions = [
-      { type: API_REQUEST },
-      { type: GET_EVENTS_BY_OWNER_FAIL,
-        error: 'Error message'
-      },
-    ];
-
-    const store = mockStore({ events: {}})
-    return store.dispatch(eventActions.getEventsByOwnerAction(1, 'active')).then(() => {
-      // return of async actions
-      expect(store.getActions()).toEqual(expectedActions);
-    });
-  });
-});
-
-describe('creatingGetEventsByTimeAction', () => {
-  beforeEach(function () {
-    moxios.install();
-  });
-
-  afterEach(function () {
-    moxios.uninstall();
-  });
-
-  it('creates GET_EVENTS_BY_TIME_SUCCESS after successfully retrieving events', async  () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      request.respondWith({
-        status: 200,
-        response: testEvents
-      });
-    });
-
-    const expectedActions = [
-      { type: API_REQUEST },
-      { type: GET_EVENTS_BY_TIME_SUCCESS,
-        payload: testEvents
-      },
-    ];
-
-    const store = mockStore({ events: {}})
-    return store.dispatch(eventActions.getEventsByTimeAction('XXXXXXA', 'XXXXXXX')).then(() => {
-      // return of async actions
-      expect(store.getActions()).toEqual(expectedActions);
-    });
-  });
-
-  it('creates GET_EVENTS_BY_TIME_FAIL after failing to retrieve events', async  () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      request.reject({
-        status: 400,
-        message: 'Error message',
-      });
-    });
-
-    const expectedActions = [
-      { type: API_REQUEST },
-      { type: GET_EVENTS_BY_TIME_FAIL,
-        error: 'Error message'
-      },
-    ];
-
-    const store = mockStore({ events: {}})
-    return store.dispatch(eventActions.getEventsByTimeAction('XXXXXXA', 'XXXXXXX')).then(() => {
-      // return of async actions
-      expect(store.getActions()).toEqual(expectedActions);
-    });
-  });
-});
+//
+// describe('creatingGetEventsByTagsAction', () => {
+//   beforeEach(function () {
+//     moxios.install();
+//   });
+//
+//   afterEach(function () {
+//     moxios.uninstall();
+//   });
+//
+//   it('creates GET_EVENTS_BY_TAGS_SUCCESS after successfully retrieving events', async  () => {
+//     moxios.wait(() => {
+//       const request = moxios.requests.mostRecent();
+//       request.respondWith({
+//         status: 200,
+//         response: testEvents
+//       });
+//     });
+//
+//     const expectedActions = [
+//       { type: API_REQUEST },
+//       { type: GET_EVENTS_BY_TAGS_SUCCESS,
+//         payload: testEvents
+//       },
+//     ];
+//
+//     const store = mockStore({ events: {}})
+//     return store.dispatch(eventActions.getEventsByTagsAction(['tag1', 'tag2'], 'active')).then(() => {
+//       // return of async actions
+//       expect(store.getActions()).toEqual(expectedActions);
+//     });
+//   });
+//
+//   it('creates GET_EVENTS_BY_TAGS_FAIL after failing to add event', async  () => {
+//     moxios.wait(() => {
+//       const request = moxios.requests.mostRecent();
+//       request.reject({
+//         status: 400,
+//         message: 'Error message',
+//       });
+//     });
+//
+//     const expectedActions = [
+//       { type: API_REQUEST },
+//       { type: GET_EVENTS_BY_TAGS_FAIL,
+//         error: 'Error message'
+//       },
+//     ];
+//
+//     const store = mockStore({ events: {}})
+//     return store.dispatch(eventActions.getEventsByTagsAction(['tag1', 'tag2'], 'active')).then(() => {
+//       // return of async actions
+//       expect(store.getActions()).toEqual(expectedActions);
+//     });
+//   });
+// });
+//
+// describe('creatingGetEventsByNameAction', () => {
+//   beforeEach(function () {
+//     moxios.install();
+//   });
+//
+//   afterEach(function () {
+//     moxios.uninstall();
+//   });
+//
+//   it('creates GET_EVENTS_BY_NAME_SUCCESS after successfully retrieving events', async  () => {
+//     moxios.wait(() => {
+//       const request = moxios.requests.mostRecent();
+//       request.respondWith({
+//         status: 200,
+//         response: testEvents
+//       });
+//     });
+//
+//     const expectedActions = [
+//       { type: API_REQUEST },
+//       { type: GET_EVENTS_BY_NAME_SUCCESS,
+//         payload: testEvents
+//       },
+//     ];
+//
+//     const store = mockStore({ events: {}})
+//     return store.dispatch(eventActions.getEventsByNameAction('Event', 'active')).then(() => {
+//       // return of async actions
+//       expect(store.getActions()).toEqual(expectedActions);
+//     });
+//   });
+//
+//   it('creates GET_EVENTS_BY_NAME_FAIL after failing to retrieve events', async  () => {
+//     moxios.wait(() => {
+//       const request = moxios.requests.mostRecent();
+//       request.reject({
+//         status: 400,
+//         message: 'Error message',
+//       });
+//     });
+//
+//     const expectedActions = [
+//       { type: API_REQUEST },
+//       { type: GET_EVENTS_BY_NAME_FAIL,
+//         error: 'Error message'
+//       },
+//     ];
+//
+//     const store = mockStore({ events: {}})
+//     return store.dispatch(eventActions.getEventsByNameAction('Event', 'active')).then(() => {
+//       // return of async actions
+//       expect(store.getActions()).toEqual(expectedActions);
+//     });
+//   });
+// });
+//
+// describe('creatingGetEventsByOwnerAction', () => {
+//   beforeEach(function () {
+//     moxios.install();
+//   });
+//
+//   afterEach(function () {
+//     moxios.uninstall();
+//   });
+//
+//   it('creates GET_EVENTS_BY_OWNER_SUCCESS after successfully retrieving events', async  () => {
+//     moxios.wait(() => {
+//       const request = moxios.requests.mostRecent();
+//       request.respondWith({
+//         status: 200,
+//         response: testEvents
+//       });
+//     });
+//
+//     const expectedActions = [
+//       { type: API_REQUEST },
+//       { type: GET_EVENTS_BY_OWNER_SUCCESS,
+//         payload: testEvents
+//       },
+//     ];
+//
+//     const store = mockStore({ events: {}})
+//     return store.dispatch(eventActions.getEventsByOwnerAction(1, 'active')).then(() => {
+//       // return of async actions
+//       expect(store.getActions()).toEqual(expectedActions);
+//     });
+//   });
+//
+//   it('creates GET_EVENTS_BY_OWNER_FAIL after failing to retrieve events', async  () => {
+//     moxios.wait(() => {
+//       const request = moxios.requests.mostRecent();
+//       request.reject({
+//         status: 400,
+//         message: 'Error message',
+//       });
+//     });
+//
+//     const expectedActions = [
+//       { type: API_REQUEST },
+//       { type: GET_EVENTS_BY_OWNER_FAIL,
+//         error: 'Error message'
+//       },
+//     ];
+//
+//     const store = mockStore({ events: {}})
+//     return store.dispatch(eventActions.getEventsByOwnerAction(1, 'active')).then(() => {
+//       // return of async actions
+//       expect(store.getActions()).toEqual(expectedActions);
+//     });
+//   });
+// });
+//
+// describe('creatingGetEventsByTimeAction', () => {
+//   beforeEach(function () {
+//     moxios.install();
+//   });
+//
+//   afterEach(function () {
+//     moxios.uninstall();
+//   });
+//
+//   it('creates GET_EVENTS_BY_TIME_SUCCESS after successfully retrieving events', async  () => {
+//     moxios.wait(() => {
+//       const request = moxios.requests.mostRecent();
+//       request.respondWith({
+//         status: 200,
+//         response: testEvents
+//       });
+//     });
+//
+//     const expectedActions = [
+//       { type: API_REQUEST },
+//       { type: GET_EVENTS_BY_TIME_SUCCESS,
+//         payload: testEvents
+//       },
+//     ];
+//
+//     const store = mockStore({ events: {}})
+//     return store.dispatch(eventActions.getEventsByTimeAction('XXXXXXA', 'XXXXXXX')).then(() => {
+//       // return of async actions
+//       expect(store.getActions()).toEqual(expectedActions);
+//     });
+//   });
+//
+//   it('creates GET_EVENTS_BY_TIME_FAIL after failing to retrieve events', async  () => {
+//     moxios.wait(() => {
+//       const request = moxios.requests.mostRecent();
+//       request.reject({
+//         status: 400,
+//         message: 'Error message',
+//       });
+//     });
+//
+//     const expectedActions = [
+//       { type: API_REQUEST },
+//       { type: GET_EVENTS_BY_TIME_FAIL,
+//         error: 'Error message'
+//       },
+//     ];
+//
+//     const store = mockStore({ events: {}})
+//     return store.dispatch(eventActions.getEventsByTimeAction('XXXXXXA', 'XXXXXXX')).then(() => {
+//       // return of async actions
+//       expect(store.getActions()).toEqual(expectedActions);
+//     });
+//   });
+// });
 
 describe('creatingGetEventAttendeesAction', () => {
   beforeEach(function () {
