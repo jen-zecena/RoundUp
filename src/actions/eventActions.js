@@ -26,6 +26,10 @@ import {
   GET_EVENT_ATTENDEES_FAIL
 } from './types/eventActionTypes';
 
+import {
+  EVENTS_URL
+} from './backendAccessPoints';
+
 import history from '../history';
 import { tokenConfig } from './authActions';
 
@@ -54,7 +58,7 @@ export const addEventAction = ({ uID, description, eventTime, poster, name, loca
   */
   dispatch(apiRequest());
   try {
-    const response = await axios.post('/events', { uID, description, eventTime, poster, name, location, tags }, tokenConfig(getState));
+    const response = await axios.post(EVENTS_URL, { uID, description, eventTime, poster, name, location, tags }, tokenConfig(getState));
     dispatch({
       type: ADD_EVENT_SUCCESS,
       payload: response.data
@@ -88,7 +92,7 @@ export const getEventAction = (eventID) => async (dispatch, getState) => {
   */
   dispatch(apiRequest());
   try {
-    const response = await axios.get(`/events/${eventID}`, tokenConfig(getState));
+    const response = await axios.get(`${EVENTS_URL}${eventID}/`, tokenConfig(getState));
     dispatch({
       type: GET_EVENT_SUCCESS,
       payload: response.data
@@ -128,7 +132,7 @@ export const updateEventAction = ({ eventID, uID, description, eventTime, poster
   */
   dispatch(apiRequest());
   try {
-    const response = await axios.put(`/events/${eventID}`, { eventID, uID, description, eventTime, poster, name, location, tags }, tokenConfig(getState));
+    const response = await axios.put(`${EVENTS_URL}${eventID}/`, { eventID, uID, description, eventTime, poster, name, location, tags }, tokenConfig(getState));
     dispatch({
       type: UPDATE_EVENT_SUCCESS,
       payload: response.data
@@ -163,7 +167,7 @@ export const deleteEventAction = (eventID, uID) => async (dispatch, getState) =>
   */
   dispatch(apiRequest());
   try {
-    const response = await axios.delete('/events/', tokenConfig(getState), { 'eventID': eventID, 'uID': uID });
+    const response = await axios.delete(EVENTS_URL, tokenConfig(getState), { 'eventID': eventID, 'uID': uID });
     dispatch({
       type: DELETE_EVENT_SUCCESS,
       payload: response.data
@@ -192,13 +196,13 @@ export const deleteEventAction = (eventID, uID) => async (dispatch, getState) =>
   The method dispatches the result of the action to the reducer, which
   informs the web app of the retrieved events.
 */
-export const getEvents = ({ tags, search, uID, status, fromTime, toTime }) => async (dispatch, getState) => {
+export const getEventsAction = ({ tags, search, uID, status, fromTime, toTime }) => async (dispatch, getState) => {
   dispatch(apiRequest());
   try {
-    const response = await axios.get(`/events/`, { tags: tags, name: name, status: status, fromTime: fromTime, toTime: toTime }, tokenConfig(getState));
+    const response = await axios.get(EVENTS_URL, {params: { tags: tags, search: search, status: status, fromTime: fromTime, toTime: toTime }});
     dispatch({
       type: GET_EVENTS_SUCCESS,
-      payload: response.data
+      payload: response.data.events
     });
     return response;
   } catch (error) {
@@ -211,7 +215,7 @@ export const getEvents = ({ tags, search, uID, status, fromTime, toTime }) => as
 }
 
 // /**
-// 
+//
 //
 //   This method retrieves eventsthat have particular tags by making a request ot the backend to extract events with
 //   specified parameters.
@@ -371,7 +375,7 @@ export const getEventAttendeesAction = (eventID) => async (dispatch, getState) =
   */
   dispatch(apiRequest());
   try {
-    const response = await axios.get(`/events/${eventID}/attendees`, tokenConfig(getState));
+    const response = await axios.get(`${EVENTS_URL}${eventID}/attendees/`, tokenConfig(getState));
     dispatch({
       type: GET_EVENT_ATTENDEES_SUCCESS,
       payload: response.data

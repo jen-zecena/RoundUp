@@ -68,7 +68,7 @@ export default function eventReducer(state=defaultEventState, action) {
         given event.
       */
       _.remove(state.events, { eID: action.payload.eID })
-      return {
+      state = {
         ...state,
         events: _.uniqBy([
           ...state.events,
@@ -77,6 +77,7 @@ export default function eventReducer(state=defaultEventState, action) {
           return event.eID;
         })
       };
+      return state;
     case GET_EVENT_FAIL:
       /*
         return state object with the complete details of the

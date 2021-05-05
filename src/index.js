@@ -20,7 +20,9 @@ import store from './store';
 
 class Index extends React.Component {
   componentDidMount() {
-    store.dispatch(loadUserAction());
+    if (store.getState().auth.token != null) {
+        store.dispatch(loadUserAction());
+    }
   }
 
   render() {
@@ -34,7 +36,7 @@ class Index extends React.Component {
             <Route path="/uploadEvent" component={UploadEvent} />
             <Route path="/about" component={AboutPage} />
             <Route path="/events" component={MappedEvents}/>
-            <Route path="/event/:eventId" component={EventPage}/>
+            <Route path="/event/:eID" component={EventPage}/>
             <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
             <Route path="/userSearch" component={UserSearch}/>

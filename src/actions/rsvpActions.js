@@ -11,9 +11,14 @@ import {
   DELETE_RSVP_FAIL,
   GET_USER_RSVPS_SUCCESS,
   GET_USER_RSVPS_FAIL,
-  GET_ATTENDEES_SUCCESS,
-  GET_ATTENDEES_FAIL
+  // GET_ATTENDEES_SUCCESS,
+  // GET_ATTENDEES_FAIL
 } from './types/rsvpActionTypes';
+
+import {
+  USERS_URL,
+  RSVPS_URL
+} from './backendAccessPoints'
 
 // ** rsvp **
 /**
@@ -26,7 +31,7 @@ import {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the added rsvp.
 */
-export const addRsvpAction = (email, name, eventID, time) => async (dispatch, getState) => {
+export const addRsvpAction = ({email, name, eID, time}) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to add the new rsvp.
@@ -36,7 +41,7 @@ export const addRsvpAction = (email, name, eventID, time) => async (dispatch, ge
   */
   dispatch(apiRequest());
   try {
-    const response = await axios.post(`/rsvps`, { email, name, eventID, time }, tokenConfig(getState));
+    const response = await axios.post(RSVPS_URL, { email, name, eID, time }, tokenConfig(getState));
     dispatch({
       type: ADD_RSVP_SUCCESS,
       payload: response.data
@@ -68,7 +73,7 @@ export const getUserRsvpsAction = (email, status) => async (dispatch, getState) 
   */
   dispatch(apiRequest());
   try {
-    const response = await axios.get(`/users/${email}/rsvps/${status}`, tokenConfig(getState));
+    const response = await axios.get(`${USERS_URL}${email}/rsvps/${status}`, tokenConfig(getState));
     dispatch({
       type: GET_USER_RSVPS_SUCCESS,
       payload: response.data
@@ -102,7 +107,7 @@ export const deleteRsvpAction = ( email, eventID) => async (dispatch, getState) 
   */
   dispatch(apiRequest());
   try {
-    const response = await axios.delete(`/rsvps`, { email, eventID }, tokenConfig(getState));
+    const response = await axios.delete(RSVPS_URL, { email, eventID }, tokenConfig(getState));
     dispatch({
       type: DELETE_RSVP_SUCCESS,
       payload: response.data

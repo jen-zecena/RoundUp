@@ -125,10 +125,23 @@ describe('creatingRegisterUserAction', () => {
       });
     });
 
+    // const expectedActions = [
+    //   { type: API_REQUEST },
+    //   { type: REGISTRATION_FAIL,
+    //     error: 'Error message'
+    //   },
+    // ];
     const expectedActions = [
       { type: API_REQUEST },
       { type: REGISTRATION_FAIL,
-        error: 'Error message'
+        error: "Error message"},
+      {
+        error: true,
+        meta: {
+          form: "registerForm"
+        },
+        payload: "Error message",
+        type: "@@redux-form/STOP_SUBMIT"
       },
     ];
 
@@ -185,6 +198,14 @@ describe('creatingLoginUserAction', () => {
       { type: API_REQUEST },
       { type: LOGIN_FAIL,
         error: 'Error message'
+      },
+      {
+        error: true,
+        meta: {
+          form: "loginForm"
+        },
+        payload: "Error message",
+        type: "@@redux-form/STOP_SUBMIT"
       },
     ];
 
