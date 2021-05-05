@@ -269,7 +269,7 @@ export const getEventsByOwnerAction = (uID, status) => async (dispatch, getState
   */
   dispatch(apiRequest());
   try {
-    const response = await axios.get(EVENTS_URL + `/${uID}/`, {status}, tokenConfig(getState));
+    const response = await axios.get(EVENTS_URL + `/owner/${uID}/`, {status}, tokenConfig(getState));
     dispatch({
       type: GET_EVENTS_BY_OWNER_SUCCESS,
       payload: response.data
