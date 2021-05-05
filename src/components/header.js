@@ -18,16 +18,16 @@ const Header = () => {
         <Nav.Link>Upload Event</Nav.Link>
       </LinkContainer>
 
-      <LinkContainer to="/eventPage">
-        <Nav.Link>Event Page</Nav.Link>
-      </LinkContainer>
-
       <LinkContainer to="/about">
         <Nav.Link>About</Nav.Link>
       </LinkContainer>
 
       <LinkContainer to="/login">
         <Nav.Link>Login</Nav.Link>
+      </LinkContainer>
+
+      <LinkContainer to="/userSearch">
+        <Nav.Link>Search</Nav.Link>
       </LinkContainer>
     </Nav>
   </Navbar.Collapse>
