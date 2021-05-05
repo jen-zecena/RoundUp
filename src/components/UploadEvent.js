@@ -5,6 +5,8 @@ import Container from 'react-bootstrap/Container';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Multiselect } from 'multiselect-react-dropdown';
+
 
 function UploadEvent(){
   const [eventInfo, setEventInfo] = useState({
@@ -15,14 +17,32 @@ function UploadEvent(){
     name: "",
     location:"",
     email:"", 
+    tags:""
   });
 
-  var dateFormat = "0"; 
-  var timeFormat = "0";
+  const tags = [{name: 'Africana Studies'},
+  {name: 'American Studies'},
+  {name: 'Anthropology'},
+  {name: 'Art'},
+  {name: 'Art History'},
+  {name: 'Asian American Studies'},
+  {name: 'Asian Languages & Literatures'},
+  {name: 'Asian Studies'},
+  {name: 'Biology'},
+  {name: 'Chemistry'},
+  {name: 'Chicana/o-Latina/o Studies'},
+  {name: 'Chinese'},
+  {name: 'Classics'},
+  {name: 'Computer Science'},
+  {name: 'Classics'},
+  {name: 'Economics'},
+  {name: 'English'},
+  {name: 'Environmental Analysis'},
+  {name: 'French'},
+  {name: 'Gender & Womens Studies'},
+  {name: 'Geology'},
+  ]
 
-  const [setEvent] = useState([]);
-
-  const requiredProps = ["userID" , "eventTime" , "name" , "location", "email"];
   
   console.log(eventInfo);
 
@@ -38,7 +58,8 @@ function UploadEvent(){
           poster: prevValue.poster,
           name: prevValue.name,
           location: prevValue.location,
-          email: prevValue.email
+          email: prevValue.email,
+          tags: prevValue.tags
         };
       } else if (name === "description") {
         return {
@@ -48,31 +69,21 @@ function UploadEvent(){
           poster: prevValue.poster,
           name: prevValue.name,
           location: prevValue.location,
-          email: prevValue.email
-        };
-      } else if (name === "eventDate") {
-        dateFormat = value;
-        return {
-          userID: prevValue.userID,
-          description: prevValue.description,
-          eventTime: dateFormat + timeFormat,
-          poster: prevValue.poster,
-          name: prevValue.name,
-          location: prevValue.location,
-          email: prevValue.email
+          email: prevValue.email,
+          tags: prevValue.tags
         };
       } else if (name === "eventTime") {
-        timeFormat = value;
         return {
           userID: prevValue.userID,
           description: prevValue.description,
-          eventTime: dateFormat + timeFormat,
+          eventTime: value,
           poster: prevValue.poster,
           name: prevValue.name,
           location: prevValue.location,
-          email: prevValue.email
+          email: prevValue.email,
+          tags: prevValue.tags
         };
-      }else if (name === "poster") {
+      } else if (name === "poster") {
         return {
           userID: prevValue.userID,
           description: prevValue.description,
@@ -81,6 +92,7 @@ function UploadEvent(){
           name: prevValue.name,
           location: prevValue.location,
           email: prevValue.email,
+          tags: prevValue.tags
         };
       }else if (name === "name") {
         return {
@@ -91,6 +103,7 @@ function UploadEvent(){
           name: value,
           location: prevValue.location,
           email: prevValue.email,
+          tags: prevValue.tags
         };
       }else if (name === "location") {
         return {
@@ -101,6 +114,7 @@ function UploadEvent(){
           name: prevValue.name,
           location: value,
           email: prevValue.email,
+          tags: prevValue.tags
         };
       }else if (name === "email") {
         return {
@@ -111,6 +125,18 @@ function UploadEvent(){
           name: prevValue.name,
           location: prevValue.location,
           email: value,
+          tags: prevValue.tags
+        };
+      }else if (name === "poster") {
+        return {
+          userID: prevValue.userID,
+          description: prevValue.description,
+          eventTime: prevValue.eventTime,
+          poster: event.target.files[0],
+          name: prevValue.name,
+          location: prevValue.location,
+          email: prevValue.email,
+          tags: prevValue.tags
         };
       }
     });
@@ -118,21 +144,83 @@ function UploadEvent(){
 
   /**
    * 
-   * @param {*} state 
-   *    The state obj
+   * @param {*} selectedList 
+   *      The items selected by the user
+   * 
+   * Sets the tags field of the state
+   */
+  function onTagSelect(selectedList){
+    setEventInfo(prevValue => {
+        return {
+          userID: prevValue.userID,
+          description: prevValue.description,
+          eventTime: prevValue.eventTime,
+          poster: prevValue.poster,
+          name: prevValue.name,
+          location: prevValue.location,
+          email: prevValue.email,
+          tags: selectedList
+        };
+        });
+  }
+
+  /**
+   * 
+   * @param {*} none
    * @returns 
    *     TRUE if all required properties are non null
    *     FALSE otherwise
+   *     REPORTS ERRORS TO USER
    */
-  function checkRequiredFields(state){
-    for (var prop in state){
-      if (requiredProps.includes(prop)){
-        if (state[prop] === null || state[prop] === ""){
-          return false;
-        }
+  function checkRequiredFields(){
+      let errors = "";
+      let formIsValid = true;
+
+      //UserID
+      if(!eventInfo.userID){
+    //  formIsValid = false;
+    //  errors = errors + "userID, ";
       }
-    }   
-    return true;
+
+      //Date and Time
+      if(!eventInfo.eventTime){
+        formIsValid = false;
+        errors = errors + "event date, ";
+      }
+
+      //Name
+      if(!eventInfo.name){
+        formIsValid = false;
+        errors = errors + "name, ";
+      }
+      else if(eventInfo.name){
+          if(eventInfo.name.match(/^[a-zA-Z]+$/)){
+            formIsValid = false;
+            errors = errors + "name, ";
+          }        
+      }
+
+      //Email
+      if(!eventInfo.email){
+          formIsValid = false;
+          errors = errors + "email, ";
+        }
+
+      if(eventInfo.email !== "undefined"){
+          let lastAtPos = eventInfo.email.lastIndexOf('@');
+          let lastDotPos = eventInfo.email.lastIndexOf('.');
+
+          if (!(lastAtPos < lastDotPos && lastAtPos > 0 && eventInfo.email.indexOf('@@') === -1 && lastDotPos > 2 && (eventInfo.email.length - lastDotPos) > 2)) {
+            formIsValid = false;
+          }
+      } 
+
+
+      if (errors !== "") {
+        errors += "are empty or have errors";
+        alert(errors);
+      }
+      return formIsValid;
   }
 
   /**
@@ -141,16 +229,15 @@ function UploadEvent(){
 		**/
   function handleSubmit(event){
     event.preventDefault();
-    setEvent(eventInfo);
-		if( checkRequiredFields(this.state)){
-      alert('A name was submitted: ' + this.state.value);
-      console.log(this.state.value);
+		if( checkRequiredFields()){
+      alert('An event was submitted.');
+      console.log(eventInfo);
     }
 	} 
 
   
     return (
-      <div className="container ">
+      <div className="container">
         <Container >
 
         <Jumbotron>
@@ -161,7 +248,7 @@ function UploadEvent(){
         </div>
         <br/>
         <br/>
-          <Container class ="justify-content-center">
+          <Container className ="justify-content-center">
           <Row>
           <Col>
           <Form>
@@ -169,29 +256,17 @@ function UploadEvent(){
             <Form.Label>Event Name</Form.Label>
             <Form.Control
               onChange = {handleChange}
-              value={eventInfo.name}
               name="name"
               type="name"
               placeholder="First Name" />
           </Form.Group>
 
-          <Form.Group controlId="eventDate">
+          <Form.Group controlId="eventTime">
             <Form.Label>Event Date</Form.Label>
             <Form.Control
               onChange = {handleChange}
-              value={eventInfo.eventTime}
-              name="eventDate"
-              type="date"
-              placeholder="Choose Event Date" />
-          </Form.Group>
-
-          <Form.Group controlId="eventTime">
-            <Form.Label>Event Time</Form.Label>
-            <Form.Control
-              onChange = {handleChange}
-              value={eventInfo.eventTime}
               name="eventTime"
-              type="time"
+              type="datetime-local"
               placeholder="Choose Event Date" />
           </Form.Group>
 
@@ -199,16 +274,16 @@ function UploadEvent(){
             <Form.Label>Event Description</Form.Label>
             <Form.Control
               onChange = {handleChange}
-              value={eventInfo.description}
               as="textarea"
               rows={3}
+              name="description"
               placeholder="Write Event Description Here" />
           </Form.Group>
 
-          <Form.Group controlId="firstName">
+          <Form.Group controlId="poster">
             <Form.File
               onChange = {handleChange}
-              value={eventInfo.poster}
+              name="poster"
               id="custom-file"
               label="Upload Poster Image"
               custom/>
@@ -221,25 +296,18 @@ function UploadEvent(){
 
           <Form.Group controlId="eventTags">
             <Form.Label>Choose Event Tags</Form.Label>
-            <Form.Control as="select" multiple htmlSize={5} custom>
-              <option>Tag 1</option>
-              <option>Tag 2</option>
-              <option>Tag 3</option>
-              <option>Tag 4</option>
-              <option>Tag 5</option>
-              <option>Tag 6</option>
-              <option>Tag 7</option>
-              <option>Tag 8</option>
-              <option>Tag 9</option>
-              <option>Tag 10</option>
-            </Form.Control>
+            <Multiselect
+            options={tags} // Options to display in the dropdown
+            onSelect={onTagSelect}
+            onRemove={onTagSelect} // Function will trigger on remove event
+            displayValue="name" // Property name to display in the dropdown options
+          />
           </Form.Group>
 
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
               onChange = {handleChange}
-              value={eventInfo.email}
               name="email"
               type="email"
               placeholder="Enter email" />
