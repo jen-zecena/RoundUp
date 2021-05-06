@@ -1,40 +1,57 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { getEventAction } from '../actions/eventActions';
+import React from "react";
+// import events from "../events";
+import EventCard from "./EventCard";
+
 import { getEventsByTimeAction } from '../actions/eventActions';
 import { connect } from 'react-redux';
-import { propTypes } from 'react-bootstrap/esm/Image';
 
+class EventsPage extends React.Component {
+    componentDidMount() {
+      var toTime = new Date('2025-12-17 12:14:00').getTime();
+      console.log("toTime");
+      console.log(toTime);
+      var fromTime = new Date();
+      console.log("fromTime");
+      console.log(fromTime);
+      fromTime.setMonth(fromTime.getMonth() - 1);
+      console.log("fromTime");
+      console.log(fromTime);
+      fromTime = fromTime.getTime();
+      console.log("fromTime");
+      console.log(fromTime);
 
-class AllEvents extends Component {
-   
-    componentWillMount(){
-        this.props.getEventAction("1"); 
-    
+      this.props.getEventsByTimeAction(fromTime, toTime)
     }
+
     render() {
-        const EventItems = this.props.events.map(event => (
-            <div key={event.id}>
-                <h3>{event.name}</h3>
-                <p>{event.description}</p>
-            </div>
-        ))
-        return (
-            <div>
-                <h1>Events</h1>
-                {EventItems}
-            </div>
-        )
-    }
-}
-
-AllEvents.propTypes = {
-    getEventAction: PropTypes.func.isRequired,
-    events: PropTypes.array.isRequired
+    return (<div>
+      <h1 style={{textAlign:"center"}}>
+        All Upcoming Events
+      </h1>
+        <dl className="dictionary">
+        {this.props.events.map((event, index) => (
+          <EventCard
+            key={event.eID}
+            date={event.date}
+            name={event.name}
+            location={event.location}
+            description={event.description}
+            time={event.time}
+            posterUrl={event.posterUrl === 'no poster' ? "https://picsum.photos/200" : event.posterUrl}
+            eventLink={`/event/${event.eID}`}
+          />
+        ))}
+        </dl>
+      </div>
+    );
+  }
 };
 
 const mapStateToProps = state => ({
-    events: state.events.items
+  events: Object.values(state.events.events)
 });
 
-export default connect(mapStateToProps,{ getEventAction })(AllEvents);
+export default connect(
+  mapStateToProps,
+  { getEventsByTimeAction }
+)(EventsPage);

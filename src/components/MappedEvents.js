@@ -8,12 +8,17 @@ import { connect } from 'react-redux';
 class EventsPage extends React.Component {
     componentDidMount() {
       var toTime = new Date().getTime();
+      console.log("toTime");
+      console.log(toTime);
       var fromTime = new Date();
+      console.log("fromTime");
       console.log(fromTime);
       fromTime.setMonth(fromTime.getMonth() - 1);
+      console.log("fromTime");
       console.log(fromTime);
       fromTime = fromTime.getTime();
-
+      console.log("fromTime");
+      console.log(fromTime);
 
       this.props.getEventsByTimeAction(fromTime, toTime)
     }
