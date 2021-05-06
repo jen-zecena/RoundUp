@@ -19,7 +19,7 @@ export const defaultAuthState = {
   isLoading: false,
   isAuthenticated: false,
   user: null,
-  token: localStorage.getItem('token')
+  token: localStorage.getItem('token') === "undefined" ? null : localStorage.getItem('token')
 };
 
 
@@ -53,13 +53,16 @@ export default function authReducer(state=defaultAuthState, action) {
        needs to know that the user was successfully
        authenticated.
      */
-     return {
-       ...state,
-       isLoading: false,
-       isAuthenticated: true,
-       user: action.payload,
-       token: action.payload.token
-     };
+     if (action.payload) {
+       return {
+         ...state,
+         isLoading: false,
+         isAuthenticated: true,
+         user: action.payload,
+         token: action.payload.token
+       };
+     }
+     return state;
     case REGISTRATION_SUCCESS:
       /*
         currently do nothing because the user information
