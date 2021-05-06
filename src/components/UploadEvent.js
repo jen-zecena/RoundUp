@@ -58,7 +58,7 @@ class UploadEvent extends React.Component {
   onSubmit = formValues => {
     const eID = this.props.eID;
     const time = new Date().getTime();
-    this.props.addEventAction({...formValues});
+    this.props.addEventAction({...formValues, eID});
   }
 
   render() {
@@ -113,18 +113,7 @@ class UploadEvent extends React.Component {
               label='Location'
               placeholder='Location'
               component={this.renderField}
-            />
-
-            <Field
-              name='email'
-              type='email'
-              id="custom-file"
-              label='Email'
-              placeholder='Enter Email'
-              validate={[required]}
-              component={this.renderField}
-              value={this.props.eID}
-            />    
+            /> 
 
           <Form.Group>
             <Multiselect
