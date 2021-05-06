@@ -224,6 +224,7 @@ export default function eventReducer(state=defaultEventState, action) {
         return an updated state object where the list of events is updated with
         the retrieved events;
       */
+      console.log('reducer Success')
       return {
         ...state,
         events: _.uniqBy([
@@ -238,6 +239,7 @@ export default function eventReducer(state=defaultEventState, action) {
         return an updated state object where the list of events is updated with
         the retrieved events;
       */
+        console.log('reducer Fail')
       return {
         ...state,
         error: action.error

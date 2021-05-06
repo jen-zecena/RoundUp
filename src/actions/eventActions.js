@@ -341,6 +341,7 @@ export const getEventsByTimeAction = (fromTime, toTime) => async (dispatch, getS
   */
   dispatch(apiRequest());
   try {
+    console.log('fetching:');
     const response = await axios.get(EVENTS_URL + "/timeframe/", {fromTime, toTime}, tokenConfig(getState));
     dispatch({
       type: GET_EVENTS_BY_TIME_SUCCESS,
