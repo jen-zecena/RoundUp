@@ -51,9 +51,7 @@ class UserSearch extends React.Component {
       };
     
   onSubmit = formValues => {
-    const eID = this.props.eID;
-    const time = new Date().getTime();
-    this.props.addRsvpAction({...formValues, eID, time });
+    this.props.getEventsByTagsAction({...formValues});
   }
 
     render() {

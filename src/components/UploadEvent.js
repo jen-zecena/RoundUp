@@ -36,8 +36,6 @@ const tags = [{name: 'Africana Studies'},
 
 class UploadEvent extends React.Component {
 
-  
-
   renderField = ({ input, label, type, placeholder, value, meta: { touched, error } }) => {
     return (
       <div className={`form-group ${touched && error ? 'error' : ''}`}>
@@ -47,7 +45,7 @@ class UploadEvent extends React.Component {
         <input {...input} className='form-control' type={type} placeholder={placeholder} value={value} />
           :
         <input {...input} className='form-control' type={type} placeholder={placeholder} />
-        }
+         }
         {touched && error && (
           <span className='text text-danger'>{error}</span>
         )}
@@ -56,9 +54,9 @@ class UploadEvent extends React.Component {
   };
 
   onSubmit = formValues => {
-    const eID = this.props.eID;
+    const uID = this.props.uID;
     const time = new Date().getTime();
-    this.props.addEventAction({...formValues, eID});
+    this.props.addEventAction({...formValues, uID});
   }
 
   render() {
