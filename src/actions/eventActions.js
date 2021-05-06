@@ -58,11 +58,16 @@ export const addEventAction = ({ uID, description, eventTime, poster, name, loca
   */
   dispatch(apiRequest());
   try {
+    console.log("add Event Action")
     const response = await axios.post(EVENTS_URL, { uID, description, eventTime, poster, name, location, tags }, tokenConfig(getState));
     dispatch({
       type: ADD_EVENT_SUCCESS,
       payload: response.data
     });
+    console.log("add event response data");
+    console.log(response.data);
+    console.log("add event response ");
+    console.log(response);
     return response;
   } catch (error) {
     dispatch({
