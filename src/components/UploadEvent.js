@@ -35,6 +35,14 @@ const tags = [{name: 'Africana Studies'},
   ]
 
 class UploadEvent extends React.Component {
+  componentDidMount() {
+    this.multiselectRef = React.createRef();
+  }
+
+  resetSelectedValues() {
+  this.multiselectRef.current.resetSelectedValues();
+}
+
   renderField = ({ input, label, type, placeholder, value, meta: { touched, error } }) => {
     return (
       <div className={`form-group ${touched && error ? 'error' : ''}`}>
@@ -53,8 +61,12 @@ class UploadEvent extends React.Component {
   };
 //{uID, description, eventTime, poster, name, location, tags }
   onSubmit = formValues => {
+    var tags = this.multiselectRef.current.state.selectedValues.map((tag) => {
+      return tag.name;
+    });
+
     const uID = this.props.uID;
-    this.props.addEventAction({...formValues, uID});
+    this.props.addEventAction({...formValues, posterUrl: "something2", "uID": 1, "tags": tags });
   }
   // onChange(e) {
   //   const { input: { onChange } } = this.props
@@ -114,8 +126,9 @@ class UploadEvent extends React.Component {
               label='Location'
               placeholder='Location'
               component={this.renderField}
-              
-            /> 
+
+            />
+
 
           <Form.Group>
             <Multiselect
@@ -123,6 +136,7 @@ class UploadEvent extends React.Component {
             placeholder='Tags'
             options={tags} // Options to display in the dropdown
             displayValue="name" // Property name to display in the dropdown options
+            ref={this.multiselectRef}
           />
           </Form.Group>
 

@@ -48,7 +48,7 @@ import { tokenConfig } from './authActions';
   The method dispatches the result of the action to the reducer, which
   informs the web app of the added event.
 */
-export const addEventAction = ({ uID, description, eventTime, poster, name, location, tags }) => async (dispatch, getState) => {
+export const addEventAction = ({ uID, description, eventTime, posterUrl, name, location, tags }) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to add the new event.
@@ -58,8 +58,10 @@ export const addEventAction = ({ uID, description, eventTime, poster, name, loca
   */
   dispatch(apiRequest());
   try {
+
     console.log("add Event Action")
-    const response = await axios.post(EVENTS_URL, { uID, description, eventTime, poster, name, location, tags }, tokenConfig(getState));
+    var eventTimeTimestamp = new Date(eventTime).getTime();
+    const response = await axios.post(EVENTS_URL, { uID: 1, description, eventTime: eventTimeTimestamp, posterUrl, name, location, tags }, tokenConfig(getState));
     console.log("add Event state");
     console.log(tokenConfig(getState));
     console.log(getState);
@@ -73,6 +75,8 @@ export const addEventAction = ({ uID, description, eventTime, poster, name, loca
     console.log(response);
     return response;
   } catch (error) {
+    console.log("PPPPPPPPPPPPPPPP");
+    console.log(error);
     dispatch({
       type: ADD_EVENT_FAIL,
       error: error.message
