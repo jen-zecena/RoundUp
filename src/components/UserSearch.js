@@ -29,7 +29,7 @@ function App(){
                 {name: 'French'},
                 {name: 'Gender & Womens Studies'},
                 {name: 'Geology'},
-            ]
+]
     });
     
     const [tag,setTags] = useState([]);

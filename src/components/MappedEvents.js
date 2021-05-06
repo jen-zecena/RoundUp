@@ -9,10 +9,13 @@ class EventsPage extends React.Component {
     componentDidMount() {
       var toTime = new Date().getTime();
       var fromTime = new Date();
+      console.log(fromTime);
       fromTime.setMonth(fromTime.getMonth() - 1);
+      console.log(fromTime);
       fromTime = fromTime.getTime();
 
-      this.props.getEventsByTimeAction({ fromTime: fromTime, toTime: toTime})
+
+      this.props.getEventsByTimeAction(fromTime, toTime)
     }
 
     render() {

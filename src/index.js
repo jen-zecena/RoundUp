@@ -13,14 +13,12 @@ import UserSearch from './components/UserSearch';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import { loadUserAction } from './actions/authActions';
-
-
 import { Provider } from 'react-redux';
 import store from './store';
 
 class Index extends React.Component {
   componentDidMount() {
-    if (store.getState().auth.token != null) {
+    if (store.getState().auth.token) {
         store.dispatch(loadUserAction());
     }
   }

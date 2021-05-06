@@ -16,7 +16,7 @@ function UploadEvent(){
     poster: "",
     name: "",
     location:"",
-    email:"", 
+    email:"",
     tags:""
   });
 
@@ -43,12 +43,11 @@ function UploadEvent(){
   {name: 'Geology'},
   ]
 
-  const requiredProps = ["uID" , "eventTime" , "name" , "location", "email"];
-  
   console.log(eventInfo);
 
   function handleChange(event) {
     const { name, value } = event.target;
+    console.log(value);
 
     setEventInfo(prevValue => {
       if (name === "uID") {
@@ -70,18 +69,8 @@ function UploadEvent(){
           poster: prevValue.poster,
           name: prevValue.name,
           location: prevValue.location,
-          email: prevValue.email
-        };
-      } else if (name === "eventDate") {
-        const dateFormat = value;
-        return {
-          uID: prevValue.uID,
-          description: prevValue.description,
-          eventTime: dateFormat ,
-          poster: prevValue.poster,
-          name: prevValue.name,
-          location: prevValue.location,
-          email: prevValue.email
+          email: prevValue.email,
+          tags: prevValue.tags
         };
       } else if (name === "eventTime") {
         return {
@@ -154,10 +143,10 @@ function UploadEvent(){
   }
 
   /**
-   * 
-   * @param {*} selectedList 
+   *
+   * @param {*} selectedList
    *      The items selected by the user
-   * 
+   *
    * Sets the tags field of the state
    */
   function onTagSelect(selectedList){
@@ -176,9 +165,9 @@ function UploadEvent(){
   }
 
   /**
-   * 
+   *
    * @param {*} none
-   * @returns 
+   * @returns
    *     TRUE if all required properties are non null
    *     FALSE otherwise
    *     REPORTS ERRORS TO USER
@@ -208,7 +197,7 @@ function UploadEvent(){
           if(eventInfo.name.match(/^[a-zA-Z]+$/)){
             formIsValid = false;
             errors = errors + "name, ";
-          }        
+          }
       }
 
       //Email
@@ -224,7 +213,7 @@ function UploadEvent(){
           if (!(lastAtPos < lastDotPos && lastAtPos > 0 && eventInfo.email.indexOf('@@') === -1 && lastDotPos > 2 && (eventInfo.email.length - lastDotPos) > 2)) {
             formIsValid = false;
           }
-      } 
+      }
 
 
       if (errors !== "") {
@@ -244,9 +233,9 @@ function UploadEvent(){
       alert('An event was submitted.');
       console.log(eventInfo);
     }
-	} 
+	}
 
-  
+
     return (
       <div className="container">
         <Container >

@@ -16,7 +16,6 @@ import { connect } from 'react-redux';
 class EventPage extends React.Component {
   componentDidMount() {
     this.props.getEventAction(this.props.match.params.eID);
-    console.log("ounting!!!!!1");
   }
 
   render() {

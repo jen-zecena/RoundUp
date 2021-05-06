@@ -453,7 +453,7 @@ describe('creatingGetEventsByTagsAction', () => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
         status: 200,
-        response: testEvents
+        response: {events: testEvents}
       });
     });
 
@@ -509,7 +509,7 @@ describe('creatingGetEventsByNameAction', () => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
         status: 200,
-        response: testEvents
+        response: {events: testEvents}
       });
     });
 
@@ -565,7 +565,7 @@ describe('creatingGetEventsByOwnerAction', () => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
         status: 200,
-        response: testEvents
+        response: {events: testEvents}
       });
     });
 
@@ -621,7 +621,7 @@ describe('creatingGetEventsByTimeAction', () => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
         status: 200,
-        response: testEvents
+        response: {events: testEvents}
       });
     });
 
