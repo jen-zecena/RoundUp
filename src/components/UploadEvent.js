@@ -53,9 +53,13 @@ class UploadEvent extends React.Component {
   };
 //{uID, description, eventTime, poster, name, location, tags }
   onSubmit = formValues => {
-    const eID = this.props.eID;
-    this.props.addEventAction({...formValues, eID});
+    const uID = this.props.uID;
+    this.props.addEventAction({...formValues, uID});
   }
+  // onChange(e) {
+  //   const { input: { onChange } } = this.props
+  //   onChange(e.target.files[0])
+  // }
 
   render() {
     return (
@@ -100,7 +104,8 @@ class UploadEvent extends React.Component {
               id="custom-file"
               placeholder='Add Poster Image'
               component={this.renderField}
-              value={this.props.eID}
+              //value={this.props.uID}
+              // onChange={this.onChange}
             />
 
             <Field
@@ -109,6 +114,7 @@ class UploadEvent extends React.Component {
               label='Location'
               placeholder='Location'
               component={this.renderField}
+              
             /> 
 
           <Form.Group>
