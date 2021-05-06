@@ -73,11 +73,11 @@ function UploadEvent(){
           email: prevValue.email
         };
       } else if (name === "eventDate") {
-        dateFormat = value;
+        const dateFormat = value;
         return {
           uID: prevValue.uID,
           description: prevValue.description,
-          eventTime: dateFormat + timeFormat,
+          eventTime: dateFormat ,
           poster: prevValue.poster,
           name: prevValue.name,
           location: prevValue.location,
