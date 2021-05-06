@@ -1,104 +1,98 @@
-import React, { useState } from "react";
+import React from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
+import { addRsvpAction } from '../actions/rsvpActions';
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 
-function App() {
-  const [userInfo, setUserInfo] = useState({
-    fName: "",
-    lName: "",
-    email: "",
-    userID: "",
-    eventID: ""
-  });
 
-  const [user,setUser] = useState([]);
+class RSVPForm extends React.Component {
+  renderField = ({ input, label, type, placeholder, value, meta: { touched, error } }) => {
+    return (
+      <div className={`form-group ${touched && error ? 'error' : ''}`}>
+        <label>{label}</label>
+        {type === 'hidden'
+          ?
+        <input {...input} className='form-control' type={type} placeholder={placeholder} value={value} />
+          :
+        <input {...input} className='form-control' type={type} placeholder={placeholder} />
+        }
+        {touched && error && (
+          <span className='text text-danger'>{error}</span>
+        )}
+      </div>
+    );
+  };
 
-  console.log(userInfo);
-  console.log(user);
-
-  function handleChange(event) {
-    const { name, value } = event.target;
-
-    setUserInfo(prevValue => {
-      if (name === "fName") {
-        return {
-          fName: value,
-          lName: prevValue.lName,
-          email: prevValue.email
-        };
-      } else if (name === "lName") {
-        return {
-          fName: prevValue.fName,
-          lName: value,
-          email: prevValue.email
-        };
-      } else if (name === "email") {
-        return {
-          fName: prevValue.fName,
-          lName: prevValue.lName,
-          email: value
-        };
-      }
-    });
+  onSubmit = formValues => {
+    const eID = this.props.eID;
+    const time = new Date().getTime();
+    this.props.addRsvpAction({...formValues, eID, time });
   }
 
-  function sendUserRSVP(e) {
-    setUser(userInfo);
-    // user and userInfo now both hold the user data that we
-    // want to send in the PUT erquest to the API to let it
-    // know that the user has subscribed
-    // on the click we should call the function for the PUT Request
+  render() {
+    return (
+      <div className="container">
+        <Container>
+          <h1>
+            RSVP Form
+          </h1>
+          <form
+          onSubmit={this.props.handleSubmit(this.onSubmit)}
+          >
+            <Field
+              name='firstName'
+              type='text'
+              label='First Name'
+              placeholder='First Name'
+              component={this.renderField}
+              validate={required}
+            />
+            <Field
+              name='lastName'
+              type='text'
+              label='Last Name'
+              placeholder='Last Name'
+              component={this.renderField}
+              validate={[required]}
+            />
+
+            <Field
+              name='email'
+              type='email'
+              label='Email'
+              placeholder='Email'
+              component={this.renderField}
+              validate={[required]}
+            />
+
+            <Field
+              name='eID'
+              type='hidden'
+              component={this.renderField}
+              value={this.props.eID}
+            />
+
+            <Button variant="danger" type="submit">
+              Submit
+            </Button>
+          </form>
+
+        </Container>
+      </div>
+    );
   }
-
-  return (
-    <div className="container">
-      <Container>
-        <h1>
-          RSVP Form
-        </h1>
-        <Form>
-          <Form.Group controlId="firstName">
-            <Form.Label>First Name</Form.Label>
-            <Form.Control
-              onChange = {handleChange}
-              value={userInfo.fName}
-              name="fName"
-              type="fname"
-              placeholder="First Name" />
-          </Form.Group>
-
-          <Form.Group controlId="lastName">
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              value={userInfo.lName}
-              name="lName"
-              type="lname"
-              placeholder="Last Name" />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              value={userInfo.email}
-              name="email"
-              type="email"
-              placeholder="Enter email" />
-          </Form.Group>
-
-          <Button variant="danger" type="submit" onClick = {sendUserRSVP} >
-            Submit
-          </Button>
-        </Form>
-
-      </Container>
-
-
-    </div>
-  );
 }
 
-export default App;
+const required = value => (value ? undefined : 'Required');
+
+RSVPForm = connect(
+  null,
+  { addRsvpAction }
+)(RSVPForm);
+
+export default reduxForm({
+  form: 'rsvpForm'
+})(RSVPForm);

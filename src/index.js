@@ -12,22 +12,43 @@ import MappedEvents from './components/MappedEvents';
 import UserSearch from './components/UserSearch';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+import { loadUserAction } from './actions/authActions';
+
+
+import { Provider } from 'react-redux';
+import store from './store';
+
+class Index extends React.Component {
+  componentDidMount() {
+    if (store.getState().auth.token != null) {
+        store.dispatch(loadUserAction());
+    }
+  }
+
+  render() {
+    return (
+      <React.StrictMode>
+        <Provider store={store}>
+          <Router>
+          <Header/>
+          <Switch>
+            <Route exact path="/" component={App} />
+            <Route path="/uploadEvent" component={UploadEvent} />
+            <Route path="/about" component={AboutPage} />
+            <Route path="/events" component={MappedEvents}/>
+            <Route path="/event/:eID" component={EventPage}/>
+            <Route path="/login" component={Login}/>
+            <Route path="/register" component={Register}/>
+            <Route path="/userSearch" component={UserSearch}/>
+          </Switch>
+        </Router>
+        </Provider>
+      </React.StrictMode>
+    )
+  }
+}
 
 ReactDOM.render(
-  <React.StrictMode>
-       <Router>
-      <Header/>
-      <Switch>
-        <Route exact path="/" component={App} />
-        <Route path="/uploadEvent" component={UploadEvent} />
-        <Route path="/about" component={AboutPage} />
-        <Route path="/events" component={MappedEvents}/>
-        <Route path="/event/:eventId" component={EventPage}/>
-        <Route path="/login" component={Login}/>
-        <Route path="/register" component={Register}/>
-        <Route path="/userSearch" component={UserSearch}/>
-      </Switch>
-    </Router>
-  </React.StrictMode>,
+  <Index />,
   document.getElementById('root')
 );

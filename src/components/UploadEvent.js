@@ -10,7 +10,7 @@ import { Multiselect } from 'multiselect-react-dropdown';
 
 function UploadEvent(){
   const [eventInfo, setEventInfo] = useState({
-    userID: "",
+    uID: "",
     description: "",
     eventTime: "",
     poster: "",
@@ -43,6 +43,7 @@ function UploadEvent(){
   {name: 'Geology'},
   ]
 
+  const requiredProps = ["uID" , "eventTime" , "name" , "location", "email"];
   
   console.log(eventInfo);
 
@@ -50,9 +51,9 @@ function UploadEvent(){
     const { name, value } = event.target;
 
     setEventInfo(prevValue => {
-      if (name === "userID") {
+      if (name === "uID") {
         return {
-          userID: value,
+          uID: value,
           description: prevValue.description,
           eventTime: prevValue.eventTime,
           poster: prevValue.poster,
@@ -63,18 +64,28 @@ function UploadEvent(){
         };
       } else if (name === "description") {
         return {
-          userID: prevValue.userID,
+          uID: prevValue.uID,
           description: value,
           eventTime: prevValue.eventTime,
           poster: prevValue.poster,
           name: prevValue.name,
           location: prevValue.location,
-          email: prevValue.email,
-          tags: prevValue.tags
+          email: prevValue.email
+        };
+      } else if (name === "eventDate") {
+        dateFormat = value;
+        return {
+          uID: prevValue.uID,
+          description: prevValue.description,
+          eventTime: dateFormat + timeFormat,
+          poster: prevValue.poster,
+          name: prevValue.name,
+          location: prevValue.location,
+          email: prevValue.email
         };
       } else if (name === "eventTime") {
         return {
-          userID: prevValue.userID,
+          uID: prevValue.uID,
           description: prevValue.description,
           eventTime: value,
           poster: prevValue.poster,
@@ -85,7 +96,7 @@ function UploadEvent(){
         };
       } else if (name === "poster") {
         return {
-          userID: prevValue.userID,
+          uID: prevValue.uID,
           description: prevValue.description,
           eventTime: prevValue.eventTime,
           poster: value,
@@ -96,7 +107,7 @@ function UploadEvent(){
         };
       }else if (name === "name") {
         return {
-          userID: prevValue.userID,
+          uID: prevValue.uID,
           description: prevValue.description,
           eventTime: prevValue.eventTime,
           poster: prevValue.poster,
@@ -107,7 +118,7 @@ function UploadEvent(){
         };
       }else if (name === "location") {
         return {
-          userID: prevValue.userID,
+          uID: prevValue.uID,
           description: prevValue.description,
           eventTime: prevValue.eventTime,
           poster: prevValue.poster,
@@ -118,7 +129,7 @@ function UploadEvent(){
         };
       }else if (name === "email") {
         return {
-          userID: prevValue.userID,
+          uID: prevValue.uID,
           description: prevValue.description,
           eventTime: prevValue.eventTime,
           poster: prevValue.poster,

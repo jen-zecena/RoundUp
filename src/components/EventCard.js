@@ -7,7 +7,7 @@ function EventCard(props){
 
   return (
     <Card style = {{ width: '18rem'}} >
-    <Card.Img variant = "top" src = "https://picsum.photos/200" / >
+    <Card.Img variant = "top" src = {props.posterUrl} / >
     < Card.Body >
       <Card.Title > {props.name} </Card.Title>
       <Card.Subtitle className="mb-2 text-muted">

@@ -1,26 +1,30 @@
 import axios from 'axios';
 import { stopSubmit } from 'redux-form';
+import { apiRequest } from './commonActions';
 
 import {
   LOADING_USER,
-  LOADED_USER,
-  SUCCESSFUL_REGISTRATION,
-  SUCCESSFUL_LOGIN,
-  SUCCESSFUL_LOGOUT,
-  AUTHENTICATION_ERROR,
-  FAILED_REGISTRATION,
-  FAILED_LOGIN,
-  FAILED_LOGOUT
-} from './types/auth';
+  LOADING_USER_SUCCESS,
+  LOADING_USER_FAIL,
+  REGISTRATION_SUCCESS,
+  REGISTRATION_FAIL,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAIL
+} from './types/authActionTypes';
 
-import store from '../store';
+import  {
+  USERS_URL,
+  USERS_LOGIN_URL
+} from './backendAccessPoints';
 
-export const loadUser = () => async (dispatch, getState) => {
+export const loadUserAction = () => async (dispatch, getState) => {
   /*
     1. tell the web application that the user information is being loaded.
     2. retrieve authentication token from local storage
     3. use authentication token to rtrieve user information from database
-    4. if the user is successfuly loaded, tell authentication reducer about
+    4. if the user is successfully loaded, tell authentication reducer about
     success and pass along retrieved user information
     5. otherwise, tell the authentication reducer about the failed attempt.
 
@@ -29,16 +33,20 @@ export const loadUser = () => async (dispatch, getState) => {
     type: LOADING_USER
   });
 
+  dispatch(apiRequest());
   try {
-    const response = await axios.get('/users/', tokenConfig(getState));
+    const response = await axios.get(USERS_URL, tokenConfig(getState));
     dispatch({
-      type: LOADED_USER,
+      type: LOADING_USER_SUCCESS,
       payload: response.data
     });
+    return response;
   } catch (error) {
     dispatch({
-      type: AUTHENTICATION_ERROR
+      type: LOADING_USER_FAIL,
+      error: error.message
     });
+    return error;
   }
 }
 
@@ -52,7 +60,7 @@ export const loadUser = () => async (dispatch, getState) => {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the user's state.
 */
-export const login = (email, password)  => async dispatch => {
+export const loginUserAction = ({ email, password })  => async dispatch => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to login the user.
@@ -60,28 +68,30 @@ export const login = (email, password)  => async dispatch => {
     success and pass along user information
     4. otherwise, tell the authentication reducer about the failed attempt.
   */
-
-  // Headers
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  };
-
-  // request body
+  // creating request headers and body
+  const config = getHeaders();
   const body = JSON.stringify({ email, password });
 
+  // get token with this method
+  // btoa("email:password")
+
+
+  dispatch(apiRequest());
   try {
-    const response = await axios.post('/users/login', body, config);
+    const response = await axios.post(USERS_LOGIN_URL, body, config);
     dispatch({
-      type: SUCCESSFUL_LOGIN,
+      type: LOGIN_SUCCESS,
       payload: response.data
     });
+    return response;
   } catch (error) {
     dispatch({
-      type: FAILED_LOGIN
+      type: LOGIN_FAIL,
+      error: error.message
     });
-    dispatch(stopSubmit('loginForm', error.response.data));
+    dispatch(stopSubmit('loginForm', error.message))
+    return error;
+
   }
 }
 
@@ -100,7 +110,7 @@ export const login = (email, password)  => async dispatch => {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the user's state.
   */
-export const register = (firstName, lastName, email, password, campus, cohort) =>  async dispatch => {
+export const registerUserAction = ({ firstName, lastName, email, password, campus }) =>  async dispatch => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to register the user.
@@ -108,26 +118,25 @@ export const register = (firstName, lastName, email, password, campus, cohort) =
     success and pass along user information
     4. otherwise, tell the authentication reducer about the failed attempt.
   */
-  // Headers
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  };
+  // creating request headers and body
+  const config = getHeaders();
+  const body = JSON.stringify({ firstName, lastName, email, password, campus });
 
-  const body = JSON.stringify({ firstName, lastName, email, password, campus, cohort });
-
+  dispatch(apiRequest());
   try {
-    const response = await axios.post('/users/register', body,  config)
+    const response = await axios.post(USERS_URL, body,  config)
     dispatch({
-      type: SUCCESSFUL_REGISTRATION,
+      type: REGISTRATION_SUCCESS,
       payload: response.data
     });
+    return response;
   } catch (error) {
     dispatch({
-      type: FAILED_REGISTRATION
+      type: REGISTRATION_FAIL,
+      error: error.message
     });
-    dispatch(stopSubmit('registrationForm', error.response.data));
+    dispatch(stopSubmit('registerForm', error.message))
+    return error;
   }
 }
 
@@ -138,7 +147,7 @@ export const register = (firstName, lastName, email, password, campus, cohort) =
   The method dispatches the result of the action to the reducer, which
   informs the web app of the user's authentication state
 */
-export const logout = () =>  async (dispatch, getState) => {
+export const logoutUserAction = () =>  async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to logout the user.
@@ -146,14 +155,15 @@ export const logout = () =>  async (dispatch, getState) => {
     success.
     4. otherwise, tell the authentication reducer about the failed attempt.
   */
-  const token = getState().auth.token;
+  const token = getToken(getState);
   if (token) {
     dispatch({
-      type: SUCCESSFUL_LOGOUT
+      type: LOGOUT_SUCCESS
     })
+
   } else {
     dispatch({
-      type: FAILED_LOGOUT
+      type: LOGOUT_FAIL
     })
   }
 }
@@ -164,7 +174,7 @@ export const logout = () =>  async (dispatch, getState) => {
 */
 export const tokenConfig = getState => {
   // Get token
-  const token = getState().auth.token;
+  const token = getToken(getState);
 
   // Headers
   const config = {
@@ -179,3 +189,19 @@ export const tokenConfig = getState => {
 
   return config;
 };
+
+function getToken(getState) {
+  var token = null;
+  try {
+    token = getState().auth.token;
+  } catch (error) {}
+  return token;
+}
+
+function getHeaders() {
+  return {
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  };
+}
