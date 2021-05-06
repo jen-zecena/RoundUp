@@ -18,6 +18,5 @@ describe("UploadEvent", () => {
         input.simulate('change');
         expect(wrapper.state().name).toEqual('pei pei');      
     });
-   
 
 });
