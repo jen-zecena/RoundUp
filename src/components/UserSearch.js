@@ -29,7 +29,6 @@ function App(){
                 {name: 'French'},
                 {name: 'Gender & Womens Studies'},
                 {name: 'Geology'},
-
             ]
     });
     
