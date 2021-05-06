@@ -104,7 +104,7 @@ class UploadEvent extends React.Component {
               id="custom-file"
               placeholder='Add Poster Image'
               component={this.renderField}
-              //value={this.props.uID}
+              value={this.props.uID}
               // onChange={this.onChange}
             />
 
