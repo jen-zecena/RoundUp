@@ -48,6 +48,7 @@ function UploadEvent(){
 
   function handleChange(event) {
     const { name, value } = event.target;
+    console.log(value);
 
     setEventInfo(prevValue => {
       if (name === "uID") {
