@@ -233,7 +233,7 @@ export const getEventsByTagsAction = (tags, status) => async (dispatch, getState
   */
   dispatch(apiRequest());
   try {
-    const response = await axios.get(EVENTS_URL + "/tags/", {tags, status}, tokenConfig(getState));
+    const response = await axios.get(EVENTS_URL + "tags/", {tags, status}, tokenConfig(getState));
     dispatch({
       type: GET_EVENTS_BY_TAGS_SUCCESS,
       payload: response.data
@@ -269,7 +269,7 @@ export const getEventsByOwnerAction = (uID, status) => async (dispatch, getState
   */
   dispatch(apiRequest());
   try {
-    const response = await axios.get(EVENTS_URL + `/owner/${uID}/`, {status}, tokenConfig(getState));
+    const response = await axios.get(EVENTS_URL + `owner/${uID}/`, {status}, tokenConfig(getState));
     dispatch({
       type: GET_EVENTS_BY_OWNER_SUCCESS,
       payload: response.data
@@ -305,7 +305,7 @@ export const getEventsByNameAction = (search, status) => async (dispatch, getSta
   */
   dispatch(apiRequest());
   try {
-    const response = await axios.get(EVENTS_URL + "/search/", {search, status}, tokenConfig(getState));
+    const response = await axios.get(EVENTS_URL + "search/", {search, status}, tokenConfig(getState));
     dispatch({
       type: GET_EVENTS_BY_NAME_SUCCESS,
       payload: response.data
@@ -341,7 +341,7 @@ export const getEventsByTimeAction = (fromTime, toTime) => async (dispatch, getS
   */
   dispatch(apiRequest());
   try {
-    const response = await axios.get(EVENTS_URL + "/timeframe/", {fromTime, toTime}, tokenConfig(getState));
+    const response = await axios.get(EVENTS_URL + "timeframe/", {fromTime, toTime}, tokenConfig(getState));
     dispatch({
       type: GET_EVENTS_BY_TIME_SUCCESS,
       payload: response.data
