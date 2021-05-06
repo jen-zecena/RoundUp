@@ -92,6 +92,7 @@ export const getEventAction = (eventID) => async (dispatch, getState) => {
   */
   dispatch(apiRequest());
   try {
+    console.log("event Action");
     const response = await axios.get(`${EVENTS_URL}${eventID}/`, tokenConfig(getState));
     dispatch({
       type: GET_EVENT_SUCCESS,

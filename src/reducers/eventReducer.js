@@ -39,6 +39,7 @@ const defaultEventState = {
 export default function eventReducer(state=defaultEventState, action) {
   switch (action.type) {
     case ADD_EVENT_SUCCESS:
+      console.log("reducer success");
       /*
         return an updated state object with a new event object
         which has the same information as the newly added event.
@@ -54,6 +55,7 @@ export default function eventReducer(state=defaultEventState, action) {
         })
       };
     case ADD_EVENT_FAIL:
+      console.log("reducer failure");
       /*
         return an updated state object with a new event object
         which has the same information as the newly added event.

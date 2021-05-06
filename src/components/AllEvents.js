@@ -13,10 +13,10 @@ class AllEvents extends Component {
     
     }
     render() {
-        const EventItems = this.props.events.map(post => (
-            <div key={post.id}>
-                <h3>{post.title}</h3>
-                <p>{post.body}</p>
+        const EventItems = this.props.events.map(event => (
+            <div key={event.id}>
+                <h3>{event.name}</h3>
+                <p>{event.description}</p>
             </div>
         ))
         return (

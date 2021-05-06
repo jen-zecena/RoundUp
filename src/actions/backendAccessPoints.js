@@ -1,5 +1,5 @@
 
-export const BACKEND_API_HOSTNAME = 'https://round-up-2020.herokuapp.com/';
+export const BACKEND_API_HOSTNAME = 'https://round-up-2020.herokuapp.com/api/';
 /*
   Auth
 */
