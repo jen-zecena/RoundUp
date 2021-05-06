@@ -29,6 +29,10 @@ const Header = () => {
       <LinkContainer to="/userSearch">
         <Nav.Link>Search</Nav.Link>
       </LinkContainer>
+
+      <LinkContainer to="/uploadPoster">
+        <Nav.Link>UploadPoster</Nav.Link>
+      </LinkContainer>
     </Nav>
   </Navbar.Collapse>
 </Navbar>
