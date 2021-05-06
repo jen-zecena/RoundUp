@@ -1,25 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { getEventAction } from '../actions/eventActions';
 import { getEventsByTimeAction } from '../actions/eventActions';
+import { connect } from 'react-redux';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
 
-
-export default class AllEvents extends Component {
-    constructor(props){
-        super(props);
-            this.state = {
-                posts:[]
-            }
-        };
+class AllEvents extends Component {
+   
     componentWillMount(){
-    //    getEventsByTimeAction("2020-08-03 14:55:10.888","2024-08-03 14:55:10.888"); 
-        fetch('https://jsonplaceholder.typicode.com/posts')
-        .then(res=>res.json())
-        .then(data => this.setState({posts:data}));
+        this.props.getEventAction("1"); 
     
     }
     render() {
-        const postItems = this.state.posts.map(post => (
+        const EventItems = this.props.events.map(post => (
             <div key={post.id}>
                 <h3>{post.title}</h3>
                 <p>{post.body}</p>
@@ -28,8 +22,19 @@ export default class AllEvents extends Component {
         return (
             <div>
                 <h1>Events</h1>
-                {postItems}
+                {EventItems}
             </div>
         )
     }
 }
+
+AllEvents.propTypes = {
+    getEventAction: PropTypes.func.isRequired,
+    events: PropTypes.array.isRequired
+};
+
+const mapStateToProps = state => ({
+    events: state.events.items
+});
+
+export default connect(mapStateToProps,{ getEventAction })(AllEvents);

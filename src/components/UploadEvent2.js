@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { getEventAction } from '../actions/eventActions';
 import { getEventsByTimeAction } from '../actions/eventActions';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { addEventAction } from '../actions/eventActions';
 
-
-
-export default class UploadEvent2 extends Component {
+class UploadEvent2 extends Component {
     constructor(props){
         super(props);
             this.state = {
@@ -34,15 +35,7 @@ export default class UploadEvent2 extends Component {
             body: this.state.body
         }
 
-        fetch('https://jsonplaceholder.typicode.com/posts',{
-           method: 'POST',
-           headers:{
-               'content-type':'application/json'
-           },
-           body: JSON.stringify(post)
-        })
-        .then(res => res.json())
-        .then(data => console.log(data));
+        this.props.addEventAction(post);
     }
 
     render() {
@@ -68,3 +61,12 @@ export default class UploadEvent2 extends Component {
     }
 }
 
+UploadEvent2.propTypes = {
+    addEventAction: PropTypes.func.isRequired
+}
+
+// const mapStateToProps = state => ({
+//     posts:state.posts.items,
+//     newPost:
+// })
+export default connect(null,{addEventAction})(UploadEvent2);
