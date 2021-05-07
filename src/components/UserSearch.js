@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { createRef } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+
 import { Multiselect } from 'multiselect-react-dropdown';
 
 import { getEventsByTagsAction } from '../actions/eventActions';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+
+import store from '../store';
 
 const tags =  [{name: 'Africana Studies'},
                 {name: 'American Studies'},
@@ -31,7 +34,11 @@ const tags =  [{name: 'Africana Studies'},
                 {name: 'Geology'}
 ];
 
+
 class UserSearch extends React.Component {
+    componentDidMount() {
+        this.tagRef = React.createRef();
+    }
 
     renderField = ({ input, label, type, placeholder, value, meta: { touched, error } }) => {
         return (
@@ -51,42 +58,58 @@ class UserSearch extends React.Component {
       };
     
   onSubmit = formValues => {
-    this.props.getEventsByTagsAction({...formValues});
+    console.log("this.multiselectRef1");
+    console.log(this.tagRef);
+    console.log("This is the state:");
+    console.log(store.getState());
+    if (this.tagRef.current !== null){
+        var tags = this.tagRef.current.state.selectedValues.map((tag) => {
+            return tag.name;
+       });
+        console.log("tags");
+        console.log(tags);
+       this.props.getEventsByTagsAction({...formValues, "tags": tags});
+
+    }
+    
   }
 
+  
+resetSelectedValues() {
+    this.tagRef.current.resetSelectedValues();
+  }
     render() {
+
         
         return (
         <div className="container">
         <Container>
-          <form onSubmit={this.props.handleSubmit(this.onSubmit)}
-          >
+          <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <Form.Label>Filter Posters by Tags</Form.Label>
-        <Multiselect
+          <Form.Group>
+          <Multiselect
+            name='tags'
+            ref={this.tagRef}
+            placeholder='Tags'
             options={tags} // Options to display in the dropdown
-           // selectedValues={searchInfo.selectedValue} // Preselected value to persist in dropdown
-           // onSelect={onSelect} // Function will trigger on select event
-           // onRemove={onRemove} // Function will trigger on remove event
             displayValue="name" // Property name to display in the dropdown options
-        />
-        <Button variant="danger" type="submit">
-              Submit
+          />
+          </Form.Group>
+          <Button variant="danger" type="submit" >
+            Search
         </Button>
-          
           </form>
         </Container>
       </div>
     );
   }
 }
-
   
-console.log(getEventsByTagsAction);
 UserSearch = connect(
     null,
     { getEventsByTagsAction }
   )(UserSearch);
   
   export default reduxForm({
-    form: 'search'
+    form: 'searchForm'
   })(UserSearch);

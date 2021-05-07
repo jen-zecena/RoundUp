@@ -40,8 +40,6 @@ const config = {
   secretAccessKey: 'Ipr/pa7YTZGvB94ofLdOjT4rX00CQUp4dpMEW1hD'
 }
 
-
-
 class UploadEvent extends React.Component {
   componentDidMount() {
     this.multiselectRef = React.createRef();
@@ -81,13 +79,15 @@ class UploadEvent extends React.Component {
     console.log(this.state.file);
 }
 
-  handleUpload(file){
+handleUpload(file){
+  if (file !== null){
     uploadFile(file, config)
-        .then(data => console.log(data))
-        .catch(err => console.error(err))
+    .then(data => console.log(data))
+    .catch(err => console.error(err))
+  }
 }
 
-  resetSelectedValues() {
+resetSelectedValues() {
   this.multiselectRef.current.resetSelectedValues();
 }
 
@@ -109,15 +109,21 @@ class UploadEvent extends React.Component {
   };
 
   onSubmit = formValues => {
+    console.log("this.multiselectRef");
+    console.log(this.multiselectRef);
     var tags = this.multiselectRef.current.state.selectedValues.map((tag) => {
       return tag.name;
     });
+    console.log("tags");
+    console.log(tags);
 
     const uID = this.props.uID;
     this.handleUpload(this.state.file);
     console.log("this.state.file");
     console.log(this.state.file);
+
     const posterUrlLink = "https://roundupposters.s3.amazonaws.com/" + this.state.file.name
+    
     console.log("posterUrl");
     console.log(posterUrlLink);
     this.props.addEventAction({...formValues, posterUrl: posterUrlLink, "uID": 1, "tags": tags });
@@ -206,7 +212,6 @@ class UploadEvent extends React.Component {
     );
   }
 }
-console.log(addEventAction);
 
 const required = value => (value ? undefined : 'Required');
 

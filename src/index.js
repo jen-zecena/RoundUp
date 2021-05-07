@@ -21,8 +21,8 @@ class Index extends React.Component {
     if (store.getState().auth.token) {
         store.dispatch(loadUserAction());
     }
-    // console.log("This is the state:");
-    // console.log(store.getState());
+    console.log("This is the state:");
+    console.log(store.getState());
   }
   
   render() {
