@@ -2,6 +2,7 @@ import React, { createRef } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import MappedEvents from './MappedEvents';
 
 import { Multiselect } from 'multiselect-react-dropdown';
 
@@ -96,6 +97,9 @@ class UserSearch extends React.Component {
             Search
         </Button>
           </form>
+          <br/>
+          <br/>
+          <MappedEvents/>
         </Container>
         {this.props.eventsWithTags.map((event) => {
           <li>{event.name}</li>

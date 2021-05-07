@@ -34,7 +34,6 @@ class Index extends React.Component {
           <Route exact path="/" component={App} />
           <Route path="/uploadEvent" component={UploadEvent} />
           <Route path="/about" component={AboutPage} />
-          <Route path="/events" component={MappedEvents}/>
           <Route path="/event/:eID" component={EventPage}/>
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>

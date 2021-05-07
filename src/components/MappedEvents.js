@@ -22,7 +22,7 @@ class EventsPage extends React.Component {
       console.log(fromTime);
 
       
-      this.props.getEventsByTimeAction(fromTime, toTime)
+      // this.props.getEventsByTimeAction(fromTime, toTime)
       
     }
 
