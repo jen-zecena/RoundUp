@@ -32,11 +32,13 @@ import {
 
 const defaultEventState = {
   events: [],
+  eventsWithTags: [],
   attendees: []
 }
 
 const defaultEventStateWithError = {
   events: [],
+  eventsWithTags: [],
   attendees: [],
   error: error
 }
@@ -47,6 +49,7 @@ const testEventState = {
     { eID: 3, owner: 2, name: "Event3", posterUrl: "testPosterUrl" },
     { eID: 4, owner: 2, name: "Event4", posterUrl: "testPosterUrl" },
   ],
+  eventsWithTags: [],
   attendees: []
 }
 
@@ -77,26 +80,6 @@ const testEventStateWithTagsAndExtra = {
   attendees: []
 }
 
-const testEventStateWithTagsEmpty = {
-  events: [
-    { eID: 2, owner: 1, name: "Event2", posterUrl: "testPosterUrl" },
-    { eID: 3, owner: 2, name: "Event3", posterUrl: "testPosterUrl" },
-    { eID: 4, owner: 2, name: "Event4", posterUrl: "testPosterUrl" },
-  ],
-  eventsWithTags: [],
-  attendees: []
-}
-
-const testEventStateWithTagsAndError = {
-  events: [
-    { eID: 2, owner: 1, name: "Event2", posterUrl: "testPosterUrl" },
-    { eID: 3, owner: 2, name: "Event3", posterUrl: "testPosterUrl" },
-    { eID: 4, owner: 2, name: "Event4", posterUrl: "testPosterUrl" },
-  ],
-  eventsWithTags: [],
-  attendees: [],
-  err: error
-}
 
 const testEventStateWithError = {
   events: [
@@ -104,6 +87,7 @@ const testEventStateWithError = {
     { eID: 3, owner: 2, name: "Event3", posterUrl: "testPosterUrl" },
     { eID: 4, owner: 2, name: "Event4", posterUrl: "testPosterUrl" },
   ],
+  eventsWithTags: [],
   attendees: [],
   error: error
 }
@@ -132,6 +116,7 @@ const testEventStateWithExtra = {
     { eID: 4, owner: 2, name: "Event4", posterUrl: "testPosterUrl" },
     testEvent
   ],
+  eventsWithTags: [],
   attendees: []
 }
 
@@ -141,6 +126,7 @@ const testEventStateWithNewDetail = {
     { eID: 4, owner: 2, name: "Event4", posterUrl: "testPosterUrl" },
     detailedEvent
   ],
+  eventsWithTags: [],
   attendees: []
 }
 
@@ -149,11 +135,13 @@ const testEventStateMinusOne = {
     { eID: 3, owner: 2, name: "Event3", posterUrl: "testPosterUrl" },
     { eID: 4, owner: 2, name: "Event4", posterUrl: "testPosterUrl" }
   ],
+  eventsWithTags: [],
   attendees: [],
 }
 
 const singleEventState = {
   events: [testEvent],
+  eventsWithTags: [],
   attendees: []
 }
 
@@ -163,6 +151,7 @@ describe('creatingAddEventAction', () => {
       eventReducer(undefined, { type: ADD_EVENT_SUCCESS, payload: testEvent })
     ).toEqual({
       events: [testEvent],
+      eventsWithTags: [],
       attendees: []
     })
 
@@ -256,6 +245,7 @@ describe('creatingGetEventAttendeesAction', () => {
       eventReducer(undefined, { type: GET_EVENT_ATTENDEES_SUCCESS, payload: testAttendees })
     ).toEqual({
       events: [],
+      eventsWithTags: [],
       attendees: testAttendees
     })
 
@@ -322,7 +312,7 @@ describe('creatingGetEventsByTagsAction', () => {
 
     expect(
       eventReducer(testEventState, { type: GET_EVENTS_BY_TAGS_SUCCESS, payload: [] })
-    ).toEqual(testEventStateWithTagsEmpty)
+    ).toEqual(testEventState)
 
     expect(
       eventReducer(testEventState, { type: GET_EVENTS_BY_TAGS_SUCCESS, payload: [testEvent] })
@@ -330,19 +320,14 @@ describe('creatingGetEventsByTagsAction', () => {
   })
 
   it('should handle GET_EVENTS_BY_TAGS_FAIL action', () => {
-    var expectedEventState = JSON.parse(JSON.stringify(defaultEventStateWithError));
-    expectedEventState.eventsWithTags = [];
 
     expect(
       eventReducer(undefined, { type: GET_EVENTS_BY_TAGS_FAIL, error: error})
-    ).toEqual(expectedEventState)
-
-    expectedEventState = JSON.parse(JSON.stringify(testEventStateWithError));
-    expectedEventState.eventsWithTags = [];
+    ).toEqual(defaultEventStateWithError)
 
     expect(
       eventReducer(testEventState, { type: GET_EVENTS_BY_TAGS_FAIL, error: error})
-    ).toEqual(expectedEventState)
+    ).toEqual(testEventStateWithError)
   })
 })
 
