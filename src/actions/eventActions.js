@@ -255,16 +255,12 @@ export const getEventsByTagsAction = ({tags, status}) => async (dispatch, getSta
       type: GET_EVENTS_BY_TAGS_SUCCESS,
       payload: response.data.events
     });
-    console.log("response");
-    console.log(response);
     return response;
   } catch (error) {
     dispatch({
       type: GET_EVENTS_BY_TAGS_FAIL,
       error: error.message
     });
-    console.log("error");
-    console.log(error);
     return error;
   }
 

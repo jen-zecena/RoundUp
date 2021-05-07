@@ -122,8 +122,10 @@ resetSelectedValues() {
     console.log("this.state.file");
     console.log(this.state.file);
 
-    const posterUrlLink = "https://roundupposters.s3.amazonaws.com/" + this.state.file.name
-    
+    const posterUrlLink = "https://roundupposters.s3.amazonaws.com/" + "1";
+    if (this.state.file !== null){
+      posterUrlLink = "https://roundupposters.s3.amazonaws.com/" + this.state.file.name; 
+    }
     console.log("posterUrl");
     console.log(posterUrlLink);
     this.props.addEventAction({...formValues, posterUrl: posterUrlLink, "uID": 1, "tags": tags });
