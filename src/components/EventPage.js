@@ -31,7 +31,7 @@ class EventPage extends React.Component {
             <Row>
               <Col>
                 <Card style = {{ width: '18 rem'}} >
-                <Card.Img variant = "top" src = { this.props.event.posterUrl === 'no poster' ? "https://picsum.photos/200": this.props.event.posterUrl } / >
+                <Card.Img variant = "top" src = { this.props.event.posterUrl === 'poster2.jpg' ? "https://roundupposters.s3.amazonaws.com/poster2.jpg": this.props.event.posterUrl } / >
                 < Card.Body >
                   <Card.Title > {this.props.event.name} </Card.Title >
                   <Card.Subtitle className="mb-2 text-muted">

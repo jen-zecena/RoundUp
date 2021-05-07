@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { createRef } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+
 import { Multiselect } from 'multiselect-react-dropdown';
 
+import { getEventsByTagsAction } from '../actions/eventActions';
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 
-function App(){
+import store from '../store';
 
-    
-    const [searchInfo, setSearchInfo] = useState({
-        tags: [{name: 'Africana Studies'},
+const tags =  [{name: 'Africana Studies'},
                 {name: 'American Studies'},
                 {name: 'Anthropology'},
                 {name: 'Art'},
@@ -28,53 +31,85 @@ function App(){
                 {name: 'Environmental Analysis'},
                 {name: 'French'},
                 {name: 'Gender & Womens Studies'},
-                {name: 'Geology'},
-]
-    });
-    
-    const [tag,setTags] = useState([]);
+                {name: 'Geology'}
+];
 
-    function handleChange(event) {
-        const {value } = event.target;
-        setSearchInfo(prevValue => {
-            return {
-              tags: prevValue + "," + value,
-            };
-        });
+
+class UserSearch extends React.Component {
+    componentDidMount() {
+        this.tagRef = React.createRef();
     }
 
-    function handleSearch(event) {
-        setTags(searchInfo);
-        console.log(searchInfo);
-    }
-
-    function onSelect(){
-        console.log("select");
-    }
-
-    function onRemove(){
-        console.log("remove");
-    }
-
+    renderField = ({ input, label, type, placeholder, value, meta: { touched, error } }) => {
         return (
-        <Form>
-        <Form.Group >
-        <Form.Label>Search Posters</Form.Label>
-        </Form.Group>
-        <Multiselect
-            options={searchInfo.tags} // Options to display in the dropdown
-            selectedValues={searchInfo.selectedValue} // Preselected value to persist in dropdown
-            onSelect={onSelect} // Function will trigger on select event
-            onRemove={onRemove} // Function will trigger on remove event
+          <div className={`form-group ${touched && error ? 'error' : ''}`}>
+            <label>{label}</label>
+            {type === 'hidden'
+              ?
+            <input {...input} className='form-control' type={type} placeholder={placeholder} value={value} />
+              :
+            <input {...input} className='form-control' type={type} placeholder={placeholder} />
+            }
+            {touched && error && (
+              <span className='text text-danger'>{error}</span>
+            )}
+          </div>
+        );
+      };
+    
+  onSubmit = formValues => {
+    console.log("this.multiselectRef1");
+    console.log(this.tagRef);
+    console.log("This is the state:");
+    console.log(store.getState());
+    if (this.tagRef.current !== null){
+        var tags = this.tagRef.current.state.selectedValues.map((tag) => {
+            return tag.name;
+       });
+        console.log("tags");
+        console.log(tags);
+       this.props.getEventsByTagsAction({...formValues, "tags": tags});
+
+    }
+    
+  }
+
+  
+resetSelectedValues() {
+    this.tagRef.current.resetSelectedValues();
+  }
+    render() {
+
+        
+        return (
+        <div className="container">
+        <Container>
+          <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+          <Form.Label>Filter Posters by Tags</Form.Label>
+          <Form.Group>
+          <Multiselect
+            name='tags'
+            ref={this.tagRef}
+            placeholder='Tags'
+            options={tags} // Options to display in the dropdown
             displayValue="name" // Property name to display in the dropdown options
-        />
-        <Button variant="danger" type="submit" onClick = {handleSearch} >
+          />
+          </Form.Group>
+          <Button variant="danger" type="submit" >
             Search
         </Button>
-        </Form>
-        );
- 
+          </form>
+        </Container>
+      </div>
+    );
+  }
 }
-      
-export default App;
-
+  
+UserSearch = connect(
+    null,
+    { getEventsByTagsAction }
+  )(UserSearch);
+  
+  export default reduxForm({
+    form: 'searchForm'
+  })(UserSearch);

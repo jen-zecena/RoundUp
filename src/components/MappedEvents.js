@@ -1,8 +1,9 @@
 import React from "react";
 // import events from "../events";
 import EventCard from "./EventCard";
+import Button from 'react-bootstrap/Button';
 
-import { getEventsByTimeAction } from '../actions/eventActions';
+import { getEventsByTimeAction, deleteEventAction } from '../actions/eventActions';
 import { connect } from 'react-redux';
 
 class EventsPage extends React.Component {
@@ -20,9 +21,14 @@ class EventsPage extends React.Component {
       console.log("fromTime");
       console.log(fromTime);
 
+      
       this.props.getEventsByTimeAction(fromTime, toTime)
+      
     }
 
+    handleDeleteEvent = () =>{
+      this.props.deleteEventAction(33, 1)
+    }
     render() {
     return (<div>
       <h1 style={{textAlign:"center"}}>
@@ -41,6 +47,9 @@ class EventsPage extends React.Component {
             eventLink={`/event/${event.eID}`}
           />
         ))}
+        <Button variant="danger" onClick={this.handleDeleteEvent}>
+              Submit
+            </Button>
         </dl>
       </div>
     );
@@ -53,5 +62,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getEventsByTimeAction }
+  { getEventsByTimeAction, deleteEventAction }
 )(EventsPage);
