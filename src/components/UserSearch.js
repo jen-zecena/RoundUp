@@ -56,7 +56,7 @@ class UserSearch extends React.Component {
           </div>
         );
       };
-    
+
   onSubmit = formValues => {
     console.log("this.multiselectRef1");
     console.log(this.tagRef);
@@ -68,19 +68,16 @@ class UserSearch extends React.Component {
        });
         console.log("tags");
         console.log(tags);
-       this.props.getEventsByTagsAction({...formValues, "tags": tags});
-
+       this.props.getEventsByTagsAction({ "tags": tags});
     }
-    
   }
 
-  
-resetSelectedValues() {
-    this.tagRef.current.resetSelectedValues();
-  }
+
+  resetSelectedValues() {
+      this.tagRef.current.resetSelectedValues();
+    }
     render() {
-
-        
+        console.log(this.props.eventsWithTags);
         return (
         <div className="container">
         <Container>
@@ -100,16 +97,26 @@ resetSelectedValues() {
         </Button>
           </form>
         </Container>
+        {this.props.eventsWithTags.map((event) => {
+          <li>{event.name}</li>
+        })}
       </div>
+
     );
   }
 }
-  
+
+const mapStateToProps = state => ({
+  events: Object.values(state.events.events),
+  eventsWithTags: Object.values(state.events.eventsWithTags)
+});
+
+
 UserSearch = connect(
-    null,
+    mapStateToProps,
     { getEventsByTagsAction }
   )(UserSearch);
-  
+
   export default reduxForm({
     form: 'searchForm'
   })(UserSearch);

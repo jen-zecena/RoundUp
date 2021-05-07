@@ -24,27 +24,25 @@ class Index extends React.Component {
     console.log("This is the state:");
     console.log(store.getState());
   }
-  
+
   render() {
     return (
-      <React.StrictMode>
-        <Provider store={store}>
-          <Router>
-          <Header/>
-          <Switch>
-            <Route exact path="/" component={App} />
-            <Route path="/uploadEvent" component={UploadEvent} />
-            <Route path="/about" component={AboutPage} />
-            <Route path="/events" component={MappedEvents}/>
-            <Route path="/event/:eID" component={EventPage}/>
-            <Route path="/login" component={Login}/>
-            <Route path="/register" component={Register}/>
-            <Route path="/userSearch" component={UserSearch}/>
-           
-          </Switch>
-        </Router>
-        </Provider>
-      </React.StrictMode>
+      <Provider store={store}>
+        <Router>
+        <Header/>
+        <Switch>
+          <Route exact path="/" component={App} />
+          <Route path="/uploadEvent" component={UploadEvent} />
+          <Route path="/about" component={AboutPage} />
+          <Route path="/events" component={MappedEvents}/>
+          <Route path="/event/:eID" component={EventPage}/>
+          <Route path="/login" component={Login}/>
+          <Route path="/register" component={Register}/>
+          <Route path="/userSearch" component={UserSearch}/>
+
+        </Switch>
+      </Router>
+      </Provider>
     )
   }
 }

@@ -25,6 +25,7 @@ import {
 
 const defaultEventState = {
   events: [],
+  eventsWithTags: [],
   attendees: []
 }
 
@@ -166,7 +167,10 @@ export default function eventReducer(state=defaultEventState, action) {
           ...action.payload
         ], function(event) {
           return event.eID
-        })
+        }),
+        eventsWithTags: [
+          ...action.payload
+        ]
       };
     case GET_EVENTS_BY_TAGS_FAIL:
       /*
@@ -175,6 +179,7 @@ export default function eventReducer(state=defaultEventState, action) {
       */
       return {
         ...state,
+        eventsWithTags: [],
         error: action.error
       };
     case GET_EVENTS_BY_NAME_SUCCESS:

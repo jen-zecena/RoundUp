@@ -86,7 +86,7 @@ export const addEventAction = ({ uID, description, eventTime, posterUrl, name, l
 }
 
 /**
-  @param eventID: the id of the specific event
+  @param eID: the id of the specific event
 
   This method retrieves event information from the database by making
   a request to the backend.
@@ -94,7 +94,7 @@ export const addEventAction = ({ uID, description, eventTime, posterUrl, name, l
   The method dispatches the result of the action to the reducer, which
   informs the web app of the retrieved event.
 */
-export const getEventAction = (eventID) => async (dispatch, getState) => {
+export const getEventAction = (eID) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to retrieve the event information.
@@ -105,7 +105,7 @@ export const getEventAction = (eventID) => async (dispatch, getState) => {
   dispatch(apiRequest());
   try {
     console.log("event Action");
-    const response = await axios.get(`${EVENTS_URL}${eventID}/`, tokenConfig(getState));
+    const response = await axios.get(`${EVENTS_URL}${eID}/`, tokenConfig(getState));
     dispatch({
       type: GET_EVENT_SUCCESS,
       payload: response.data
@@ -121,7 +121,7 @@ export const getEventAction = (eventID) => async (dispatch, getState) => {
 }
 
 /**
-  @param eventID:  the id of the event to be updated
+  @param eID:  the id of the event to be updated
   @param uID: the user id of the user trying to update the event
   @param description: the new description for the event
   @param eventTime: the new time for the event
@@ -135,7 +135,7 @@ export const getEventAction = (eventID) => async (dispatch, getState) => {
   The method dispatches the result of the action to the reducer, which
   informs the web app of the updated event.
 */
-export const updateEventAction = ({ eventID, uID, description, eventTime, poster, name, location, tags }) => async (dispatch, getState) => {
+export const updateEventAction = ({ eID, uID, description, eventTime, poster, name, location, tags }) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to modify the specified event.
@@ -145,7 +145,7 @@ export const updateEventAction = ({ eventID, uID, description, eventTime, poster
   */
   dispatch(apiRequest());
   try {
-    const response = await axios.put(`${EVENTS_URL}${eventID}/`, { eventID, uID, description, eventTime, poster, name, location, tags }, tokenConfig(getState));
+    const response = await axios.put(`${EVENTS_URL}${eID}/`, { eID, uID, description, eventTime, poster, name, location, tags }, tokenConfig(getState));
     dispatch({
       type: UPDATE_EVENT_SUCCESS,
       payload: response.data
@@ -162,7 +162,7 @@ export const updateEventAction = ({ eventID, uID, description, eventTime, poster
 }
 
 /**
-  @param eventID: the id of the specific event
+  @param eID: the id of the specific event
 
   This method deletes an event by making a request to the backend to delete the
   specified event from the database.
@@ -170,7 +170,7 @@ export const updateEventAction = ({ eventID, uID, description, eventTime, poster
   The method dispatches the result of the action to the reducer, which
   informs the web app of the deleted event.
 */
-export const deleteEventAction = (eventID, uID) => async (dispatch, getState) => {
+export const deleteEventAction = (eID, uID) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to delete the event.
@@ -180,7 +180,7 @@ export const deleteEventAction = (eventID, uID) => async (dispatch, getState) =>
   */
   dispatch(apiRequest());
   try {
-    const response = await axios.delete(EVENTS_URL, tokenConfig(getState), { 'eventID': eventID, 'uID': uID });
+    const response = await axios.delete(EVENTS_URL,  {params: { 'eID': eID, 'uID': uID }}, tokenConfig(getState));
     dispatch({
       type: DELETE_EVENT_SUCCESS,
       payload: response.data
@@ -236,7 +236,7 @@ export const deleteEventAction = (eventID, uID) => async (dispatch, getState) =>
   The method dispatches the result of the action to the reducer, which
   informs the web app of the retrieved events.
 */
-export const getEventsByTagsAction = (tags, status) => async (dispatch, getState) => {
+export const getEventsByTagsAction = ({tags, status}) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to retrieve specified events.
@@ -244,9 +244,13 @@ export const getEventsByTagsAction = (tags, status) => async (dispatch, getState
     success and pass along user information
     4. otherwise, tell the authentication reducer about the failed attempt.
   */
+  console.log("eeeeeeeeeeeee");
+  console.log(tags);
   dispatch(apiRequest());
   try {
-    const response = await axios.get(EVENTS_URL + "tags/", {tags, status}, tokenConfig(getState));
+    const response = await axios.get(EVENTS_URL + "tags/", {params: {tags: tags.join(","), status: status}}, tokenConfig(getState));
+    console.log("response");
+    console.log(response);
     dispatch({
       type: GET_EVENTS_BY_TAGS_SUCCESS,
       payload: response.data.events
@@ -263,7 +267,7 @@ export const getEventsByTagsAction = (tags, status) => async (dispatch, getState
     console.log(error);
     return error;
   }
-  
+
 
 }
 
@@ -377,14 +381,14 @@ export const getEventsByTimeAction = (fromTime, toTime) => async (dispatch, getS
 
 
 /**
-  @param eventID: the id of the event to be rsvp'ing to
+  @param eID: the id of the event to be rsvp'ing to
 
   This method retrieves a list of attendees for an event.
 
   The method dispatches the result of the action to the reducer, which
   informs the web app of the retrieved attendees.
 */
-export const getEventAttendeesAction = (eventID) => async (dispatch, getState) => {
+export const getEventAttendeesAction = (eID) => async (dispatch, getState) => {
   /*
     1. Create the request configuration and stringify the parameters
     2. Make a request to the backend to retrieve the list of attendees.
@@ -394,7 +398,7 @@ export const getEventAttendeesAction = (eventID) => async (dispatch, getState) =
   */
   dispatch(apiRequest());
   try {
-    const response = await axios.get(`${EVENTS_URL}${eventID}/attendees/`, tokenConfig(getState));
+    const response = await axios.get(`${EVENTS_URL}${eID}/attendees/`, tokenConfig(getState));
     dispatch({
       type: GET_EVENT_ATTENDEES_SUCCESS,
       payload: response.data
