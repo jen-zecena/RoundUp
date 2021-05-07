@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Navbar, Nav} from 'react-bootstrap'
-import {LinkContainer} from 'react-router-bootstrap'
-
+import {LinkContainer} from 'react-router-bootstrap';
 import { connect } from 'react-redux';
 import { logoutUserAction } from '../actions/authActions';
 
@@ -21,7 +20,7 @@ class Header extends Component {
     <LinkContainer to="/userSearch">
         <Nav.Link>Search</Nav.Link>
       </LinkContainer>
-      
+
       <LinkContainer to="/uploadEvent">
         <Nav.Link>Upload Event</Nav.Link>
       </LinkContainer>

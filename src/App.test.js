@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import RSVPForm from './components/RSVPForm';
 import { shallow, configure } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-
+import store from './store';
 configure({ adapter: new Adapter() });
 
 const wrapper = shallow(<RSVPForm/>);
