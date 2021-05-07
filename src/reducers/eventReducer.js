@@ -114,6 +114,7 @@ export default function eventReducer(state=defaultEventState, action) {
         error: action.error
       };
     case DELETE_EVENT_SUCCESS:
+      console.log("delete success")
       /*
         return an updated state object with the deleted event omitted
         from the list of retrieved events.
@@ -121,6 +122,7 @@ export default function eventReducer(state=defaultEventState, action) {
       _.remove(state.events, { eID: action.payload.eID})
       return state;
     case DELETE_EVENT_FAIL:
+      console.log("delete fail")
       /*
         return an updated state object with the deleted event omitted
         from the list of retrieved events.

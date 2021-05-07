@@ -22,7 +22,10 @@ const UploadImageToS3WithReactS3 = () => {
     const [selectedFile, setSelectedFile] = useState(null);
 
     const handleFileInput = (e) => {
+        console.log("e.target.files[0]");
+        console.log(e.target.files[0]);
         setSelectedFile(e.target.files[0]);
+        console.log(selectedFile);
     }
 
     const handleUpload = async (file) => {

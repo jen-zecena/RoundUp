@@ -43,11 +43,51 @@ const config = {
 }
 
 
+
 class UploadEvent extends React.Component {
   componentDidMount() {
     this.multiselectRef = React.createRef();
   }
-  
+  // constructor(props){
+  //   super(props);
+  //   this.state = {
+  //     file: null
+  //   }
+  //   this.handleChange = this.handleChange.bind(this);
+  //   this.handleUpload = this.handleUpload.bind(this);
+  // }
+  state = {file: null}
+
+  // handleFileInput(e) {
+  //   console.log("state before setting");
+  //   console.log(this.state.file);
+  //   console.log("e");
+  //   console.log(e);
+  //   console.log("e.target");
+  //   console.log(e.target);
+  //   console.log("e.target.value");
+  //   console.log(e.target.value);
+  //   console.log("e.target.files[0]");
+  //   console.log(e.target.files[0]);
+  //   this.setState({[e.target.id]: e.target.files[0]});
+
+  //   console.log("state after setting");
+  //   console.log(this.state.file);
+
+  // }
+  handleChange = (e) => {
+    this.setState({
+        [e.target.id] : e.target.files[0]
+    })
+    console.log("state after setting");
+    console.log(this.state.file);
+}
+
+  handleUpload(file){
+    uploadFile(file, config)
+        .then(data => console.log(data))
+        .catch(err => console.error(err))
+}
 
   resetSelectedValues() {
   this.multiselectRef.current.resetSelectedValues();
@@ -69,14 +109,21 @@ class UploadEvent extends React.Component {
       </div>
     );
   };
-//{uID, description, eventTime, poster, name, location, tags }
+
   onSubmit = formValues => {
     var tags = this.multiselectRef.current.state.selectedValues.map((tag) => {
       return tag.name;
     });
 
     const uID = this.props.uID;
-    this.props.addEventAction({...formValues, posterUrl: "poster2.jpg", "uID": 1, "tags": tags });
+    this.handleUpload(this.state.file);
+    console.log("this.state.file");
+    console.log(this.state.file);
+    const posterUrlLink = "https://roundupposters.s3.amazonaws.com/" + this.state.file.name
+    console.log("posterUrl");
+    console.log(posterUrlLink);
+    this.props.addEventAction({...formValues, posterUrl: posterUrlLink, "uID": 1, "tags": tags });
+    
   }
   // onChange(e) {
   //   const { input: { onChange } } = this.props
@@ -123,11 +170,11 @@ class UploadEvent extends React.Component {
               name='poster'
               label='Poster'
               type='hidden'
-              id="custom-file"
+              id="file"
               placeholder='Add Poster Image'
               component={this.renderField}
               value={this.props.uID}
-              // onChange={this.onChange}
+              onChange={this.handleChange}
             />
 
             <Field

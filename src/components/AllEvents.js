@@ -2,7 +2,7 @@ import React from "react";
 // import events from "../events";
 import EventCard from "./EventCard";
 
-import { getEventsByTimeAction } from '../actions/eventActions';
+import { getEventsByTimeAction, deleteEventAction } from '../actions/eventActions';
 import { connect } from 'react-redux';
 
 class EventsPage extends React.Component {
@@ -53,5 +53,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getEventsByTimeAction }
+  { getEventsByTimeAction, deleteEventAction }
 )(EventsPage);
