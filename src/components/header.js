@@ -16,11 +16,12 @@ class Header extends Component {
   </LinkContainer>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="mr-auto">
-      <LinkContainer to="/events">
-        <Nav.Link>Events</Nav.Link>
-      </LinkContainer>
+    <Nav className="ml-auto">
 
+    <LinkContainer to="/userSearch">
+        <Nav.Link>Search</Nav.Link>
+      </LinkContainer>
+      
       <LinkContainer to="/uploadEvent">
         <Nav.Link>Upload Event</Nav.Link>
       </LinkContainer>
@@ -43,9 +44,7 @@ class Header extends Component {
           <Nav.Link>Login</Nav.Link>
         </LinkContainer>
       }
-      <LinkContainer to="/userSearch">
-        <Nav.Link>Search</Nav.Link>
-      </LinkContainer>
+      
     </Nav>
   </Navbar.Collapse>
 </Navbar>
