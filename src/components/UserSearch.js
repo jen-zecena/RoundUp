@@ -80,23 +80,20 @@ class UserSearch extends React.Component {
         console.log(this.props.eventsWithTags);
         return (
         <div className="container">
-        <Container>
           <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <Form.Label>Filter Posters by Tags</Form.Label>
-          <Form.Group>
           <Multiselect
+            className="menu"
             name='tags'
             ref={this.tagRef}
             placeholder='Tags'
             options={tags} // Options to display in the dropdown
             displayValue="name" // Property name to display in the dropdown options
           />
-          </Form.Group>
           <Button variant="danger" type="submit" >
             Search
         </Button>
           </form>
-        </Container>
         {this.props.eventsWithTags.map((event) => {
           <li>{event.name}</li>
         })}
