@@ -8,7 +8,6 @@ import AboutPage from './components/AboutPage';
 import Login from './components/Login';
 import Register from './components/Register';
 import EventPage from './components/EventPage';
-import MappedEvents from './components/MappedEvents';
 import UserSearch from './components/UserSearch';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
