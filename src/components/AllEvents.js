@@ -37,7 +37,7 @@ class EventsPage extends React.Component {
             location={event.location}
             description={event.description}
             time={event.time}
-            posterUrl={event.posterUrl === 'no poster' ? "https://picsum.photos/200" : event.posterUrl}
+            posterUrl={event.posterUrl === 'poster2.jpg' ? "https://roundupposters.s3.amazonaws.com/poster2.jpg" : event.posterUrl}
             eventLink={`/event/${event.eID}`}
           />
         ))}

@@ -10,6 +10,7 @@ import { Multiselect } from 'multiselect-react-dropdown';
 import { addEventAction } from '../actions/eventActions';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import { uploadFile, deleteFile } from 'react-s3';
 
 const tags = [{name: 'Africana Studies'},
   {name: 'American Studies'},
@@ -34,10 +35,19 @@ const tags = [{name: 'Africana Studies'},
   {name: 'Geology'},
   ]
 
+const config = {
+  bucketName: 'roundupposters',
+  region: 'us-east-1',
+  accessKeyId: 'AKIA6CRJN2MSKJZOJQBH',
+  secretAccessKey: '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'
+}
+
+
 class UploadEvent extends React.Component {
   componentDidMount() {
     this.multiselectRef = React.createRef();
   }
+  
 
   resetSelectedValues() {
   this.multiselectRef.current.resetSelectedValues();
@@ -66,7 +76,7 @@ class UploadEvent extends React.Component {
     });
 
     const uID = this.props.uID;
-    this.props.addEventAction({...formValues, posterUrl: "something2", "uID": 1, "tags": tags });
+    this.props.addEventAction({...formValues, posterUrl: "poster2.jpg", "uID": 1, "tags": tags });
   }
   // onChange(e) {
   //   const { input: { onChange } } = this.props

@@ -29,6 +29,10 @@ class Header extends Component {
         <Nav.Link>About</Nav.Link>
       </LinkContainer>
 
+      <LinkContainer to="/uploadToS3">
+        <Nav.Link>Upload To S3</Nav.Link>
+      </LinkContainer>
+
       {
         isAuthenticated
         ?
