@@ -59,12 +59,9 @@ class UserSearch extends React.Component {
         return (
         <div className="container">
         <Container>
-          <h1>
-            RSVP Form
-          </h1>
           <form onSubmit={this.props.handleSubmit(this.onSubmit)}
           >
-          <Form.Label>Search Posters</Form.Label>
+          <Form.Label>Filter Posters by Tags</Form.Label>
         <Multiselect
             options={tags} // Options to display in the dropdown
            // selectedValues={searchInfo.selectedValue} // Preselected value to persist in dropdown

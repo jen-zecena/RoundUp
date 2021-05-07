@@ -11,7 +11,6 @@ import EventPage from './components/EventPage';
 import MappedEvents from './components/MappedEvents';
 import UserSearch from './components/UserSearch';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import UploadImageToS3WithReactS3 from './components/UploadPosterToS3';
 
 import { loadUserAction } from './actions/authActions';
 import { Provider } from 'react-redux';
@@ -41,7 +40,6 @@ class Index extends React.Component {
             <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
             <Route path="/userSearch" component={UserSearch}/>
-            <Route path="/uploadToS3" component={ UploadImageToS3WithReactS3}/>
            
           </Switch>
         </Router>

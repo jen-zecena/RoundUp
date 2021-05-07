@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+
 import { Multiselect } from 'multiselect-react-dropdown';
 
 import { addEventAction } from '../actions/eventActions';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { uploadFile, deleteFile } from 'react-s3';
+import { uploadFile } from 'react-s3';
 
 const tags = [{name: 'Africana Studies'},
   {name: 'American Studies'},
