@@ -50,6 +50,54 @@ const testEventState = {
   attendees: []
 }
 
+const testEventStateWithTags = {
+  events: [
+    { eID: 2, owner: 1, name: "Event2", posterUrl: "testPosterUrl" },
+    { eID: 3, owner: 2, name: "Event3", posterUrl: "testPosterUrl" },
+    { eID: 4, owner: 2, name: "Event4", posterUrl: "testPosterUrl" },
+  ],
+  eventsWithTags: [
+    { eID: 2, owner: 1, name: "Event2", posterUrl: "testPosterUrl" },
+    { eID: 3, owner: 2, name: "Event3", posterUrl: "testPosterUrl" },
+    { eID: 4, owner: 2, name: "Event4", posterUrl: "testPosterUrl" },
+  ],
+  attendees: []
+}
+
+const testEventStateWithTagsAndExtra = {
+  events: [
+    { eID: 2, owner: 1, name: "Event2", posterUrl: "testPosterUrl" },
+    { eID: 3, owner: 2, name: "Event3", posterUrl: "testPosterUrl" },
+    { eID: 4, owner: 2, name: "Event4", posterUrl: "testPosterUrl" },
+    testEvent
+  ],
+  eventsWithTags: [
+    testEvent
+  ],
+  attendees: []
+}
+
+const testEventStateWithTagsEmpty = {
+  events: [
+    { eID: 2, owner: 1, name: "Event2", posterUrl: "testPosterUrl" },
+    { eID: 3, owner: 2, name: "Event3", posterUrl: "testPosterUrl" },
+    { eID: 4, owner: 2, name: "Event4", posterUrl: "testPosterUrl" },
+  ],
+  eventsWithTags: [],
+  attendees: []
+}
+
+const testEventStateWithTagsAndError = {
+  events: [
+    { eID: 2, owner: 1, name: "Event2", posterUrl: "testPosterUrl" },
+    { eID: 3, owner: 2, name: "Event3", posterUrl: "testPosterUrl" },
+    { eID: 4, owner: 2, name: "Event4", posterUrl: "testPosterUrl" },
+  ],
+  eventsWithTags: [],
+  attendees: [],
+  err: error
+}
+
 const testEventStateWithError = {
   events: [
     { eID: 2, owner: 1, name: "Event2", posterUrl: "testPosterUrl" },
@@ -270,25 +318,31 @@ describe('creatingGetEventsByTagsAction', () => {
 
     expect(
       eventReducer(undefined, { type: GET_EVENTS_BY_TAGS_SUCCESS, payload: testEvents })
-    ).toEqual(testEventState)
+    ).toEqual(testEventStateWithTags)
 
     expect(
       eventReducer(testEventState, { type: GET_EVENTS_BY_TAGS_SUCCESS, payload: [] })
-    ).toEqual(testEventState)
+    ).toEqual(testEventStateWithTagsEmpty)
 
     expect(
       eventReducer(testEventState, { type: GET_EVENTS_BY_TAGS_SUCCESS, payload: [testEvent] })
-    ).toEqual(testEventStateWithExtra)
+    ).toEqual(testEventStateWithTagsAndExtra)
   })
 
   it('should handle GET_EVENTS_BY_TAGS_FAIL action', () => {
+    var expectedEventState = JSON.parse(JSON.stringify(defaultEventStateWithError));
+    expectedEventState.eventsWithTags = [];
+
     expect(
       eventReducer(undefined, { type: GET_EVENTS_BY_TAGS_FAIL, error: error})
-    ).toEqual(defaultEventStateWithError)
+    ).toEqual(expectedEventState)
+
+    expectedEventState = JSON.parse(JSON.stringify(testEventStateWithError));
+    expectedEventState.eventsWithTags = [];
 
     expect(
       eventReducer(testEventState, { type: GET_EVENTS_BY_TAGS_FAIL, error: error})
-    ).toEqual(testEventStateWithError)
+    ).toEqual(expectedEventState)
   })
 })
 

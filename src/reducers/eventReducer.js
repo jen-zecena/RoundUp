@@ -25,7 +25,6 @@ import {
 
 const defaultEventState = {
   events: [],
-  eventsWithTags: [],
   attendees: []
 }
 
