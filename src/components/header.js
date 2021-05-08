@@ -3,6 +3,8 @@ import {Navbar, Nav} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap';
 import { connect } from 'react-redux';
 import { logoutUserAction } from '../actions/authActions';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 
 export class Header extends Component {
   render() {

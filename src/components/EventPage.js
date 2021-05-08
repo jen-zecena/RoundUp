@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Card from 'react-bootstrap/Card';
+import { BrowserRouter as Router} from "react-router-dom";
 
 import _ from 'lodash';
 import { addRsvpAction } from '../actions/rsvpActions';
@@ -25,7 +26,6 @@ class EventPage extends React.Component {
       const eventTime = timeStamp.getHours() + ":" + timeStamp.getMinutes() + ":" + timeStamp.getSeconds();
 
       return (
-        <Router>
         <div>
           <Container>
           <Jumbotron>
@@ -47,7 +47,6 @@ class EventPage extends React.Component {
           </ Jumbotron>
           </ Container>
         </div>
-        </Router>
       );
     }
 

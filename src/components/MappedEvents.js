@@ -2,6 +2,8 @@ import React from "react";
 // import events from "../events";
 import EventCard from "./EventCard";
 import Button from 'react-bootstrap/Button';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 
 import { getEventsByTimeAction, deleteEventAction } from '../actions/eventActions';
 import { connect } from 'react-redux';

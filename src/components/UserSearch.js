@@ -81,7 +81,6 @@ class UserSearch extends React.Component {
     render() {
         console.log(this.props.eventsWithTags);
         return (
-          <Router>
         <div className="container">
           <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <Form.Label>Filter Posters by Tags</Form.Label>
@@ -99,12 +98,13 @@ class UserSearch extends React.Component {
           </form>
           <br/>
           <br/>
+          <Router>
           <MappedEvents/>
         {this.props.eventsWithTags.map((event) => {
           <li>{event.name}</li>
         })}
+              </Router>
       </div>
-      </Router>
 
     );
   }
