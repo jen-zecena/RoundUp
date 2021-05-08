@@ -25,6 +25,7 @@ class EventPage extends React.Component {
       const eventTime = timeStamp.getHours() + ":" + timeStamp.getMinutes() + ":" + timeStamp.getSeconds();
 
       return (
+        <Router>
         <div>
           <Container>
           <Jumbotron>
@@ -45,7 +46,8 @@ class EventPage extends React.Component {
             </ Row>
           </ Jumbotron>
           </ Container>
-        </ div>
+        </div>
+        </Router>
       );
     }
 

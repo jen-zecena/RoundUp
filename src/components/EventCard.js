@@ -6,6 +6,7 @@ import { Link} from "react-router-dom";
 function EventCard(props){
 
   return (
+    <Router>
     <Card style = {{ width: '18rem'}} class="card" >
     <Card.Img variant = "top" src = {props.posterUrl} />
     <Card.Body >
@@ -15,13 +16,13 @@ function EventCard(props){
       </Card.Subtitle>
       <Card.Text class="text">
         {props.description}
-
       </Card.Text>
       <Link to={props.eventLink}>
         <Button variant="danger" class="button"> More Information </Button>
       </Link>
     </Card.Body>
   </Card>
+  </Router>
   );
 
 }

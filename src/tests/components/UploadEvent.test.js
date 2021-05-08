@@ -5,8 +5,6 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import {Provider} from 'react-redux';
 import store from './store';
 
-
-
 configure({ adapter: new Adapter() });
 
 const wrapper = shallow(<UploadEvents/>);  

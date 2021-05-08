@@ -33,7 +33,9 @@ class EventsPage extends React.Component {
       this.props.deleteEventAction(36, 1)
     }
     render() {
-    return (<div>
+    return (
+      <Router>
+    <div>
       <h1 style={{textAlign:"center"}}>
         Events Page
       </h1>
@@ -55,6 +57,7 @@ class EventsPage extends React.Component {
             </Button>
         </dl>
       </div>
+      </Router>
     );
   }
 };

@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import MappedEvents from './MappedEvents';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Multiselect } from 'multiselect-react-dropdown';
 
@@ -80,6 +81,7 @@ class UserSearch extends React.Component {
     render() {
         console.log(this.props.eventsWithTags);
         return (
+          <Router>
         <div className="container">
           <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <Form.Label>Filter Posters by Tags</Form.Label>
@@ -102,6 +104,7 @@ class UserSearch extends React.Component {
           <li>{event.name}</li>
         })}
       </div>
+      </Router>
 
     );
   }

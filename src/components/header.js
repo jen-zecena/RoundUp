@@ -9,6 +9,7 @@ export class Header extends Component {
     const { isAuthenticated } = this.props.auth;
 
     return (
+      <Router>
         <Navbar bg="light" expand="lg">
             <LinkContainer to="/">
   <Navbar.Brand>RoundUp</Navbar.Brand>
@@ -47,6 +48,7 @@ export class Header extends Component {
     </Nav>
   </Navbar.Collapse>
 </Navbar>
+</Router>
     )
   }
 }
