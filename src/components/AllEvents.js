@@ -24,8 +24,8 @@ class EventsPage extends React.Component {
     }
 
     render() {
-    return (<div>
-      <h1 style={{textAlign:"center"}}>
+    return (<div className="allevents">
+      <h1 style={{textAlign:"center"}} className="header">
         All Upcoming Events
       </h1>
         <dl className="dictionary">

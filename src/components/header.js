@@ -4,7 +4,7 @@ import {LinkContainer} from 'react-router-bootstrap';
 import { connect } from 'react-redux';
 import { logoutUserAction } from '../actions/authActions';
 
-class Header extends Component {
+export class Header extends Component {
   render() {
     const { isAuthenticated } = this.props.auth;
 

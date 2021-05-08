@@ -20,14 +20,17 @@ class EventsPage extends React.Component {
       fromTime = fromTime.getTime();
       console.log("fromTime");
       console.log(fromTime);
+      console.log("React.version");
+      console.log(React.version);
 
       
       // this.props.getEventsByTimeAction(fromTime, toTime)
       
     }
+    
 
     handleDeleteEvent = () =>{
-      this.props.deleteEventAction(33, 1)
+      this.props.deleteEventAction(36, 1)
     }
     render() {
     return (<div>

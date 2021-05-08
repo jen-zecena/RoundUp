@@ -32,10 +32,10 @@ class LoginForm extends React.Component {
     }
 
   return (
-  <div>
+  <div className="login">
     <Container>
       <Col className="col-sm-6 mx-auto">
-        <Jumbotron>
+        <Jumbotron className="format">
           <h2>Login Page </h2>
           <br/>
           <div className="login-form">
