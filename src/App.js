@@ -1,7 +1,7 @@
 import React from 'react'
 import AllEvents from './components/AllEvents';
 
-
+// App renders the main page with all of the components
 
 function App() {
   return (

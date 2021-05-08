@@ -1,18 +1,18 @@
-import React, { createRef } from "react";
+import React from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import MappedEvents from './MappedEvents';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import SearchResults from './SearchResults';
+import { BrowserRouter as Router} from "react-router-dom";
 
 import { Multiselect } from 'multiselect-react-dropdown';
 
 import { getEventsByTagsAction } from '../actions/eventActions';
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
 import store from '../store';
 
+// List of tags that users can use to filter Events
 const tags =  [{name: 'Africana Studies'},
                 {name: 'American Studies'},
                 {name: 'Anthropology'},
@@ -36,7 +36,7 @@ const tags =  [{name: 'Africana Studies'},
                 {name: 'Geology'}
 ];
 
-
+/** This component creates and renders the Search Bar. Users can filter events using tags */
 class UserSearch extends React.Component {
     componentDidMount() {
         this.tagRef = React.createRef();
@@ -99,7 +99,7 @@ class UserSearch extends React.Component {
           <br/>
           <br/>
           <Router>
-          <MappedEvents/>
+          <SearchResults/>
         {this.props.eventsWithTags.map((event) => {
           <li>{event.name}</li>
         })}

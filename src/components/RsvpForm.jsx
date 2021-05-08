@@ -1,5 +1,4 @@
 import React from "react";
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
@@ -7,8 +6,10 @@ import { addRsvpAction } from '../actions/rsvpActions';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
-
+/** This component creates and renders the RSVP Form and calls a function 
+ * that sends an API calls to the backend to add an rsvp*/
 class RSVPForm extends React.Component {
+  // Used to keep track of the user's inputs
   renderField = ({ input, label, type, placeholder, value, meta: { touched, error } }) => {
     return (
       <div className={`form-group ${touched && error ? 'error' : ''}`}>
@@ -26,6 +27,11 @@ class RSVPForm extends React.Component {
     );
   };
 
+  /**
+  @param formValues: contains the information that the user typed into the RSVP form
+  @return: When the submit button is clicked the addRsvpAction function is called and the request to the backend is sent
+  that will rsvp the user for the event
+  **/
   onSubmit = formValues => {
     const eID = this.props.eID;
     const time = new Date().getTime();
@@ -39,6 +45,7 @@ class RSVPForm extends React.Component {
           <h1>
             RSVP Form
           </h1>
+          {/* The RSVP form */}
           <form
           onSubmit={this.props.handleSubmit(this.onSubmit)}
           >
