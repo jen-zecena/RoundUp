@@ -10,7 +10,6 @@ import { connect } from "react-redux";
 class SearchResults extends React.Component {
   render() {
     return (
-      <Router>
         <div>
           <h1 style={{ textAlign: "center" }}>Events Page</h1>
             <dl className="dictionary">
@@ -33,7 +32,6 @@ class SearchResults extends React.Component {
               ))}
             </dl>
         </div>
-      </Router>
     );
   }
 }

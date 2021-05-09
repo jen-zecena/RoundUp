@@ -41,7 +41,7 @@ class EventsPage extends React.Component {
 
   render() {
     return (
-      <div className="allevents">
+      <div className="allevents" data-test="allEventsComponent">
         <h1 style={{ textAlign: "center" }} className="header">
           All Upcoming Events
         </h1>

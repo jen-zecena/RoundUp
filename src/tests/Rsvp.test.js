@@ -6,7 +6,7 @@ import RsvpForm from '../components/RsvpForm';
 import { addRsvpAction } from '../actions/rsvpActions';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-
+import { findByTestAttr, testStore} from './utils.js';
 
 
 const mockStore = configureStore([]);
@@ -115,13 +115,16 @@ describe('My Connected React-Redux Component', () => {
           <Provider store={store}>
               <RsvpForm/>
           </Provider>
-      );
+      ).childAt(0).dive();
     });
    
     it('should render with given state from Redux store', () => {
         expect(component.toJSON()).toMatchSnapshot();
     });
-    
+    it('should render without errors',() => {
+      const component = findByTestAttr(component, 'allEventsComponent');
+      expect(component.length).toBe(1);
+    });
     it('component renders correctly', () => {
         //expect(component).toContain("<h1>RSVP Form</h1>").toBeTruthy();
         expect(component).toContain("div.container").toBeTruthy();
