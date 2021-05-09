@@ -465,7 +465,7 @@ describe('creatingGetEventsByTagsAction', () => {
     ];
 
     const store = mockStore({ events: {}})
-    return store.dispatch(eventActions.getEventsByTagsAction(['tag1', 'tag2'], 'active')).then(() => {
+    return store.dispatch(eventActions.getEventsByTagsAction({tags:['tag1', 'tag2'], status:'active'})).then(() => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });
@@ -488,7 +488,7 @@ describe('creatingGetEventsByTagsAction', () => {
     ];
 
     const store = mockStore({ events: {}})
-    return store.dispatch(eventActions.getEventsByTagsAction(['tag1', 'tag2'], 'active')).then(() => {
+    return store.dispatch(eventActions.getEventsByTagsAction({tags:['tag1', 'tag2'], status:'active'})).then(() => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });
