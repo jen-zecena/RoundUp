@@ -14,7 +14,7 @@ class SearchResults extends React.Component {
           <h1 style={{ textAlign: "center" }}>Events Page</h1>
             <dl className="dictionary">
             {/* this.props.events access the list of events that match a user search*/}
-              {this.props.events.map((event, index) => (
+              {this.props.eventsWithTags.map((event, index) => (
                 <EventCard
                   key={event.eID}
                   date={event.date}
@@ -38,6 +38,7 @@ class SearchResults extends React.Component {
 
 const mapStateToProps = (state) => ({
   events: Object.values(state.events.events),
+  eventsWithTags: Object.values(state.events.eventsWithTags)
 });
 
 export default connect(mapStateToProps, {

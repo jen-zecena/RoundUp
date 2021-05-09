@@ -79,7 +79,10 @@ class UserSearch extends React.Component {
       this.tagRef.current.resetSelectedValues();
     }
     render() {
+      console.log("this.props.eventsWithTags");
         console.log(this.props.eventsWithTags);
+        console.log("this.props.events");
+        console.log(this.props.events);
         return (
         <div className="container">
           <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
