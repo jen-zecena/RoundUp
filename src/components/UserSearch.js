@@ -1,16 +1,18 @@
-import React, { createRef } from "react";
+import React from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
+import SearchResults from './SearchResults';
+import { BrowserRouter as Router} from "react-router-dom";
 
 import { Multiselect } from 'multiselect-react-dropdown';
 
 import { getEventsByTagsAction } from '../actions/eventActions';
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
 import store from '../store';
 
+// List of tags that users can use to filter Events
 const tags =  [{name: 'Africana Studies'},
                 {name: 'American Studies'},
                 {name: 'Anthropology'},
@@ -34,7 +36,7 @@ const tags =  [{name: 'Africana Studies'},
                 {name: 'Geology'}
 ];
 
-
+/** This component creates and renders the Search Bar. Users can filter events using tags */
 class UserSearch extends React.Component {
     componentDidMount() {
         this.tagRef = React.createRef();
@@ -80,26 +82,28 @@ class UserSearch extends React.Component {
         console.log(this.props.eventsWithTags);
         return (
         <div className="container">
-        <Container>
           <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <Form.Label>Filter Posters by Tags</Form.Label>
-          <Form.Group>
           <Multiselect
+            className="menu"
             name='tags'
             ref={this.tagRef}
             placeholder='Tags'
             options={tags} // Options to display in the dropdown
             displayValue="name" // Property name to display in the dropdown options
           />
-          </Form.Group>
           <Button variant="danger" type="submit" >
             Search
         </Button>
           </form>
-        </Container>
+          <br/>
+          <br/>
+          <Router>
+          <SearchResults/>
         {this.props.eventsWithTags.map((event) => {
           <li>{event.name}</li>
         })}
+              </Router>
       </div>
 
     );

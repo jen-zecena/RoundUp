@@ -8,7 +8,11 @@ import { registerUserAction } from '../actions/authActions';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
+/** This component creates and renders the Registration Form and calls functions 
+ * that send API calls to the backend that create a new user*/
+
 class RegisterForm extends React.Component {
+  // Used to keep track of the user's inputs
   renderField = ({ input, label, type, placeholder, meta: { touched, error } }) => {
     return (
       <div className={`form-group ${touched && error ? 'error' : ''}`}>
@@ -21,17 +25,24 @@ class RegisterForm extends React.Component {
     );
   };
 
+  /**
+  @param formValues: contains the information that the user typed into the Register form
+  @return: When the submit button is clicked the registerUserAction function is called and the request to the backend is sent
+  that will create a new account for the user
+  **/
   onSubmit = formValues => {
     this.props.registerUserAction(formValues);
   }
 
   render() {
+    // if the user is already logged in they will be rederected to the home page
     if (this.props.isAuthenticated) {
       return <Redirect to='/' />;
     }
 
     return (
     <div>
+    {/* The registration form with all of the necessary fields */}
       <Container>
         <Col className="col-sm-6 mx-auto">
           <Jumbotron>
@@ -100,7 +111,7 @@ class RegisterForm extends React.Component {
                   </Field>
                 </div>
 
-                <button type="submit" class="btn btn-dark">Submit</button>
+                <button type="submit" className="btn btn-dark">Submit</button>
               </form>
             </div>
           </Jumbotron>
@@ -111,8 +122,10 @@ class RegisterForm extends React.Component {
   }
 }
 
+// used to set which fields are required
 const required = value => (value ? undefined : 'Required');
 
+//Passwords must have a minLength of 8
 const minLength = min => value =>
   value && value.length < min
     ? `Must be at least ${min} characters`
@@ -120,6 +133,7 @@ const minLength = min => value =>
 
 const minLength8 = minLength(8);
 
+// Checking that the passwords match
 const passwordsMatch = (value, allValues) =>
   (value !== allValues.password ? 'Passwords do not match' : undefined);
 
@@ -128,6 +142,7 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
+// used to connect this component and its data to the redux store
 RegisterForm = connect(
   mapStateToProps,
   { registerUserAction }
