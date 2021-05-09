@@ -98,12 +98,10 @@ class UserSearch extends React.Component {
           </form>
           <br/>
           <br/>
-          <Router>
           <SearchResults/>
         {this.props.eventsWithTags.map((event) => {
           <li>{event.name}</li>
         })}
-              </Router>
       </div>
 
     );
