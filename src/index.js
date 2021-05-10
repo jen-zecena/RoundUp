@@ -34,6 +34,7 @@ class Index extends React.Component {
         {/* always display the header */}
         <Header/>
         {/* Only one of these pages can be rendered at a time  */}
+
         <Switch>
           <Route exact path="/" component={App} />
           <Route path="/uploadEvent" component={UploadEvent} />
