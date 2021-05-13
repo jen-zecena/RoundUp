@@ -40,7 +40,6 @@ const defaultEventState = {
 export default function eventReducer(state=defaultEventState, action) {
   switch (action.type) {
     case ADD_EVENT_SUCCESS:
-      console.log("add event reducer success");
       /*
         return an updated state object with a new event object
         which has the same information as the newly added event.
@@ -56,7 +55,6 @@ export default function eventReducer(state=defaultEventState, action) {
         })
       };
     case ADD_EVENT_FAIL:
-      console.log("add event reducer success");
       /*
         return an updated state object with a new event object
         which has the same information as the newly added event.
@@ -115,7 +113,6 @@ export default function eventReducer(state=defaultEventState, action) {
         error: action.error
       };
     case DELETE_EVENT_SUCCESS:
-      console.log("delete success")
       /*
         return an updated state object with the deleted event omitted
         from the list of retrieved events.
@@ -123,7 +120,6 @@ export default function eventReducer(state=defaultEventState, action) {
       _.remove(state.events, { eID: action.payload.eID})
       return state;
     case DELETE_EVENT_FAIL:
-      console.log("delete fail")
       /*
         return an updated state object with the deleted event omitted
         from the list of retrieved events.
@@ -132,29 +128,6 @@ export default function eventReducer(state=defaultEventState, action) {
         ...state,
         error: action.error
       };
-    // case GET_EVENTS_SUCCESS:
-    //   /*
-    //     return an updated state object where the list of events is updated with
-    //     the retrieved events;
-    //   */
-    //   return {
-    //     ...state,
-    //     events: _.uniqBy([
-    //       ...state.events,
-    //       ...action.payload
-    //     ], function(event) {
-    //       return event.eID
-    //     })
-    //   };
-    // case GET_EVENTS_FAIL:
-    //   /*
-    //     return an updated state object where the list of events is updated with
-    //     the retrieved events;
-    //   */
-    //   return {
-    //     ...state,
-    //     error: action.error
-    //   };
     case GET_EVENTS_BY_TAGS_SUCCESS:
       /*
         return an updated state object where the list of events is updated with
@@ -233,7 +206,6 @@ export default function eventReducer(state=defaultEventState, action) {
         return an updated state object where the list of events is updated with
         the retrieved events;
       */
-      console.log('reducer Success')
       return {
         ...state,
         events: _.uniqBy([
@@ -248,7 +220,6 @@ export default function eventReducer(state=defaultEventState, action) {
         return an updated state object where the list of events is updated with
         the retrieved events;
       */
-        console.log('reducer Fail')
       return {
         ...state,
         error: action.error

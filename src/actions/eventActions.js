@@ -30,7 +30,6 @@ import {
   EVENTS_URL
 } from './backendAccessPoints';
 
-import history from '../history';
 import { tokenConfig } from './authActions';
 
 // actions related to the events **
@@ -58,25 +57,14 @@ export const addEventAction = ({ uID, description, eventTime, posterUrl, name, l
   */
   dispatch(apiRequest());
   try {
-
-    console.log("add Event Action")
     var eventTimeTimestamp = new Date(eventTime).getTime();
     const response = await axios.post(EVENTS_URL, { uID: 1, description, eventTime: eventTimeTimestamp, posterUrl, name, location, tags }, tokenConfig(getState));
-    console.log("add Event state");
-    console.log(tokenConfig(getState));
-    console.log(getState);
     dispatch({
       type: ADD_EVENT_SUCCESS,
       payload: response.data
     });
-    console.log("add event response data");
-    console.log(response.data);
-    console.log("add event response ");
-    console.log(response);
     return response;
   } catch (error) {
-    console.log("PPPPPPPPPPPPPPPP");
-    console.log(error);
     dispatch({
       type: ADD_EVENT_FAIL,
       error: error.message
@@ -104,7 +92,6 @@ export const getEventAction = (eID) => async (dispatch, getState) => {
   */
   dispatch(apiRequest());
   try {
-    console.log("event Action");
     const response = await axios.get(`${EVENTS_URL}${eID}/`, tokenConfig(getState));
     dispatch({
       type: GET_EVENT_SUCCESS,
@@ -195,38 +182,6 @@ export const deleteEventAction = (eID, uID) => async (dispatch, getState) => {
   }
 }
 
-// /**
-//   @param tags: a list of tags associated with the event
-//   @param search: the key word to search events by
-//   @param uID: the owner's user id
-//   @param status: the status of events user is interested in
-//   @param fromTime: the beginning of the events time window
-//   @param toTime: the end of the events time window
-//
-//   This method retrieves eventsthat have particular tags by making a request ot the backend to extract events with
-//   specified parameters.
-//
-//   The method dispatches the result of the action to the reducer, which
-//   informs the web app of the retrieved events.
-// */
-// export const getEventsAction = ({ tags, search, uID, status, fromTime, toTime }) => async (dispatch, getState) => {
-//   dispatch(apiRequest());
-//   try {
-//     const response = await axios.get(EVENTS_URL, {params: { tags: tags, search: search, status: status, fromTime: fromTime, toTime: toTime }});
-//     dispatch({
-//       type: GET_EVENTS_SUCCESS,
-//       payload: response.data.events
-//     });
-//     return response;
-//   } catch (error) {
-//     dispatch({
-//       type: GET_EVENTS_FAIL,
-//       error: error.message
-//     });
-//     return error;
-//   }
-// }
-
 /**
 
 
@@ -244,15 +199,9 @@ export const getEventsByTagsAction = ({tags, status}) => async (dispatch, getSta
     success and pass along user information
     4. otherwise, tell the authentication reducer about the failed attempt.
   */
-  console.log("eeeeeeeeeeeee");
-  console.log(tags);
   dispatch(apiRequest());
   try {
     const response = await axios.get(EVENTS_URL + "tags/", {params: tags === null ? null : {tags: tags.join(",") , status: status}}, tokenConfig(getState));
-    console.log("response");
-    console.log(response);
-    console.log("response.data.events");
-    console.log(response.data.events);
     dispatch({
       type: GET_EVENTS_BY_TAGS_SUCCESS,
       payload: response.data.events

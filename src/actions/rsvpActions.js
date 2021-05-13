@@ -41,16 +41,11 @@ export const addRsvpAction = ({email, name, eID, time}) => async (dispatch, getS
   */
   dispatch(apiRequest());
   try {
-    console.log("rsvp Action");
     const response = await axios.post(RSVPS_URL, { email, name, eID, time }, tokenConfig(getState));
     dispatch({
       type: ADD_RSVP_SUCCESS,
       payload: response.data
     });
-    console.log("response data");
-    console.log(response.data);
-    console.log("response ");
-    console.log(response);
     return response;
   } catch (error) {
     dispatch({

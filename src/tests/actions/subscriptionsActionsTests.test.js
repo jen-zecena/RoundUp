@@ -71,7 +71,7 @@ describe('creatingAddExistingSubscriptionAction', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.reject({
-        status: 400,
+        status: 500,
         message: 'Error message',
       });
     });
@@ -138,7 +138,7 @@ describe('creatingIllegalDeleteSubscriptionAction', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.reject({
-        status: 400,
+        status: 500,
         message: 'Error message',
       });
     });
@@ -204,7 +204,7 @@ describe('creatingIllegalGetSubscribersAction', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.reject({
-        status: 400,
+        status: 500,
         message: 'Error message',
       });
     });
@@ -271,7 +271,7 @@ describe('creatingIllegalGetSubscriptionsAction', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.reject({
-        status: 400,
+        status: 500,
         message: 'Error message',
       });
     });

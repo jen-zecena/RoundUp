@@ -70,7 +70,7 @@ describe('creatingAddRsvpActionWithExistingRsvpDetails', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.reject({
-        status: 400,
+        status: 500,
         message: 'Error message',
       });
     });
@@ -142,7 +142,7 @@ describe('creatingGetNonexistingUserRsvpsAction', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.reject({
-        status: 400,
+        status: 500,
         message: 'Error message',
       });
     });
@@ -208,7 +208,7 @@ describe('creatingIllegalDeleteRsvpAction', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.reject({
-        status: 400,
+        status: 500,
         message: 'Error message',
       });
     });

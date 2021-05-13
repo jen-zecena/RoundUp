@@ -25,18 +25,14 @@ export default function rsvpReducer(state={rsvps: []}, action) {
         return an updated state object with a new rsvp object
         which has the same information as the newly added rsvp.
       */
-      console.log('rsvp success');
-      console.log('rsvps');
-      // console.log(rsvps);
       return {
         rsvps: _.uniqBy([...state.rsvps, action.payload], function(rsvp) {
           return rsvp.email + rsvp.eventID
         })
-        
+
       };
-      
+
     case ADD_RSVP_FAIL:
-      console.log('rsvp fail');
       return {
         ...state,
         error: action.error
