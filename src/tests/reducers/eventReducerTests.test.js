@@ -145,7 +145,7 @@ const singleEventState = {
   attendees: []
 }
 
-describe('creatingAddEventAction', () => {
+describe('creatingSuccessfulAddEventAction', () => {
   it('should handle a ADD_EVENT_SUCCESS action', () => {
     expect(
       eventReducer(undefined, { type: ADD_EVENT_SUCCESS, payload: testEvent })
@@ -159,8 +159,9 @@ describe('creatingAddEventAction', () => {
       eventReducer(JSON.parse(JSON.stringify(testEventState)), { type: ADD_EVENT_SUCCESS, payload: testEvent })
     ).toEqual(testEventStateWithExtra)
   })
+})
 
-
+describe('creatingFailedAddEventAction', () => {
   it('should handle ADD_EVENT_FAIL action', () => {
     expect(
       eventReducer(undefined, { type: ADD_EVENT_FAIL, error: error})
@@ -172,7 +173,7 @@ describe('creatingAddEventAction', () => {
   })
 })
 
-describe('creatingGetEventAction', () => {
+describe('creatingSuccessfulGetEventAction', () => {
   it('should handle a GET_EVENT_SUCCESS action', () => {
     expect(
       eventReducer(undefined, { type: GET_EVENT_SUCCESS, payload: testEvent })
@@ -182,8 +183,9 @@ describe('creatingGetEventAction', () => {
       eventReducer(JSON.parse(JSON.stringify(testEventState)), { type: GET_EVENT_SUCCESS, payload: detailedEvent })
     ).toEqual(testEventStateWithNewDetail)
   })
+})
 
-
+describe('creatingFailedGetEventAction', () => {
   it('should handle GET_EVENT_FAIL action', () => {
     expect(
       eventReducer(undefined, { type: GET_EVENT_FAIL, error: error})
@@ -195,7 +197,7 @@ describe('creatingGetEventAction', () => {
   })
 })
 
-describe('creatingDeleteEventAction', () => {
+describe('creatingSuccessfulDeleteEventAction', () => {
   it('should handle a DELETE_EVENT_SUCCESS action', () => {
     expect(
       eventReducer(undefined, { type: DELETE_EVENT_SUCCESS, payload: testEvent })
@@ -205,7 +207,9 @@ describe('creatingDeleteEventAction', () => {
       eventReducer(JSON.parse(JSON.stringify(testEventState)), { type: DELETE_EVENT_SUCCESS, payload: detailedEvent })
     ).toEqual(testEventStateMinusOne)
   })
+})
 
+describe('creatingFailedDeleteEventAction', () => {
   it('should handle DELETE_EVENT_FAIL action', () => {
     expect(
       eventReducer(undefined, { type: DELETE_EVENT_FAIL, error: error})
@@ -217,7 +221,7 @@ describe('creatingDeleteEventAction', () => {
   })
 })
 
-describe('creatingUpdateEventAction', () => {
+describe('creatingSuccessfulUpdateEventAction', () => {
   it('should handle a UPDATE_EVENT_SUCCESS action', () => {
     expect(
       eventReducer(undefined, { type: UPDATE_EVENT_SUCCESS, payload: testEvent })
@@ -227,7 +231,9 @@ describe('creatingUpdateEventAction', () => {
       eventReducer(JSON.parse(JSON.stringify(testEventState)), { type: UPDATE_EVENT_SUCCESS, payload: detailedEvent })
     ).toEqual(testEventStateWithNewDetail)
   })
+})
 
+describe('creatingFailedUpdateEventAction', () => {
   it('should handle UPDATE_EVENT_FAIL action', () => {
     expect(
       eventReducer(undefined, { type: UPDATE_EVENT_FAIL, error: error})
@@ -239,7 +245,7 @@ describe('creatingUpdateEventAction', () => {
   })
 })
 
-describe('creatingGetEventAttendeesAction', () => {
+describe('creatingSuccessfulGetEventAttendeesAction', () => {
   it('should handle a GET_EVENT_ATTENDEES_SUCCESS action', () => {
     expect(
       eventReducer(undefined, { type: GET_EVENT_ATTENDEES_SUCCESS, payload: testAttendees })
@@ -260,8 +266,9 @@ describe('creatingGetEventAttendeesAction', () => {
       attendees: testAttendees
     })
   })
+})
 
-
+describe('creatingFailedGetEventAttendeesAction', () => {
   it('should handle GET_EVENT_ATTENDEES_FAIL action', () => {
     expect(
       eventReducer(undefined, { type: GET_EVENT_ATTENDEES_FAIL, error: error})
@@ -273,37 +280,7 @@ describe('creatingGetEventAttendeesAction', () => {
   })
 })
 
-
-// describe('creatingGetEventsAction', () => {
-//   it('should handle a GET_EVENTS_SUCCESS action', () => {
-//
-//     expect(
-//       eventReducer(undefined, { type: GET_EVENTS_SUCCESS, payload: testEvents })
-//     ).toEqual(testEventState)
-//
-//     expect(
-//       eventReducer(testEventState, { type: GET_EVENTS_SUCCESS, payload: [] })
-//     ).toEqual(testEventState)
-//
-//     expect(
-//       eventReducer(testEventState, { type: GET_EVENTS_SUCCESS, payload: [testEvent] })
-//     ).toEqual(testEventStateWithExtra)
-//   })
-//
-//   it('should handle GET_EVENTS_FAIL action', () => {
-//     expect(
-//       eventReducer(undefined, { type: GET_EVENTS_FAIL, error: error})
-//     ).toEqual(defaultEventStateWithError)
-//
-//     expect(
-//       eventReducer(testEventState, { type: GET_EVENTS_FAIL, error: error})
-//     ).toEqual(testEventStateWithError)
-//   })
-// })
-
-
-
-describe('creatingGetEventsByTagsAction', () => {
+describe('creatingSuccessfulGetEventsByTagsAction', () => {
   it('should handle a GET_EVENTS_BY_TAGS_SUCCESS action', () => {
 
     expect(
@@ -318,7 +295,9 @@ describe('creatingGetEventsByTagsAction', () => {
       eventReducer(testEventState, { type: GET_EVENTS_BY_TAGS_SUCCESS, payload: [testEvent] })
     ).toEqual(testEventStateWithTagsAndExtra)
   })
+})
 
+describe('creatingFailedGetEventsByTagsAction', () => {
   it('should handle GET_EVENTS_BY_TAGS_FAIL action', () => {
 
     expect(
@@ -331,7 +310,7 @@ describe('creatingGetEventsByTagsAction', () => {
   })
 })
 
-describe('creatingGetEventsByNameAction', () => {
+describe('creatingSuccessfulGetEventsByNameAction', () => {
   it('should handle a GET_EVENTS_BY_NAME_SUCCESS action', () => {
 
     expect(
@@ -346,7 +325,9 @@ describe('creatingGetEventsByNameAction', () => {
       eventReducer(testEventState, { type: GET_EVENTS_BY_NAME_SUCCESS, payload: [testEvent] })
     ).toEqual(testEventStateWithExtra)
   })
+})
 
+describe('creatingFailedGetEventsByNameAction', () => {
   it('should handle GET_EVENTS_BY_NAME_FAIL action', () => {
     expect(
       eventReducer(undefined, { type: GET_EVENTS_BY_NAME_FAIL, error: error})
@@ -358,7 +339,7 @@ describe('creatingGetEventsByNameAction', () => {
   })
 })
 
-describe('creatingGetEventsByOwnerAction', () => {
+describe('creatingSuccessfulGetEventsByOwnerAction', () => {
   it('should handle a GET_EVENTS_BY_OWNER_SUCCESS action', () => {
 
     expect(
@@ -373,7 +354,9 @@ describe('creatingGetEventsByOwnerAction', () => {
       eventReducer(testEventState, { type: GET_EVENTS_BY_OWNER_SUCCESS, payload: [testEvent] })
     ).toEqual(testEventStateWithExtra)
   })
+})
 
+describe('creatingFailedGetEventsByOwnerAction', () => {
   it('should handle GET_EVENTS_BY_OWNER_FAIL action', () => {
     expect(
       eventReducer(undefined, { type: GET_EVENTS_BY_OWNER_FAIL, error: error})
@@ -385,7 +368,7 @@ describe('creatingGetEventsByOwnerAction', () => {
   })
 })
 
-describe('creatingGetEventsByTimeAction', () => {
+describe('creatingSuccessfulGetEventsByTimeAction', () => {
   it('should handle a GET_EVENTS_BY_TIME_SUCCESS action', () => {
 
     expect(
@@ -400,7 +383,9 @@ describe('creatingGetEventsByTimeAction', () => {
       eventReducer(testEventState, { type: GET_EVENTS_BY_TIME_SUCCESS, payload: [testEvent] })
     ).toEqual(testEventStateWithExtra)
   })
+})
 
+describe('creatingFailedGetEventsByTimeAction', () => {
   it('should handle GET_EVENTS_BY_TIME_FAIL action', () => {
     expect(
       eventReducer(undefined, { type: GET_EVENTS_BY_TIME_FAIL, error: error})

@@ -55,6 +55,16 @@ describe('creatingAddRsvpAction', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+});
+
+describe('creatingAddRsvpActionWithExistingRsvpDetails', () => {
+  beforeEach(function () {
+    moxios.install();
+  });
+
+  afterEach(function () {
+    moxios.uninstall();
+  });
 
   it('creates ADD_RSVP_FAIL after failing to add rsvp', async  () => {
     moxios.wait(() => {
@@ -117,6 +127,16 @@ describe('creatingGetUserRsvpsAction', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+});
+
+describe('creatingGetNonexistingUserRsvpsAction', () => {
+  beforeEach(function () {
+    moxios.install();
+  });
+
+  afterEach(function () {
+    moxios.uninstall();
+  });
 
   it('creates GET_USER_RSVPS_FAIL after failing to retrieve user rsvps', async  () => {
     moxios.wait(() => {
@@ -173,6 +193,16 @@ describe('creatingDeleteRsvpAction', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+});
+
+describe('creatingIllegalDeleteRsvpAction', () => {
+  beforeEach(function () {
+    moxios.install();
+  });
+
+  afterEach(function () {
+    moxios.uninstall();
+  });
 
   it('creates DELETE_RSVP_FAIL after failing to delete rsvp', async  () => {
     moxios.wait(() => {
@@ -191,7 +221,7 @@ describe('creatingDeleteRsvpAction', () => {
     ];
 
     const store = mockStore({ rsvps: {}})
-    return store.dispatch(rsvpActions.deleteRsvpAction('john@doe.edu', 1)).then(() => {
+    return store.dispatch(rsvpActions.deleteRsvpAction('john@doe.edu', null)).then(() => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });

@@ -18,7 +18,7 @@ import {
   testRsvpsWithExtraRsvps
 } from '../testData';
 
-describe('reducingAddRsvpAction', () => {
+describe('reducingSuccessfulAddRsvpAction', () => {
   const rsvps = {
     rsvps: [
       ...testRsvps.rsvps,
@@ -36,8 +36,9 @@ describe('reducingAddRsvpAction', () => {
       rsvpReducer(testRsvps, { type: ADD_RSVP_SUCCESS, payload: testRsvp })
     ).toEqual(rsvps)
   })
+})
 
-
+describe('reducingFailedAddRsvpAction', () => {
   it('should handle ADD_RSVP_FAIL action', () => {
     expect(
       rsvpReducer(undefined, { type: ADD_RSVP_FAIL, error: error})
@@ -56,7 +57,8 @@ describe('reducingAddRsvpAction', () => {
 })
 
 
-describe('reducingGetUserRsvpsAction', () => {
+
+describe('reducingSuccessfulGetUserRsvpsAction', () => {
   it('should handle a GET_USER_RSVPS_SUCCESS action', () => {
     expect(
       rsvpReducer(undefined, { type: GET_USER_RSVPS_SUCCESS, payload: testRsvps.rsvps })
@@ -66,8 +68,9 @@ describe('reducingGetUserRsvpsAction', () => {
       rsvpReducer(testRsvps, { type: GET_USER_RSVPS_SUCCESS, payload: testExtraRsvps.rsvps })
     ).toEqual(testRsvpsWithExtraRsvps)
   })
+})
 
-
+describe('reducingFailedGetUserRsvpsAction', () => {
   it('should handle GET_USER_RSVPS_FAIL action', () => {
     expect(
       rsvpReducer(undefined, { type: GET_USER_RSVPS_FAIL, error: error})
@@ -85,8 +88,7 @@ describe('reducingGetUserRsvpsAction', () => {
   })
 })
 
-
-describe('reducingDeleteRsvpAction', () => {
+describe('reducingSuccessfulDeleteRsvpAction', () => {
   it('should handle a DELETE_RSVP_SUCCESS action', () => {
     expect(
       rsvpReducer(undefined, { type: DELETE_RSVP_SUCCESS, payload: testRsvp })
@@ -106,7 +108,9 @@ describe('reducingDeleteRsvpAction', () => {
     ).toEqual(testRsvps)
   })
 
+})
 
+describe('reducingFailedDeleteRsvpAction', () => {
   it('should handle DELETE_RSVP_FAIL action', () => {
     expect(
       rsvpReducer(undefined, { type: DELETE_RSVP_FAIL, error: error})

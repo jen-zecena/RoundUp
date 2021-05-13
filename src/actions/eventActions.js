@@ -248,7 +248,7 @@ export const getEventsByTagsAction = ({tags, status}) => async (dispatch, getSta
   console.log(tags);
   dispatch(apiRequest());
   try {
-    const response = await axios.get(EVENTS_URL + "tags/", {params: {tags: tags.join(","), status: status}}, tokenConfig(getState));
+    const response = await axios.get(EVENTS_URL + "tags/", {params: tags === null ? null : {tags: tags.join(",") , status: status}}, tokenConfig(getState));
     console.log("response");
     console.log(response);
     console.log("response.data.events");

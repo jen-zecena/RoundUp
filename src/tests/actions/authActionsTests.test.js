@@ -58,12 +58,22 @@ describe('creatingLoadUserAction', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+});
+
+describe('creatingLoadUserActionWithIncorrentParameters', () => {
+  beforeEach(function () {
+    moxios.install();
+  });
+
+  afterEach(function () {
+    moxios.uninstall();
+  });
 
   it('creates LOADING_USER_FAIL after failing to load user', async  () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.reject({
-        status: 400,
+        status: 500,
         message: 'Error message',
       });
     });
@@ -76,7 +86,7 @@ describe('creatingLoadUserAction', () => {
       },
     ];
 
-    const store = mockStore({ auth: {token: 'XXXXXXX', user: {}} })
+    const store = mockStore({ auth: {token: 'YYYYYYYY', user: {}} })
     return store.dispatch(authActions.loadUserAction()).then(() => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
@@ -115,12 +125,22 @@ describe('creatingRegisterUserAction', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+});
+
+describe('creatingRegisterActionWithExistingUser', () => {
+  beforeEach(function () {
+    moxios.install();
+  });
+
+  afterEach(function () {
+    moxios.uninstall();
+  });
 
   it('creates REGISTRATION_FAIL after failing to register user', async  () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.reject({
-        status: 400,
+        status: 500,
         message: 'Error message',
       });
     });
@@ -153,7 +173,7 @@ describe('creatingRegisterUserAction', () => {
   });
 });
 
-describe('creatingLoginUserAction', () => {
+describe('creatingLoginUserActionWithExistingUser', () => {
   beforeEach(function () {
     moxios.install();
   });
@@ -184,12 +204,22 @@ describe('creatingLoginUserAction', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+});
+
+describe('creatingLoginActionWithNonexistentUser', () => {
+  beforeEach(function () {
+    moxios.install();
+  });
+
+  afterEach(function () {
+    moxios.uninstall();
+  });
 
   it('creates LOGIN_FAIL after failing to log in user', async  () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.reject({
-        status: 400,
+        status: 500,
         message: 'Error message',
       });
     });
@@ -229,7 +259,9 @@ describe('cratingLogoutUserAction', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+});
 
+describe('creatingLogoutActionWithunauthenticatedUser', () => {
   it('creates LOGOUT_FAIL after failing to logout user', async  () => {
     const expectedActions = [
       { type: LOGOUT_FAIL },
