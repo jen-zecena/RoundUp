@@ -27,7 +27,7 @@ import {
 
 
 
-describe('reducingLoadUserAction', () => {
+describe('reducingSuccessfulLoadUserAction', () => {
   it('should return the default auth state', () => {
     expect(authReducer(undefined, {})).toEqual(defaultAuthState)
   })
@@ -51,7 +51,9 @@ describe('reducingLoadUserAction', () => {
       authReducer( loadingUserState, { type: LOADING_USER_SUCCESS, payload: testUser })
     ).toEqual(loadedUserState)
   })
+})
 
+describe('reducingFailedLoadUserAction', () => {
   it('should handle LOADING_USER_FAIL action', () => {
     expect(
       authReducer(undefined, { type: LOADING_USER_FAIL, error: error})
@@ -63,7 +65,7 @@ describe('reducingLoadUserAction', () => {
   })
 })
 
-describe('reducingRegisterUserAction', () => {
+describe('reducingSuccessfulRegistrationAction', () => {
   it('should handle a REGISTRATION_SUCCESS action', () => {
     expect(
       authReducer(undefined, { type: REGISTRATION_SUCCESS, payload: testUser })
@@ -73,7 +75,9 @@ describe('reducingRegisterUserAction', () => {
       authReducer( loadingUserState, { type: REGISTRATION_SUCCESS, payload: testUser })
     ).toEqual(loadedUserState)
   })
+})
 
+describe('reducingFailedRegistrationAction', () => {
   it('should handle REGISTRATION_FAIL action', () => {
     expect(
       authReducer(undefined, { type: REGISTRATION_FAIL, error: error })
@@ -85,7 +89,7 @@ describe('reducingRegisterUserAction', () => {
   })
 })
 
-describe('reducingLoginUserAction', () => {
+describe('reducingSuccessfulLoginAction', () => {
   it('should handle a LOGIN_SUCCESS action', () => {
     expect(
       authReducer(undefined, { type: LOGIN_SUCCESS, payload: testUser })
@@ -95,7 +99,9 @@ describe('reducingLoginUserAction', () => {
       authReducer( loadingUserState, { type: LOGIN_SUCCESS, payload: testUser })
     ).toEqual(loadedUserState)
   })
+})
 
+describe('reducingFailedLoginAction', () => {
   it('should handle LOGIN_FAIL action', () => {
     expect(
       authReducer(undefined, { type: LOGIN_FAIL, error: error })
@@ -108,7 +114,7 @@ describe('reducingLoginUserAction', () => {
 
 })
 
-describe('reducingLogoutUserAction', () => {
+describe('reducingSuccessfulLogoutAction', () => {
   it('should handle a LOGOUT_SUCCESS action', () => {
     expect(
       authReducer(undefined, { type: LOGOUT_SUCCESS, payload: testUser })
@@ -118,7 +124,9 @@ describe('reducingLogoutUserAction', () => {
       authReducer( loadingUserState, { type: LOGOUT_SUCCESS, payload: testUser })
     ).toEqual(defaultAuthState)
   })
+})
 
+describe('reducingFailedLogoutAction', () => {
   it('should handle LOGIN_FAIL action', () => {
     expect(
       authReducer(undefined, { type: LOGOUT_FAIL, error: error })

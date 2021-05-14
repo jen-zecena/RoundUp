@@ -56,6 +56,16 @@ describe('creatingAddSubscriptionAction', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+});
+
+describe('creatingAddExistingSubscriptionAction', () => {
+  beforeEach(function () {
+    moxios.install();
+  });
+
+  afterEach(function () {
+    moxios.uninstall();
+  });
 
   it('creates ADD_SUBSCRIPTION_FAIL after failing to add subscription', async  () => {
     moxios.wait(() => {
@@ -112,6 +122,17 @@ describe('creatingDeleteSubscriptionAction', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+});
+
+describe('creatingIllegalDeleteSubscriptionAction', () => {
+  beforeEach(function () {
+    moxios.install();
+  });
+
+  afterEach(function () {
+    moxios.uninstall();
+  });
+
 
   it('creates DELETE_SUBSCRIPTION_FAIL after failing to delete subscription', async  () => {
     moxios.wait(() => {
@@ -130,7 +151,7 @@ describe('creatingDeleteSubscriptionAction', () => {
     ];
 
     const store = mockStore({ subscriptions: {}})
-    return store.dispatch(subscriptionActions.deleteSubscriptionAction(1, 2)).then(() => {
+    return store.dispatch(subscriptionActions.deleteSubscriptionAction(1, 1)).then(() => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });
@@ -168,6 +189,16 @@ describe('creatingGetSubscribersAction', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+});
+
+describe('creatingIllegalGetSubscribersAction', () => {
+  beforeEach(function () {
+    moxios.install();
+  });
+
+  afterEach(function () {
+    moxios.uninstall();
+  });
 
   it('creates GET_SUBSCRIBERS_FAIL after failing to retrieve user subscribers', async  () => {
     moxios.wait(() => {
@@ -186,7 +217,7 @@ describe('creatingGetSubscribersAction', () => {
     ];
 
     const store = mockStore({ subscriptions: {}})
-    return store.dispatch(subscriptionActions.getSubscribersAction(1)).then(() => {
+    return store.dispatch(subscriptionActions.getSubscribersAction(null)).then(() => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });
@@ -224,6 +255,17 @@ describe('creatingGetSubscriptionsAction', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+});
+
+describe('creatingIllegalGetSubscriptionsAction', () => {
+  beforeEach(function () {
+    moxios.install();
+  });
+
+  afterEach(function () {
+    moxios.uninstall();
+  });
+
 
   it('creates GET_SUBSCRIPTIONS_FAIL after failing to retrieve user subscriptions', async  () => {
     moxios.wait(() => {
@@ -242,7 +284,7 @@ describe('creatingGetSubscriptionsAction', () => {
     ];
 
     const store = mockStore({ subscriptions: {}})
-    return store.dispatch(subscriptionActions.getSubscriptionsAction(1)).then(() => {
+    return store.dispatch(subscriptionActions.getSubscriptionsAction(null)).then(() => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });

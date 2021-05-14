@@ -76,7 +76,7 @@ const testSubscribersStateWithExtra = {
   ]
 }
 
-describe('reducingAddRsvpAction', () => {
+describe('reducingSuccessfulAddRsvpAction', () => {
   it('should handle a ADD_SUBSCRIPTION_SUCCESS action', () => {
     const expectedSubscriptions ={
       subscriptions: [
@@ -97,7 +97,9 @@ describe('reducingAddRsvpAction', () => {
       subscriptionReducer(testSubscriptionState, { type: ADD_SUBSCRIPTION_SUCCESS, payload: extraSubscription })
     ).toEqual(testSubscriptionStateWithExtra)
   })
+})
 
+describe('reducingFailedAddRsvpAction', () => {
   it('should handle ADD_SUBSCRIPTION_FAIL action', () => {
     expect(
       subscriptionReducer(undefined, { type: ADD_SUBSCRIPTION_FAIL, error: error})
@@ -109,7 +111,7 @@ describe('reducingAddRsvpAction', () => {
   })
 })
 
-describe('reducingDeleteRsvpAction', () => {
+describe('reducingSuccessfulDeleteRsvpAction', () => {
   it('should handle a DELETE_SUBSCRIPTION_SUCCESS action', () => {
     const expectedSubscriptions = {
       subscriptions: [
@@ -127,7 +129,9 @@ describe('reducingDeleteRsvpAction', () => {
       subscriptionReducer(testSubscriptionState, { type: DELETE_SUBSCRIPTION_SUCCESS, payload: testSubscription })
     ).toEqual(expectedSubscriptions)
   })
+})
 
+describe('reducingFailedDeleteRsvpAction', () => {
   it('should handle DELETE_SUBSCRIPTION_FAIL action', () => {
     expect(
       subscriptionReducer(undefined, { type: DELETE_SUBSCRIPTION_FAIL, error: error})
@@ -139,7 +143,7 @@ describe('reducingDeleteRsvpAction', () => {
   })
 })
 
-describe('reducingSubscriptionsAction', () => {
+describe('reducingSuccessfulSubscriptionsAction', () => {
   it('should handle a GET_SUBSCRIPTIONS_SUCCESS action', () => {
     expect(
       subscriptionReducer(undefined, { type: GET_SUBSCRIPTIONS_SUCCESS, payload: testSubscriptions })
@@ -153,7 +157,9 @@ describe('reducingSubscriptionsAction', () => {
       subscriptionReducer(testSubscriptionState, { type: GET_SUBSCRIPTIONS_SUCCESS, payload: [extraSubscription] })
     ).toEqual(testSubscriptionStateWithExtra)
   })
+})
 
+describe('reducingFailedSubscriptionsAction', () => {
   it('should handle GET_SUBSCRIPTIONS_FAIL action', () => {
     expect(
       subscriptionReducer(undefined, { type: GET_SUBSCRIPTIONS_FAIL, error: error})
@@ -165,7 +171,7 @@ describe('reducingSubscriptionsAction', () => {
   })
 })
 
-describe('reducingGetSubscribersAction', () => {
+describe('reducingSuccessfulGetSubscribersAction', () => {
   it('should handle a GET_SUBSCRIBERS_SUCCESS action', () => {
     expect(
       subscriptionReducer(undefined, { type: GET_SUBSCRIBERS_SUCCESS, payload: testSubscribers })
@@ -183,8 +189,9 @@ describe('reducingGetSubscribersAction', () => {
       subscriptionReducer(testSubscribersState, { type: GET_SUBSCRIBERS_SUCCESS, payload: [extraSubscriber] })
     ).toEqual(testSubscribersStateWithExtra)
   })
+})
 
-
+describe('reducingFailedGetSubscribersAction', () => {
   it('should handle GET_SUBSCRIBERS_FAIL action', () => {
     expect(
       subscriptionReducer(undefined, { type: GET_SUBSCRIBERS_FAIL, error: error})

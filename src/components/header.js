@@ -1,13 +1,11 @@
-import React, { Component } from "react";
-import { Navbar, Nav } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { connect } from "react-redux";
-import { logoutUserAction } from "../actions/authActions";
-import { BrowserRouter as Router } from "react-router-dom";
+import React, { Component } from 'react';
+import {Navbar, Nav} from 'react-bootstrap'
+import {LinkContainer} from 'react-router-bootstrap'
 
-/* This compoent displays the navigation Bar and links to other components*/
+import { connect } from 'react-redux';
+import { logoutUserAction } from '../actions/authActions';
 
-export class Header extends Component {
+class Header extends Component {
   render() {
     const { isAuthenticated } = this.props.auth;
 
@@ -50,8 +48,11 @@ export class Header extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
+const mapStateToProps = state => ({
+  auth: state.auth
+})
 
-export default connect(mapStateToProps, { logoutUserAction })(Header);
+export default connect(
+  mapStateToProps,
+  { logoutUserAction }
+)(Header);
