@@ -95,16 +95,19 @@ class UserSearch extends React.Component {
             options={tags} // Options to display in the dropdown
             displayValue="name" // Property name to display in the dropdown options
           />
-          <Button variant="danger" type="submit" >
+          <Button variant="danger" type="submit" className="button" >
             Search
-        </Button>
+          </Button>
           </form>
           <br/>
           <br/>
+          <Router>
+
           <SearchResults/>
         {this.props.eventsWithTags.map((event) => {
           <li>{event.name}</li>
         })}
+              </Router>
       </div>
 
     );

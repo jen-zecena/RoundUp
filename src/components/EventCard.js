@@ -2,6 +2,7 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import { BrowserRouter as Router} from "react-router-dom";
 
 
 /**
@@ -16,6 +17,7 @@ import { Link } from "react-router-dom";
 
 function EventCard(props) {
   return (
+    <Router>
     <Card style={{ width: "18rem" }} className="card">
       <Card.Img variant="top" src={props.posterUrl} />
       <Card.Body>
@@ -31,6 +33,7 @@ function EventCard(props) {
         </Link>
       </Card.Body>
     </Card>
+    </Router>
   );
 }
 

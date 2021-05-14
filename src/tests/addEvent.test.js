@@ -4,9 +4,10 @@ import renderer from 'react-test-renderer';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import UserSearch from '../components/UserSearch';
+import UserSearch from '../components/UploadEvent';
 import { mount, shallow, configure } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import UploadEvent from '../components/UploadEvent';
 
 
 
@@ -25,7 +26,12 @@ describe('My Connected React-Redux Component', () => {
     beforeEach(() => {
         let state = {
           form: {
-              searchForm: {
+            eventForm: {
+                name: {
+                    name: 'eventName',
+                    type: 'Field',
+                    count: 1
+                  },
               }
             },
             auth: {
@@ -96,10 +102,10 @@ describe('My Connected React-Redux Component', () => {
 
 
 wrapperDeep = mount(<Provider store={store}>
-  <UserSearch/>
+  <UploadEvent/>
   </Provider>);  
   
-  wrapper = shallow(<UserSearch/>, {
+  wrapper = shallow(<UploadEvent/>, {
     disableLifecycleMethods: true,
   });
        

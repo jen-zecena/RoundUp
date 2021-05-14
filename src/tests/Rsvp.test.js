@@ -60,7 +60,7 @@ describe('My Connected React-Redux Component', () => {
                 owner: 1,
                 eID: 1,
                 posterUrl: 'no poster',
-                name: 'Test Event'
+                name: 'Test Event',
               },
               {
                 owner: 1,
