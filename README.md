@@ -7,6 +7,7 @@ RoundUp is a place where students can browse, search for, and Rsvp for upcoming 
 
 ## Instructions to Run Web App
 
+Firstly, make sure you have the node package manager ([https://www.npmjs.com/get-npm](https://www.npmjs.com/get-npm)) installed on you machine. 
 In the project directory, you can run:
 
 ### `npm install`
